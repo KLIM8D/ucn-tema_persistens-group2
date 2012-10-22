@@ -1,4 +1,9 @@
-ucn-tema_persistens-group2
-==========================
+ucn-2semproject-dm79-group2
+===========================
 
-Edited by chris test
+###src:
+    Contains the source code for the project
+###test:
+    Contains unit test for the project
+###docs:
+    Contains documentation for the source code in the project
