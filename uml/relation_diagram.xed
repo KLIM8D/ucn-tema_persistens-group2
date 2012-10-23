@@ -6,7 +6,7 @@
       <Column id="3" name="address" type="varchar" length="255" nulls="false"/>
       <Column id="4" name="zipCode" type="int" length="25" nulls="false"/>
       <Column id="5" name="city" type="varchar" length="255" nulls="false"/>
-      <Column id="6" name="email" type="varchar" length="255" nulls="false"/>
+      <Column id="6" name="email" type="varchar" length="255" nulls="true"/>
       <Column id="7" name="country" type="varchar" length="2" nulls="false"/>
       <Storage name="Filegroup" value=""></Storage>
       <Storage name="FilegroupTextImage" value=""></Storage>
@@ -45,7 +45,7 @@
          <CP name="PRECISION">15</CP>
          <CP name="SCALE">5</CP>
       </Column>
-      <Column id="24" name="countryOfOrigen" type="varchar" length="2" nulls="false"/>
+      <Column id="24" name="countryOfOrigin" type="varchar" length="2" nulls="false"/>
       <Column id="25" name="mimimumStock" type="int" length="25" nulls="false"/>
       <Storage name="Filegroup" value=""></Storage>
       <Storage name="FilegroupTextImage" value=""></Storage>
@@ -170,7 +170,7 @@
    <Constraint table="48" name="PK_DeliveryStatus_1" type="PrimKey">
       <ConstraintColumn id="49"></ConstraintColumn>
    </Constraint>
-   <Sheet name="Untitled 1" id="61" disp_at="true" disp_ph="true" disp_co="true" disp_rn="true">
+   <Sheet name="Untitled 1" id="61" disp_at="true" disp_ph="true" disp_co="true" disp_rn="true" disp_null="true">
       <Place id="12" visible="true">380,210,180,80</Place>
       <Place id="48" visible="true">50,480,210,60</Place>
       <Place id="57" visible="true" options="50.0,320.0,170.0,110.0,370.0,440.0,160.0,80.0,4,220.0,390.0,240.0,390.0,240.0,470.0,370.0,470.0">700,-11,2,0</Place>

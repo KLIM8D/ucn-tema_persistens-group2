@@ -442,7 +442,7 @@
       <visibility xmi:id="_qfmScRyQEeKikfH106dAOQ" label="+"/>
       <cardinality xmi:id="_qfmSchyQEeKikfH106dAOQ" label="1" max="1" min="1"/>
     </attributes>
-    <attributes xmi:id="_rVtbEByQEeKikfH106dAOQ" name="countryOfOrigen">
+    <attributes xmi:id="_rVtbEByQEeKikfH106dAOQ" name="countryOfOrigin">
       <modelElement href="ucn-tema_persistens-group2.uml#_rVsM8ByQEeKikfH106dAOQ"/>
       <visibility xmi:id="_rVuCIByQEeKikfH106dAOQ" label="+"/>
       <cardinality xmi:id="_rVuCIRyQEeKikfH106dAOQ" label="1" max="1" min="1"/>

@@ -616,7 +616,7 @@
         <ownedAttribute xmi:id="_o6_FEByQEeKikfH106dAOQ" name="purchasePrice"/>
         <ownedAttribute xmi:id="_pg7qwByQEeKikfH106dAOQ" name="salesPrice"/>
         <ownedAttribute xmi:id="_qfjPIByQEeKikfH106dAOQ" name="rentPrice"/>
-        <ownedAttribute xmi:id="_rVsM8ByQEeKikfH106dAOQ" name="countryOfOrigen"/>
+        <ownedAttribute xmi:id="_rVsM8ByQEeKikfH106dAOQ" name="countryOfOrigin"/>
         <ownedAttribute xmi:id="_sW_R4ByQEeKikfH106dAOQ" name="minimumStock"/>
         <ownedAttribute xmi:id="_NSw58BySEeKikfH106dAOQ" name="supplier" type="_hkmGUByQEeKikfH106dAOQ" association="_NSwS4BySEeKikfH106dAOQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NSxhABySEeKikfH106dAOQ" value="1"/>
