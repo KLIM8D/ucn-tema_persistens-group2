@@ -118,7 +118,9 @@
           <ownedParameter xmi:id="_QHKmIxyQEeKikfH106dAOQ" name="column">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_QHKmJByQEeKikfH106dAOQ" type="_QCFR0ByQEeKikfH106dAOQ" direction="return"/>
+          <ownedParameter xmi:id="_QHKmJByQEeKikfH106dAOQ" type="_QCFR0ByQEeKikfH106dAOQ" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>this.table = table;&#xD;
 		this.action = action;&#xD;
@@ -165,7 +167,9 @@
           <ownedParameter xmi:id="_QHMbVRyQEeKikfH106dAOQ" name="column">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_QHMbVhyQEeKikfH106dAOQ" type="_QF6B4ByQEeKikfH106dAOQ" direction="return"/>
+          <ownedParameter xmi:id="_QHMbVhyQEeKikfH106dAOQ" type="_QF6B4ByQEeKikfH106dAOQ" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>if (value == null)&#xD;
 		{&#xD;
@@ -188,7 +192,9 @@
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_QHNpcByQEeKikfH106dAOQ" name="getCellEditorValue" specification="_QCRfEByQEeKikfH106dAOQ">
-          <ownedParameter xmi:id="_QHNpcRyQEeKikfH106dAOQ" type="_QFz7QByQEeKikfH106dAOQ" direction="return"/>
+          <ownedParameter xmi:id="_QHNpcRyQEeKikfH106dAOQ" type="_QFz7QByQEeKikfH106dAOQ" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>return editorValue;&#xD;
 	</body>
@@ -208,7 +214,9 @@
           <ownedParameter xmi:id="_QHOQhhyQEeKikfH106dAOQ" name="column">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_QHOQhxyQEeKikfH106dAOQ" type="_QF6B4ByQEeKikfH106dAOQ" direction="return"/>
+          <ownedParameter xmi:id="_QHOQhxyQEeKikfH106dAOQ" type="_QF6B4ByQEeKikfH106dAOQ" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>if (isSelected)&#xD;
 		{&#xD;
@@ -442,7 +450,9 @@
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_QHYokByQEeKikfH106dAOQ" name="makeCollection" specification="_QGlXURyQEeKikfH106dAOQ">
           <ownedParameter xmi:id="_QHYokRyQEeKikfH106dAOQ" name="iter" type="_QGkJMByQEeKikfH106dAOQ"/>
-          <ownedParameter xmi:id="_QHYokhyQEeKikfH106dAOQ" type="_QFLpIByQEeKikfH106dAOQ" direction="return"/>
+          <ownedParameter xmi:id="_QHYokhyQEeKikfH106dAOQ" type="_QFLpIByQEeKikfH106dAOQ" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>ArrayList&lt;E> list = new ArrayList&lt;E>();
      for (E item : iter)
@@ -480,7 +490,9 @@
           <ownedParameter xmi:id="_QHadwRyQEeKikfH106dAOQ" name="limit">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_QHadwhyQEeKikfH106dAOQ" type="_QDLeAByQEeKikfH106dAOQ" direction="return"/>
+          <ownedParameter xmi:id="_QHadwhyQEeKikfH106dAOQ" type="_QDLeAByQEeKikfH106dAOQ" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>super();
      this.limit = limit;
@@ -610,15 +622,21 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NSxhABySEeKikfH106dAOQ" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NSyIEBySEeKikfH106dAOQ" value="1"/>
         </ownedAttribute>
+        <ownedAttribute xmi:id="_7cYJwhzqEeKPL7x6KEsGMg" name="orderItems" type="_7a3gwByQEeKikfH106dAOQ" association="_7cT4UBzqEeKPL7x6KEsGMg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7cYw0BzqEeKPL7x6KEsGMg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7cYw0RzqEeKPL7x6KEsGMg" value="*"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_bA6ukBzrEeKPL7x6KEsGMg" name="type"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_sp608ByQEeKikfH106dAOQ" name="ProductCategory">
+      <packagedElement xmi:type="uml:Class" xmi:id="_sp608ByQEeKikfH106dAOQ" name="Clothing">
         <generalization xmi:id="_IQvKgBySEeKikfH106dAOQ" general="_kSxj0ByQEeKikfH106dAOQ"/>
-        <ownedAttribute xmi:id="_tewyQByQEeKikfH106dAOQ" name="type"/>
+        <ownedAttribute xmi:id="_tewyQByQEeKikfH106dAOQ" name="size"/>
+        <ownedAttribute xmi:id="_StmqABzqEeKPL7x6KEsGMg" name="colour"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_txI7sByQEeKikfH106dAOQ" name="ProductData">
+      <packagedElement xmi:type="uml:Class" xmi:id="_txI7sByQEeKikfH106dAOQ" name="Equipment">
         <generalization xmi:id="_IwMGoBySEeKikfH106dAOQ" general="_kSxj0ByQEeKikfH106dAOQ"/>
-        <ownedAttribute xmi:id="_1eu5gByQEeKikfH106dAOQ" name="attribute"/>
-        <ownedAttribute xmi:id="_2LRPYByQEeKikfH106dAOQ" name="attributeValue"/>
+        <ownedAttribute xmi:id="_1eu5gByQEeKikfH106dAOQ" name="type"/>
+        <ownedAttribute xmi:id="_2LRPYByQEeKikfH106dAOQ" name="description"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_5OODAByQEeKikfH106dAOQ" name="Invoice">
         <ownedAttribute xmi:id="_6QpJUByQEeKikfH106dAOQ" name="invoiceNo"/>
@@ -635,6 +653,10 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_P54tMBySEeKikfH106dAOQ" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_P54tMRySEeKikfH106dAOQ" value="*"/>
         </ownedAttribute>
+        <ownedAttribute xmi:id="_7cUfYBzqEeKPL7x6KEsGMg" name="product" type="_kSxj0ByQEeKikfH106dAOQ" association="_7cT4UBzqEeKPL7x6KEsGMg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7cYJwBzqEeKPL7x6KEsGMg" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7cYJwRzqEeKPL7x6KEsGMg" value="1"/>
+        </ownedAttribute>
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_LTDE8BySEeKikfH106dAOQ" name="" memberEnd="_LTDsABySEeKikfH106dAOQ _LTE6IBySEeKikfH106dAOQ"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_L2qvYBySEeKikfH106dAOQ" name="" memberEnd="_L2qvYRySEeKikfH106dAOQ _L2rWchySEeKikfH106dAOQ"/>
@@ -642,6 +664,12 @@
       <packagedElement xmi:type="uml:Association" xmi:id="_OydLEBySEeKikfH106dAOQ" name="" memberEnd="_OydyIBySEeKikfH106dAOQ _OyfAQRySEeKikfH106dAOQ"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_PY0AcBySEeKikfH106dAOQ" name="" memberEnd="_PY0ngBySEeKikfH106dAOQ _PY0ngxySEeKikfH106dAOQ"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_P53fEBySEeKikfH106dAOQ" name="" memberEnd="_P54GIBySEeKikfH106dAOQ _P55UQBySEeKikfH106dAOQ"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_gGmrcBzqEeKPL7x6KEsGMg" name="GunReplicas">
+        <generalization xmi:id="_2ENyQBzqEeKPL7x6KEsGMg" general="_kSxj0ByQEeKikfH106dAOQ"/>
+        <ownedAttribute xmi:id="_lOdWEBzqEeKPL7x6KEsGMg" name="fabric"/>
+        <ownedAttribute xmi:id="_nNlVMBzqEeKPL7x6KEsGMg" name="calibre"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_7cT4UBzqEeKPL7x6KEsGMg" name="" memberEnd="_7cUfYBzqEeKPL7x6KEsGMg _7cYJwhzqEeKPL7x6KEsGMg"/>
     </packagedElement>
     <packagedElement xmi:type="uml:DataType" xmi:id="_VaSFkByQEeKikfH106dAOQ" name="none"/>
     <profileApplication xmi:id="_PuQ98ByQEeKikfH106dAOQ">
