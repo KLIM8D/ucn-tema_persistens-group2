@@ -1,0 +1,54 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Diagram version="1.0" type="MSSQL" versionMajor="11" versionMinor="0" groupSchema="false">
+   <Table id="0" name="Contacts" schema="" database="" background="16777165">
+      <Column id="1" name="phoneNo" type="int" length="25" nulls="false"/>
+      <Column id="2" name="name" type="varchar" length="255" nulls="false"/>
+      <Column id="3" name="address" type="varchar" length="255" nulls="false"/>
+      <Column id="4" name="zipCode" type="int" length="25" nulls="false"/>
+      <Column id="5" name="city" type="varchar" length="255" nulls="false"/>
+      <Column id="6" name="email" type="varchar" length="255" nulls="false"/>
+      <Column id="7" name="country" type="varchar" length="2" nulls="false"/>
+      <Storage name="Filegroup" value=""></Storage>
+      <Storage name="FilegroupTextImage" value=""></Storage>
+   </Table>
+   <Table id="8" name="Supplier" schema="" database="" background="16777165">
+      <Column id="9" name="contactsKey" type="int" length="25" nulls="false"/>
+      <Column id="10" name="contactPerson" type="varchar" length="255" nulls="false"/>
+      <Column id="11" name="bankAccount" type="varchar" length="255" nulls="false"/>
+      <Storage name="Filegroup" value=""></Storage>
+      <Storage name="FilegroupTextImage" value=""></Storage>
+   </Table>
+   <Table id="12" name="Customer" schema="" database="" background="16777165">
+      <Column id="13" name="contactsKey" type="int" length="25" nulls="false"/>
+      <Column id="14" name="discount" type="decimal" length="25" nulls="false">
+         <CP name="PRECISION">15</CP>
+         <CP name="SCALE">5</CP>
+      </Column>
+      <Column id="15" name="isBusiness" type="bit" length="25" nulls="false"/>
+      <Storage name="Filegroup" value=""></Storage>
+      <Storage name="FilegroupTextImage" value=""></Storage>
+   </Table>
+   <Relation id="16" name="Contacts_Supplier" cardinality="1" identifying="false" nulls="false">
+      <Option name="enfConMS" class="Boolean" value="true"></Option>
+      <FK>1</FK>
+      <PK>9</PK>
+      <Text></Text>
+   </Relation>
+   <Relation id="17" name="Contacts_Customer" cardinality="1" identifying="false" nulls="false">
+      <Option name="enfConMS" class="Boolean" value="true"></Option>
+      <FK>1</FK>
+      <PK>13</PK>
+      <Text></Text>
+   </Relation>
+   <Constraint table="0" name="PK_Contacts_1" type="PrimKey">
+      <ConstraintColumn id="1"></ConstraintColumn>
+   </Constraint>
+   <Sheet name="Untitled 1" id="18" disp_at="true" disp_ph="true" disp_co="true" disp_rn="true">
+      <Place id="8" visible="true">380,40,220,80</Place>
+      <Place id="17" visible="true">500,0,0,0</Place>
+      <Place id="12" visible="true">380,150,180,80</Place>
+      <Place id="0" visible="true">30,40,180,140</Place>
+      <Place id="16" visible="true">500,0,0,0</Place>
+   </Sheet>
+   <Settings sheet="18" zoom="1.0"></Settings>
+</Diagram>
