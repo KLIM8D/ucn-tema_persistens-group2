@@ -596,7 +596,7 @@
         </ownedAttribute>
         <ownedAttribute xmi:id="_P55UQBySEeKikfH106dAOQ" name="orderItems" type="_7a3gwByQEeKikfH106dAOQ" association="_P53fEBySEeKikfH106dAOQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_P557UBySEeKikfH106dAOQ" value="1"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_P557URySEeKikfH106dAOQ" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_P557URySEeKikfH106dAOQ" value="*"/>
         </ownedAttribute>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_hkmGUByQEeKikfH106dAOQ" name="Supplier">
@@ -651,7 +651,7 @@
         <ownedAttribute xmi:id="_9SDr4ByQEeKikfH106dAOQ" name="unitPrice"/>
         <ownedAttribute xmi:id="_P54GIBySEeKikfH106dAOQ" name="salesOrder" type="_bj8LcByQEeKikfH106dAOQ" association="_P53fEBySEeKikfH106dAOQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_P54tMBySEeKikfH106dAOQ" value="1"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_P54tMRySEeKikfH106dAOQ" value="*"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_P54tMRySEeKikfH106dAOQ" value="1"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_7cUfYBzqEeKPL7x6KEsGMg" name="product" type="_kSxj0ByQEeKikfH106dAOQ" association="_7cT4UBzqEeKPL7x6KEsGMg">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7cYJwBzqEeKPL7x6KEsGMg" value="1"/>

@@ -121,13 +121,13 @@
       <modelElement href="ucn-tema_persistens-group2.uml#_P54GIBySEeKikfH106dAOQ"/>
       <visualProperties xmi:id="_P9T0oBySEeKikfH106dAOQ" position="62.0,-49.0"/>
       <visibility xmi:id="_P5_a5BySEeKikfH106dAOQ" label="+"/>
-      <cardinality xmi:id="_P5_a5RySEeKikfH106dAOQ" label="1..*" max="-1" min="1"/>
+      <cardinality xmi:id="_P5_a5RySEeKikfH106dAOQ" label="1" max="1" min="1"/>
     </sourceRole>
     <targetRole xmi:id="_P5_a5hySEeKikfH106dAOQ" aggregationKind="NONE" name="orderItems" navigable="true">
       <modelElement href="ucn-tema_persistens-group2.uml#_P55UQBySEeKikfH106dAOQ"/>
       <visualProperties xmi:id="_P9UbsRySEeKikfH106dAOQ" position="-129.0,-54.0"/>
       <visibility xmi:id="_P5_a5xySEeKikfH106dAOQ" label="+"/>
-      <cardinality xmi:id="_P5_a6BySEeKikfH106dAOQ" label="1" max="1" min="1"/>
+      <cardinality xmi:id="_P5_a6BySEeKikfH106dAOQ" label="1..*" max="-1" min="1"/>
     </targetRole>
   </edges>
   <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_2EQ1kBzqEeKPL7x6KEsGMg" sourceAnchor="98.0,0.0" targetAnchor="131.0,209.0" superClass="_kSyK4ByQEeKikfH106dAOQ" subClass="_gGn5kBzqEeKPL7x6KEsGMg">
@@ -251,7 +251,7 @@
     <attributes xmi:id="_P6BQEBySEeKikfH106dAOQ" name="orderItems">
       <modelElement href="ucn-tema_persistens-group2.uml#_P55UQBySEeKikfH106dAOQ"/>
       <visibility xmi:id="_P6BQERySEeKikfH106dAOQ" label="+"/>
-      <cardinality xmi:id="_P6BQEhySEeKikfH106dAOQ" label="1" max="1" min="1"/>
+      <cardinality xmi:id="_P6BQEhySEeKikfH106dAOQ" label="1..*" max="-1" min="1"/>
       <type xmi:id="_P6BQExySEeKikfH106dAOQ" name="OrderItems">
         <modelElement href="ucn-tema_persistens-group2.uml#_7a3gwByQEeKikfH106dAOQ"/>
       </type>
@@ -297,7 +297,7 @@
     <attributes xmi:id="_P6ApABySEeKikfH106dAOQ" name="salesOrder">
       <modelElement href="ucn-tema_persistens-group2.uml#_P54GIBySEeKikfH106dAOQ"/>
       <visibility xmi:id="_P6ApARySEeKikfH106dAOQ" label="+"/>
-      <cardinality xmi:id="_P6ApAhySEeKikfH106dAOQ" label="1..*" max="-1" min="1"/>
+      <cardinality xmi:id="_P6ApAhySEeKikfH106dAOQ" label="1" max="1" min="1"/>
       <type xmi:id="_P6ApAxySEeKikfH106dAOQ" name="SalesOrder">
         <modelElement href="ucn-tema_persistens-group2.uml#_bj8LcByQEeKikfH106dAOQ"/>
       </type>
