@@ -1,13 +1,12 @@
 package models;
 
-public class SalesOrder {
+public class SalesOrder 
+{
 	
-	// instance variables
 	private String _orderDate;
 	private String _deliveryDate;
 	private int _deliveryStatus;
 	
-	// constructor
 	public SalesOrder(String orderDate, String deliveryDate, int deliveryStatus)
 	{
 		_orderDate = orderDate;
@@ -15,23 +14,19 @@ public class SalesOrder {
 		_deliveryStatus = deliveryStatus;
 	}
 
-	// methods getters and setters
-	public String get_orderDate() 
-	{ return _orderDate; }
+	public String getOrderDate() 
+	{ return _orderDate; }	
+	public void setOrderDate(String orderDate) 
+	{ _orderDate = orderDate; }
 
-	public void set_orderDate(String orderDate) 
-	{ this._orderDate = orderDate; }
-
-	public String get_deliveryDate() 
+	public String getDeliveryDate() 
 	{ return _deliveryDate; }
+	public void setDeliveryDate(String deliveryDate) 
+	{ _deliveryDate = deliveryDate; }
 
-	public void set_deliveryDate(String deliveryDate) 
-	{ this._deliveryDate = deliveryDate; }
-
-	public int get_deliveryStatus() 
+	public int getDeliveryStatus() 
 	{ return _deliveryStatus; }
-
-	public void set_deliveryStatus(int deliveryStatus) 
-	{ this._deliveryStatus = deliveryStatus; }
+	public void setDeliveryStatus(int deliveryStatus) 
+	{ _deliveryStatus = deliveryStatus; }
 
 }
