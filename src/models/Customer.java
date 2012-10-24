@@ -1,6 +1,7 @@
 package models;
 
-public class Customer extends Contacts {
+public class Customer extends Contact
+{
 	
 	private double discount_;
 	private boolean isBusiness_;

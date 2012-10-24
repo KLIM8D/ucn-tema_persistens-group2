@@ -1,6 +1,7 @@
 package models;
 
-public class Supplier extends Contacts {
+public class Supplier extends Contact
+{
 
 	private String contactPerson_;
 	private String bankAccount_;

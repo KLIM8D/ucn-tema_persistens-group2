@@ -3,12 +3,12 @@ package models;
 /**
  * Created: 24-10-2012
  * @version: 0.1
- * Filename: Contacts.java
+ * Filename: Contact.java
  * Description:
  * @changes
  */
 
-public class Contacts
+public class Contact
 {
     private String _name;
     private String _address;
@@ -53,7 +53,7 @@ public class Contacts
     public void setCountry(String value)
     { _country = value; }
 
-    public Contacts(String name, String address, int zipCode, String city, long phoneNo, String email, String country)
+    public Contact(String name, String address, int zipCode, String city, long phoneNo, String email, String country)
     {
         _name = name;
         _address = address;
