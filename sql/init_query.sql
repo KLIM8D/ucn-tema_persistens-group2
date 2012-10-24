@@ -6,9 +6,7 @@ CREATE TABLE "Contacts"  (
 	"city"   	varchar(255) NOT NULL,
 	"email"  	varchar(255) NULL,
 	"country"	varchar(2) NOT NULL,
-	CONSTRAINT "PK_Contacts_1" PRIMARY KEY NONCLUSTERED("phoneNo")
-
-WITH (ALLOW_ROW_LOCKS = OFF, ALLOW_PAGE_LOCKS = OFF)
+	CONSTRAINT "PK_Contacts" PRIMARY KEY ("phoneNo")
 	)
 GO
 CREATE TABLE "Customer"  ( 
@@ -20,9 +18,7 @@ GO
 CREATE TABLE "DeliveryStatus"  ( 
 	"deliveryId"   	int NOT NULL,
 	"deliveryState"	varchar(255) NOT NULL,
-	CONSTRAINT "PK_DeliveryStatus_1" PRIMARY KEY NONCLUSTERED("deliveryId")
-
-WITH (ALLOW_ROW_LOCKS = OFF, ALLOW_PAGE_LOCKS = OFF)
+	CONSTRAINT "PK_DeliveryStatus" PRIMARY KEY ("deliveryId")
 	)
 GO
 CREATE TABLE "Invoice"  ( 
@@ -41,9 +37,7 @@ GO
 CREATE TABLE "ProductCategory"  ( 
 	"categoryId"  	int NOT NULL,
 	"categoryName"	varchar(255) NOT NULL,
-	CONSTRAINT "PK_ProductCategory_1" PRIMARY KEY NONCLUSTERED("categoryId")
-
-WITH (ALLOW_ROW_LOCKS = OFF, ALLOW_PAGE_LOCKS = OFF)
+	CONSTRAINT "PK_ProductCategory" PRIMARY KEY ("categoryId")
 	)
 GO
 CREATE TABLE "ProductData"  ( 
@@ -62,9 +56,7 @@ CREATE TABLE "Products"  (
 	"rentPrice"      	decimal(15,5) NOT NULL,
 	"countryOfOrigin"	varchar(2) NOT NULL,
 	"mimimumStock"   	int NOT NULL,
-	CONSTRAINT "PK_Products_1" PRIMARY KEY NONCLUSTERED("productId")
-
-WITH (ALLOW_ROW_LOCKS = OFF, ALLOW_PAGE_LOCKS = OFF)
+	CONSTRAINT "PK_Products" PRIMARY KEY ("productId")
 	)
 GO
 CREATE TABLE "SalesOrder"  ( 
@@ -73,9 +65,7 @@ CREATE TABLE "SalesOrder"  (
 	"deliveryKey" 	int NOT NULL,
 	"orderDate"   	datetime NOT NULL,
 	"deliveryDate"	date NOT NULL,
-	CONSTRAINT "PK_SalesOrder_1" PRIMARY KEY NONCLUSTERED("orderId")
-
-WITH (ALLOW_ROW_LOCKS = OFF, ALLOW_PAGE_LOCKS = OFF)
+	CONSTRAINT "PK_SalesOrder" PRIMARY KEY ("orderId")
 	)
 GO
 CREATE TABLE "Supplier"  ( 
