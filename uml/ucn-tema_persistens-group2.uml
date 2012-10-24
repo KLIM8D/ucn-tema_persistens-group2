@@ -554,29 +554,19 @@
         <ownedEnd xmi:id="_QHy4QRyQEeKikfH106dAOQ" name="" type="_QCFR0ByQEeKikfH106dAOQ" association="_QHy4QByQEeKikfH106dAOQ"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_RP698ByQEeKikfH106dAOQ" name="Contacts">
+        <generalization xmi:id="_iP_ngB2zEeKLZd2wUa_DMA" general="_hkmGUByQEeKikfH106dAOQ"/>
+        <generalization xmi:id="_i_Nd8B2zEeKLZd2wUa_DMA" general="_ZS1EcByQEeKikfH106dAOQ"/>
         <ownedAttribute xmi:id="_VaQ3cByQEeKikfH106dAOQ" name="name"/>
         <ownedAttribute xmi:id="_V15DgByQEeKikfH106dAOQ" name="address"/>
-        <ownedAttribute xmi:id="_WTFV0ByQEeKikfH106dAOQ" name="zipCodes"/>
+        <ownedAttribute xmi:id="_WTFV0ByQEeKikfH106dAOQ" name="zipCode"/>
         <ownedAttribute xmi:id="_WlX_sByQEeKikfH106dAOQ" name="city"/>
         <ownedAttribute xmi:id="_XBhJIByQEeKikfH106dAOQ" name="phoneNo"/>
         <ownedAttribute xmi:id="_XtL8UByQEeKikfH106dAOQ" name="email"/>
         <ownedAttribute xmi:id="_YJUesByQEeKikfH106dAOQ" name="country"/>
-        <ownedAttribute xmi:id="_LTE6IBySEeKikfH106dAOQ" name="supplier" type="_hkmGUByQEeKikfH106dAOQ" association="_LTDE8BySEeKikfH106dAOQ">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LTFhMBySEeKikfH106dAOQ" value="1"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LTFhMRySEeKikfH106dAOQ" value="1"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:id="_L2rWchySEeKikfH106dAOQ" name="customer" type="_ZS1EcByQEeKikfH106dAOQ" association="_L2qvYBySEeKikfH106dAOQ">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_L2r9gBySEeKikfH106dAOQ" value="1"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_L2r9gRySEeKikfH106dAOQ" value="1"/>
-        </ownedAttribute>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_ZS1EcByQEeKikfH106dAOQ" name="Customer">
         <ownedAttribute xmi:id="_aaJ44ByQEeKikfH106dAOQ" name="discount"/>
         <ownedAttribute xmi:id="_bJUE8ByQEeKikfH106dAOQ" name="isBusiness"/>
-        <ownedAttribute xmi:id="_L2qvYRySEeKikfH106dAOQ" name="contacts" type="_RP698ByQEeKikfH106dAOQ" association="_L2qvYBySEeKikfH106dAOQ">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_L2rWcBySEeKikfH106dAOQ" value="1"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_L2rWcRySEeKikfH106dAOQ" value="1"/>
-        </ownedAttribute>
         <ownedAttribute xmi:id="_OyfAQRySEeKikfH106dAOQ" name="salesOrder" type="_bj8LcByQEeKikfH106dAOQ" association="_OydLEBySEeKikfH106dAOQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OyfnUBySEeKikfH106dAOQ"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OyfnURySEeKikfH106dAOQ" value="*"/>
@@ -602,10 +592,6 @@
       <packagedElement xmi:type="uml:Class" xmi:id="_hkmGUByQEeKikfH106dAOQ" name="Supplier">
         <ownedAttribute xmi:id="_i2Tl0ByQEeKikfH106dAOQ" name="contactPerson"/>
         <ownedAttribute xmi:id="_jTgfMByQEeKikfH106dAOQ" name="bankAccount"/>
-        <ownedAttribute xmi:id="_LTDsABySEeKikfH106dAOQ" name="contacts" type="_RP698ByQEeKikfH106dAOQ" association="_LTDE8BySEeKikfH106dAOQ">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LTETEBySEeKikfH106dAOQ" value="1"/>
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LTETERySEeKikfH106dAOQ" value="1"/>
-        </ownedAttribute>
         <ownedAttribute xmi:id="_NSyIERySEeKikfH106dAOQ" name="product" type="_kSxj0ByQEeKikfH106dAOQ" association="_NSwS4BySEeKikfH106dAOQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NSyvIBySEeKikfH106dAOQ"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NSyvIRySEeKikfH106dAOQ" value="*"/>
@@ -658,8 +644,6 @@
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7cYJwRzqEeKPL7x6KEsGMg" value="1"/>
         </ownedAttribute>
       </packagedElement>
-      <packagedElement xmi:type="uml:Association" xmi:id="_LTDE8BySEeKikfH106dAOQ" name="" memberEnd="_LTDsABySEeKikfH106dAOQ _LTE6IBySEeKikfH106dAOQ"/>
-      <packagedElement xmi:type="uml:Association" xmi:id="_L2qvYBySEeKikfH106dAOQ" name="" memberEnd="_L2qvYRySEeKikfH106dAOQ _L2rWchySEeKikfH106dAOQ"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_NSwS4BySEeKikfH106dAOQ" name="" memberEnd="_NSw58BySEeKikfH106dAOQ _NSyIERySEeKikfH106dAOQ"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_OydLEBySEeKikfH106dAOQ" name="" memberEnd="_OydyIBySEeKikfH106dAOQ _OyfAQRySEeKikfH106dAOQ"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_PY0AcBySEeKikfH106dAOQ" name="" memberEnd="_PY0ngBySEeKikfH106dAOQ _PY0ngxySEeKikfH106dAOQ"/>
