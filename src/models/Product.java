@@ -33,6 +33,18 @@ public class Product
         _minimumStock = minimumStock;
     }
 
+    public Product(String name, String purchasePrice, String salesPrice, String rentPrice, String countryOfOrigin, long minimumStock, ProductCategory category, Supplier supplier)
+    {
+        _name = name;
+        _purchasePrice = new BigDecimal(purchasePrice);
+        _salesPrice = new BigDecimal(salesPrice);
+        _rentPrice = new BigDecimal(rentPrice);
+        _countryOfOrigin = countryOfOrigin;
+        _minimumStock = minimumStock;
+        _category = category;
+        _supplier = supplier;
+    }
+
     public String getName()
     { return _name; }
     public void setName(String value)
@@ -67,6 +79,11 @@ public class Product
     { return _category; }
     public void setCategory(ProductCategory value)
     { _category = value; }
+
+    public Supplier getSupplier()
+    { return _supplier; }
+    public void setSupplier(Supplier value)
+    { _supplier = value; }
 
     public ArrayList<ProductData> getProductData()
     { return _productData; }
