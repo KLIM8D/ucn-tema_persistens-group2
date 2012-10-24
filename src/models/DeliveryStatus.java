@@ -1,6 +1,7 @@
 package models;
 
-public class DeliveryStatus {
+public class DeliveryStatus
+{
 	private int _deliveryId;
 	private String _deliveryState;
 	

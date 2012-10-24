@@ -13,6 +13,12 @@ public class ProductData
     private String _attribute;
     private String _attributeValue;
 
+    public ProductData(String attribute, String attributeValue)
+    {
+        _attribute = attribute;
+        _attributeValue = attributeValue;
+    }
+
     public String getAttribute()
     { return _attribute; }
     public void setAttribute(String value)
@@ -22,10 +28,4 @@ public class ProductData
     { return _attributeValue; }
     public void setAttributeValue(String value)
     { _attributeValue = value; }
-
-    public ProductData(String attribute, String attributeValue)
-    {
-        _attribute = attribute;
-        _attributeValue = attributeValue;
-    }
 }

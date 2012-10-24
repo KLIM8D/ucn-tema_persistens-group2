@@ -18,6 +18,17 @@ public class Contact
     private String _email;
     private String _country;
 
+    public Contact(String name, String address, int zipCode, String city, long phoneNo, String email, String country)
+    {
+        _name = name;
+        _address = address;
+        _zipCode = zipCode;
+        _city = city;
+        _phoneNo = phoneNo;
+        _email = email;
+        _country = country;
+    }
+
     public String getName()
     { return _name; }
     public void setName(String value)
@@ -52,15 +63,4 @@ public class Contact
     { return _country; }
     public void setCountry(String value)
     { _country = value; }
-
-    public Contact(String name, String address, int zipCode, String city, long phoneNo, String email, String country)
-    {
-        _name = name;
-        _address = address;
-        _zipCode = zipCode;
-        _city = city;
-        _phoneNo = phoneNo;
-        _email = email;
-        _country = country;
-    }
 }

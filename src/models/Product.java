@@ -23,6 +23,16 @@ public class Product
     private Supplier _supplier;
     private ArrayList<ProductData> _productData;
 
+    public Product(String name, String purchasePrice, String salesPrice, String rentPrice, String countryOfOrigin, long minimumStock)
+    {
+        _name = name;
+        _purchasePrice = new BigDecimal(purchasePrice);
+        _salesPrice = new BigDecimal(salesPrice);
+        _rentPrice = new BigDecimal(rentPrice);
+        _countryOfOrigin = countryOfOrigin;
+        _minimumStock = minimumStock;
+    }
+
     public String getName()
     { return _name; }
     public void setName(String value)
@@ -62,14 +72,4 @@ public class Product
     { return _productData; }
     public void insertProductData(ProductData value)
     { _productData.add(value); }
-
-    public Product(String name, String purchasePrice, String salesPrice, String rentPrice, String countryOfOrigin, long minimumStock)
-    {
-        _name = name;
-        _purchasePrice = new BigDecimal(purchasePrice);
-        _salesPrice = new BigDecimal(salesPrice);
-        _rentPrice = new BigDecimal(rentPrice);
-        _countryOfOrigin = countryOfOrigin;
-        _minimumStock = minimumStock;
-    }
 }

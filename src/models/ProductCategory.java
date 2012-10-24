@@ -14,6 +14,12 @@ public class ProductCategory
     private int _categoryId;
     private String _categoryName;
 
+    public ProductCategory(int categoryId, String categoryName)
+    {
+        _categoryId = categoryId;
+        _categoryName = categoryName;
+    }
+
     public String getCategoryName()
     { return _categoryName; }
     public void setCategoryName(String value)
@@ -23,8 +29,4 @@ public class ProductCategory
     { return _categoryId; }
     public void setCategoryId(int value)
     { _categoryId = value; }
-
-    public ProductCategory()
-    {
-    }
 }

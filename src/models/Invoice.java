@@ -2,7 +2,8 @@ package models;
 
 import java.util.Date;
 
-public class Invoice {
+public class Invoice
+{
 	private int _invoiceNo;
 	private Date _paymentDate;
 	

@@ -2,7 +2,8 @@ package models;
 
 import java.math.BigDecimal;
 
-public class OrderItems {
+public class OrderItems
+{
 	private int _quantity;
 	private BigDecimal _unitPrice;
 	
@@ -12,13 +13,13 @@ public class OrderItems {
 		_unitPrice = unitPrice;
 	}
 	
-	public int get_quantity()
+	public int getQuantity()
 	{ return _quantity; }
-	public void set_quantity(int value)
+	public void setQuantity(int value)
 	{ _quantity = value; }
 	
-	public BigDecimal get_unitPrice()
+	public BigDecimal getUnitPrice()
 	{ return _unitPrice; }
-	public void set_unitPrice(BigDecimal value)
+	public void setUnitPrice(BigDecimal value)
 	{ _unitPrice = value; }
 }
