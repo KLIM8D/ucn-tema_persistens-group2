@@ -4,6 +4,7 @@ import models.Product;
 import models.ProductCategory;
 import models.ProductData;
 
+import javax.sql.rowset.CachedRowSet;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -70,7 +71,9 @@ public class DBProduct implements IFDBProduct
             query.setLong(1, id);
             _da.setSqlCommandText(query);
             ResultSet productResult = _da.callCommandGetRow();
-            return buildProduct(productResult, true);
+            productResult.next();
+            Product prod = buildProduct(productResult, retrieveAssociation);
+            return prod;
         }
         catch (Exception e)
         {
@@ -96,7 +99,8 @@ public class DBProduct implements IFDBProduct
             query.setString(1, name);
             _da.setSqlCommandText(query);
             ResultSet productResult = _da.callCommandGetRow();
-            return buildProduct(productResult, true);
+            productResult.next();
+            return buildProduct(productResult, retrieveAssociation);
         }
         catch (Exception e)
         {
@@ -115,6 +119,30 @@ public class DBProduct implements IFDBProduct
     @Override
     public int insertProduct(Product product) throws Exception
     {
+        if(product == null)
+            return 0;
+
+        try
+        {
+            PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Products (contactsKey, categoryKey, name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minimumStock) " +
+                                       "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+            query.setLong(1, product.getSupplier().getPhoneNo());
+            query.setLong(2, product.getCategory().getCategoryId());
+            query.setString(3, product.getName());
+            query.setDouble(4, product.getPurchasePrice().doubleValue());
+            query.setDouble(5, product.getSalesPrice().doubleValue());
+            query.setDouble(6, product.getRentPrice().doubleValue());
+            query.setString(7, product.getCountryOfOrigin());
+            query.setLong(8, product.getMinimumStock());
+            _da.setSqlCommandText(query);
+            return _da.callCommand();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
         return 0;
     }
 
@@ -155,12 +183,13 @@ public class DBProduct implements IFDBProduct
                 queryCategory.setLong(1, categoryId);
                 _da.setSqlCommandText(queryCategory);
                 ResultSet categoryResults = _da.callCommandGetRow();
+                categoryResults.next();
                 ProductCategory category = buildProductCategory(categoryResults);
                 product.setCategory(category);
 
                 //ProductData
                 PreparedStatement queryProductData = _da.getCon().prepareStatement("SELECT * FROM ProductData WHERE productKey = ?");
-                queryCategory.setLong(1, productId);
+                queryProductData.setLong(1, productId);
                 _da.setSqlCommandText(queryProductData);
                 ResultSet dataResults = _da.callCommandGetResultSet();
                 while(dataResults.next())
@@ -176,6 +205,7 @@ public class DBProduct implements IFDBProduct
         {
             ex.printStackTrace();
         }
+
         return null;
     }
 
@@ -194,6 +224,7 @@ public class DBProduct implements IFDBProduct
         {
             ex.printStackTrace();
         }
+
         return null;
     }
 
@@ -212,6 +243,7 @@ public class DBProduct implements IFDBProduct
         {
             ex.printStackTrace();
         }
+
         return null;
     }
 }

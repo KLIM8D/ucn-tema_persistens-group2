@@ -8,6 +8,9 @@ package db;
  * @changes
  */
 
+import com.sun.rowset.CachedRowSetImpl;
+
+import javax.sql.rowset.CachedRowSet;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 import java.sql.*;
@@ -16,7 +19,7 @@ public class DataAccess
 {
     private PreparedStatement _sqlCommand;
     private int _dbType;
-    private String _connectionString = "jdbc:sqlserver://IP-ADDR;" +
+    private String _connectionString = "jdbc:sqlserver://IP-ADDR:1433;" +
                                         "databaseName=DBNAME;" +
                                         "user=USERNAME;" +
                                         "password=PASSWORD";
@@ -33,8 +36,12 @@ public class DataAccess
     public void setDbType(int value)
     { _dbType = value; }
 
-    public Connection getCon()
-    { return _con; }
+    public Connection getCon() throws SQLException
+    {
+        if(_con == null || isClosed())
+            openConnection();
+        return _con;
+    }
 
 
     public static DataAccess getInstance()
@@ -44,6 +51,7 @@ public class DataAccess
 
     private DataAccess()
     {
+        _dbType = 1;
         switch(_dbType)
         {
             case 1:
@@ -134,11 +142,16 @@ public class DataAccess
         if (_enableSqlMonitor)
             startTime =  threadmxbean.getCurrentThreadCpuTime();
 
-        ResultSet newResultSet = null;
         try
         {
-            openConnection();
-            newResultSet = _sqlCommand.executeQuery();
+            CachedRowSet cachedRowSet = new CachedRowSetImpl();
+            if(isClosed())
+                openConnection();
+            ResultSet newResultSet = _sqlCommand.executeQuery();
+            cachedRowSet.populate(newResultSet);
+            newResultSet.close();
+            closeConnection();
+            return cachedRowSet;
         }
         catch (Exception e)
         {
@@ -158,15 +171,20 @@ public class DataAccess
 
         _sqlCommand = null;
 
-        return newResultSet;
+        return null;
     }
     private ResultSet callCommandGetResultSetWithOutMonitor()
     {
-        ResultSet newResultSet = null;
         try
         {
-            openConnection();
-            newResultSet = _sqlCommand.executeQuery();
+            CachedRowSet cachedRowSet = new CachedRowSetImpl();
+            if(isClosed())
+                openConnection();
+            ResultSet newResultSet = _sqlCommand.executeQuery();
+            cachedRowSet.populate(newResultSet);
+            newResultSet.close();
+            closeConnection();
+            return cachedRowSet;
         }
         catch (Exception e)
         {
@@ -180,7 +198,7 @@ public class DataAccess
 
         _sqlCommand = null;
 
-        return newResultSet;
+        return null;
     }
 
     public int callCommand()
@@ -198,7 +216,8 @@ public class DataAccess
 
         try
         {
-            openConnection();
+            if(isClosed())
+                openConnection();
             returnVal = _sqlCommand.executeUpdate();
         }
         catch (Exception e)
@@ -277,10 +296,15 @@ public class DataAccess
         try
         {
             ResultSet listData = callCommandGetResultSetWithOutMonitor();
-            if (listData != null && listData.next())
+            CachedRowSet rowset = new CachedRowSetImpl();
+            if (listData != null)
             {
-                listData.first();
-                return listData;
+                // && listData.next()
+                //listData.first();
+                rowset.populate(listData);
+                listData.close();
+                closeConnection();
+                return rowset;
             }
         }
         catch (Exception e)
@@ -310,5 +334,24 @@ public class DataAccess
         sb.append("Running method:" + dalFunction +  System.getProperty("line.separator"));
         sb.append("Execution time: " + sqlExecutionTime + " ns" +  System.getProperty("line.separator"));
         System.out.println(sb.toString());
+    }
+
+    private boolean isClosed()
+    {
+        Statement stmt;
+        ResultSet rs;
+        try
+        {
+            stmt = _con.createStatement();
+            rs = stmt.executeQuery("SELECT 1");
+            if (rs.next())
+                return false; // connection is valid
+        }
+        catch (SQLException ex)
+        {
+            //ex.printStackTrace();
+            return true;
+        }
+        return false;
     }
 }
