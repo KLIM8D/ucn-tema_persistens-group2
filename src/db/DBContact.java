@@ -6,7 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class DBContact implements IFDBContact {
+public class DBContact implements IFDBContact
+{
 	
 	private DataAccess _da;
 	public DBContact()
@@ -19,10 +20,12 @@ public class DBContact implements IFDBContact {
 	 * 
 	 * @return ArrayList<Contact>
 	 */
-	public ArrayList<Contact> getAllContacts() {
+	public ArrayList<Contact> getAllContacts()
+	{
 		
 		ArrayList<Contact> returnList = new ArrayList<Contact>();
-		try {
+		try 
+		{
 			PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Contacts");
 			_da.setSqlCommandText(query);
 			ResultSet contacts = _da.callCommandGetResultSet();
@@ -46,7 +49,8 @@ public class DBContact implements IFDBContact {
 	 * @param id 			the ID of the contact that needs to be returned
 	 * @return Contact
 	 */
-	public Contact getContactById(long id) {
+	public Contact getContactById(long id)
+	{
 		try
 		{
 			PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Contacts WHERE phoneNo = ?");
@@ -62,11 +66,13 @@ public class DBContact implements IFDBContact {
 		return null;
 	}
 
-	public int insertContact(Contact contact) throws Exception {
+	public int insertContact(Contact contact) throws Exception
+	{
 		return 0;
 	}
 
-	public int updateContact(Contact contact) throws Exception {
+	public int updateContact(Contact contact) throws Exception
+	{
 		return 0;
 	}
 	

@@ -60,5 +60,5 @@ public interface IFDBSupplier
      * @return int returns the number of rows affected
      *
      */
-    public int updateSupplier(Supplier supplier);
+    public int updateSupplier(Supplier supplier) throws Exception;
 }
