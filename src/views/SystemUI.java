@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,14 +10,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class SystemUI {
+public class SystemUI
+{
 
 	private JFrame frmSystemWindow;
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
 					SystemUI window = new SystemUI();
 					window.frmSystemWindow.setVisible(true);
 				} catch (Exception e) {
@@ -26,11 +34,13 @@ public class SystemUI {
 		});
 	}
 
-	public SystemUI() {
+	public SystemUI()
+	{
 		initialize();
 	}
 
-	private void initialize() {
+	private void initialize()
+	{
 		frmSystemWindow = new JFrame();
 		frmSystemWindow.setResizable(false);
 		frmSystemWindow.setTitle("System Window");
@@ -49,21 +59,48 @@ public class SystemUI {
 		pnlQuickSelection.setLayout(null);
 		
 		JLabel lblOrder = new JLabel(new ImageIcon(SystemUI.class.getResource("/cart.png")));
+		lblOrder.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				orderSelect();
+			}
+		});
 		lblOrder.setHorizontalAlignment(SwingConstants.LEFT);
-		lblOrder.setText("Order");
+		lblOrder.setText("Ordre");
 		lblOrder.setBounds(12, 12, 150, 50);
+		lblOrder.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlQuickSelection.add(lblOrder);
 		
 		JLabel lblContacts = new JLabel(new ImageIcon(SystemUI.class.getResource("/contacts.png")));
+		lblContacts.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				contactsSelect();
+			}
+		});
 		lblContacts.setText("Kontakter");
 		lblContacts.setHorizontalAlignment(SwingConstants.LEFT);
 		lblContacts.setBounds(12, 74, 150, 50);
+		lblContacts.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlQuickSelection.add(lblContacts);
 		
 		JLabel lblProducts = new JLabel(new ImageIcon(SystemUI.class.getResource("/productbase.png")));
+		lblProducts.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				productsSelect();
+			}
+		});
 		lblProducts.setText("Produktbase");
 		lblProducts.setHorizontalAlignment(SwingConstants.LEFT);
 		lblProducts.setBounds(12, 136, 150, 50);
+		lblProducts.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlQuickSelection.add(lblProducts);
 		
 		JPanel pnlInfo = new JPanel();
@@ -71,5 +108,20 @@ public class SystemUI {
 		pnlInfo.setBounds(4, 217, 180, 326);
 		pnlInfo.setBackground(Color.WHITE);
 		frmSystemWindow.getContentPane().add(pnlInfo);
+	}
+	
+	private void orderSelect()
+	{
+		
+	}
+	
+	private void contactsSelect()
+	{
+		
+	}
+	
+	private void productsSelect()
+	{
+		
 	}
 }
