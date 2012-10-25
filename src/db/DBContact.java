@@ -13,8 +13,12 @@ public class DBContact implements IFDBContact {
 	{
 		_da = DataAccess.getInstance();
 	}
-
-	@Override
+	
+	/**
+	 * Retrieve all contacts from database
+	 * 
+	 * @return ArrayList<Contact>
+	 */
 	public ArrayList<Contact> getAllContacts() {
 		
 		ArrayList<Contact> returnList = new ArrayList<Contact>();
@@ -34,6 +38,28 @@ public class DBContact implements IFDBContact {
 			e.printStackTrace();
 		}
 		return returnList;
+	}
+	
+	/**
+	 * Retrieve a specific contact by contact id
+	 * 
+	 * @param id 			the ID of the contact that needs to be returned
+	 * @return Contact
+	 */
+	public Contact getContactById(long id) {
+		try
+		{
+			PreparedStatement query = _da.getCon().prepareStatement("");
+			query.setLong(1, id);
+			_da.setSqlCommandText(query);
+			ResultSet contactResult = _da.callCommandGetRow();
+			return buildContact(contactResult);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
@@ -67,12 +93,10 @@ public class DBContact implements IFDBContact {
 			
 			return contact;
 		}
-		
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
 		return null;
 	}
-
 }
