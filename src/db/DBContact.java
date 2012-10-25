@@ -23,7 +23,7 @@ public class DBContact implements IFDBContact {
 		
 		ArrayList<Contact> returnList = new ArrayList<Contact>();
 		try {
-			PreparedStatement query = _da.getCon().prepareStatement("");
+			PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Contacts");
 			_da.setSqlCommandText(query);
 			ResultSet contacts = _da.callCommandGetResultSet();
 			
@@ -49,7 +49,7 @@ public class DBContact implements IFDBContact {
 	public Contact getContactById(long id) {
 		try
 		{
-			PreparedStatement query = _da.getCon().prepareStatement("");
+			PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Contacts WHERE phoneNo = ?");
 			query.setLong(1, id);
 			_da.setSqlCommandText(query);
 			ResultSet contactResult = _da.callCommandGetRow();
@@ -62,15 +62,11 @@ public class DBContact implements IFDBContact {
 		return null;
 	}
 
-	@Override
 	public int insertContact(Contact contact) throws Exception {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public int updateContact(Contact contact) throws Exception {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	
