@@ -1,21 +1,23 @@
 package models;
 
+import java.math.BigDecimal;
+
 public class Customer extends Contact
 {
 	
-	private double _discount;
+	private BigDecimal _discount;
 	private boolean _isBusiness;
 	
-	public Customer(String name, String address, int zipCode, String city, long phoneNo, String email, String country, double discount, boolean isBusiness)
+	public Customer(String name, String address, int zipCode, String city, long phoneNo, String email, String country, BigDecimal discount, boolean isBusiness)
 	{
 		super(name, address, zipCode, city, phoneNo, email, country);
 		_discount = discount;
 		_isBusiness = isBusiness;
 	}
 
-    public double getDiscount()
+    public BigDecimal getDiscount()
     { return _discount; }
-    public void setDiscount(double discount)
+    public void setDiscount(BigDecimal discount)
     { _discount = discount; }
 
     public boolean isBusiness()
