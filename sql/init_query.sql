@@ -16,7 +16,7 @@ CREATE TABLE "Customer"  (
 	)
 GO
 CREATE TABLE "DeliveryStatus"  ( 
-	"deliveryId"   	int NOT NULL,
+	"deliveryId"   	int IDENTITY(1,1) NOT NULL,
 	"deliveryState"	varchar(255) NOT NULL,
 	CONSTRAINT "PK_DeliveryStatus" PRIMARY KEY ("deliveryId")
 	)
@@ -35,7 +35,7 @@ CREATE TABLE "OrderItems"  (
 	)
 GO
 CREATE TABLE "ProductCategory"  ( 
-	"categoryId"  	int NOT NULL,
+	"categoryId"  	int IDENTITY(1,1) NOT NULL,
 	"categoryName"	varchar(255) NOT NULL,
 	CONSTRAINT "PK_ProductCategory" PRIMARY KEY ("categoryId")
 	)
@@ -47,7 +47,7 @@ CREATE TABLE "ProductData"  (
 	)
 GO
 CREATE TABLE "Products"  ( 
-	"productId"      	int NOT NULL,
+	"productId"      	int IDENTITY(1,1) NOT NULL,
 	"contactsKey"    	int NOT NULL,
 	"categoryKey"    	int NOT NULL,
 	"name"           	varchar(255) NOT NULL,
@@ -55,12 +55,12 @@ CREATE TABLE "Products"  (
 	"salesPrice"     	decimal(15,5) NOT NULL,
 	"rentPrice"      	decimal(15,5) NOT NULL,
 	"countryOfOrigin"	varchar(2) NOT NULL,
-	"mimimumStock"   	int NOT NULL,
+	"minimumStock"   	int NOT NULL,
 	CONSTRAINT "PK_Products" PRIMARY KEY ("productId")
 	)
 GO
 CREATE TABLE "SalesOrder"  ( 
-	"orderId"     	int NOT NULL,
+	"orderId"     	int IDENTITY(100,1) NOT NULL,
 	"contactsKey" 	int NOT NULL,
 	"deliveryKey" 	int NOT NULL,
 	"orderDate"   	datetime NOT NULL,
@@ -88,15 +88,11 @@ ALTER TABLE "SalesOrder"
 	ADD CONSTRAINT "Contacts_SalesOrder"
 	FOREIGN KEY("contactsKey")
 	REFERENCES "Contacts"("phoneNo")
-	ON DELETE NO ACTION 
-	ON UPDATE NO ACTION 
 GO
 ALTER TABLE "Products"
 	ADD CONSTRAINT "Contacts_Products"
 	FOREIGN KEY("contactsKey")
 	REFERENCES "Contacts"("phoneNo")
-	ON DELETE NO ACTION 
-	ON UPDATE NO ACTION 
 GO
 ALTER TABLE "SalesOrder"
 	ADD CONSTRAINT "DeliveryStatus_SalesOrder"
