@@ -61,4 +61,13 @@ public interface IFDBProduct
      *
      */
     public int updateProduct(Product product);
+
+    /**
+     * Delete a product from the database
+     *
+     * @param product the product object which contains a valid ID
+     * @return int returns the number of rows affected
+     */
+    public int deleteProduct(Product product);
+
 }

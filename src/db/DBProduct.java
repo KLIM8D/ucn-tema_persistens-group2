@@ -4,7 +4,6 @@ import models.Product;
 import models.ProductCategory;
 import models.ProductData;
 
-import javax.sql.rowset.CachedRowSet;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -72,8 +71,7 @@ public class DBProduct implements IFDBProduct
             _da.setSqlCommandText(query);
             ResultSet productResult = _da.callCommandGetRow();
             productResult.next();
-            Product prod = buildProduct(productResult, retrieveAssociation);
-            return prod;
+            return buildProduct(productResult, retrieveAssociation);
         }
         catch (Exception e)
         {
@@ -155,9 +153,66 @@ public class DBProduct implements IFDBProduct
     @Override
     public int updateProduct(Product product)
     {
+        if(product == null)
+            return 0;
+
+        try
+        {
+            if(getProductById(product.getId(), true) == null)
+                return 0;
+
+            PreparedStatement query = _da.getCon().prepareStatement("UPDATE Products SET contactsKey = ?, categoryKey = ?, name = ?, purchasePrice = ?, salesPrice = ?, rentPrice = ?, countryOfOrigin = ?, minimumStock = ? " +
+                    "WHERE productId = ?");
+
+            query.setLong(1, product.getSupplier().getPhoneNo());
+            query.setLong(2, product.getCategory().getCategoryId());
+            query.setString(3, product.getName());
+            query.setDouble(4, product.getPurchasePrice().doubleValue());
+            query.setDouble(5, product.getSalesPrice().doubleValue());
+            query.setDouble(6, product.getRentPrice().doubleValue());
+            query.setString(7, product.getCountryOfOrigin());
+            query.setLong(8, product.getMinimumStock());
+            query.setLong(9, product.getId());
+            _da.setSqlCommandText(query);
+            return _da.callCommand();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
         return 0;
     }
 
+    /**
+     * Delete a product from the database
+     *
+     * @param product the product object which contains a valid ID
+     * @return int returns the number of rows affected
+     */
+    @Override
+    public int deleteProduct(Product product)
+    {
+        if(product == null)
+            return 0;
+
+        try
+        {
+            if(getProductById(product.getId(), true) == null)
+                return 0;
+
+            PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Products WHERE productId = ?");
+            query.setLong(1, product.getId());
+            _da.setSqlCommandText(query);
+            return _da.callCommand();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return 0;
+    }
 
     private Product buildProduct(ResultSet row, boolean retrieveAssociation)
     {
