@@ -57,6 +57,7 @@ public class DBContact implements IFDBContact
 			query.setLong(1, id);
 			_da.setSqlCommandText(query);
 			ResultSet contactResult = _da.callCommandGetRow();
+            contactResult.next();
 			return buildContact(contactResult);
 		}
 		catch(Exception e)

@@ -18,14 +18,13 @@ import java.sql.*;
 public class DataAccess
 {
     private PreparedStatement _sqlCommand;
-    private int _dbType;
-    private String _connectionString = "jdbc:sqlserver://IP-ADDR:1433;" +
-                                        "databaseName=DBNAME;" +
-                                        "user=USERNAME;" +
-                                        "password=PASSWORD";
-    private boolean _enableSqlMonitor = true;
+    private int _dbType = 1;
+    private final String _connectionString = "jdbc:sqlserver://IP-ADDR:1433;" +
+                                             "databaseName=DBNAME;" +
+                                             "user=USERNAME;" +
+                                             "password=PASSWORD";
+    private final boolean _enableSqlMonitor = true;
     private static Connection _con;
-    //private DatabaseMetaData dma;
     private static DataAccess _instance;
 
     public PreparedStatement getSqlCommandText()
@@ -43,7 +42,6 @@ public class DataAccess
         return _con;
     }
 
-
     public static DataAccess getInstance()
     {
         return _instance != null ? _instance : (_instance = new DataAccess());
@@ -51,7 +49,6 @@ public class DataAccess
 
     private DataAccess()
     {
-        _dbType = 1;
         switch(_dbType)
         {
             case 1:
@@ -75,7 +72,6 @@ public class DataAccess
         {
             _con = DriverManager.getConnection(_connectionString);
             _con.setAutoCommit(true);
-            //dma = _con.getMetaData(); // get meta data
         }
         catch(Exception e)
         {
@@ -107,6 +103,7 @@ public class DataAccess
             e.printStackTrace();
         }
     }
+
     public static void commitTransaction()
     {
         try
@@ -118,6 +115,7 @@ public class DataAccess
             e.printStackTrace();
         }
     }
+
     public static void rollbackTransaction()
     {
         try
@@ -135,22 +133,21 @@ public class DataAccess
     {
         //Benchmark time start
         ThreadMXBean threadmxbean = ManagementFactory.getThreadMXBean();
-        long startTime = 0;
+        long startTime;
         long finishTime;
-
 
         if (_enableSqlMonitor)
             startTime =  threadmxbean.getCurrentThreadCpuTime();
 
         try
         {
+            ResultSet newResultSet = _sqlCommand.executeQuery();
             CachedRowSet cachedRowSet = new CachedRowSetImpl();
             if(isClosed())
                 openConnection();
-            ResultSet newResultSet = _sqlCommand.executeQuery();
+
             cachedRowSet.populate(newResultSet);
             newResultSet.close();
-            closeConnection();
             return cachedRowSet;
         }
         catch (Exception e)
@@ -161,6 +158,7 @@ public class DataAccess
         {
             if (_con != null)
                 closeConnection();
+            _sqlCommand = null;
         }
 
         if (_enableSqlMonitor)
@@ -169,21 +167,20 @@ public class DataAccess
             sqlMonitor((finishTime-startTime), "CallCommandGetResultSet()");
         }
 
-        _sqlCommand = null;
-
         return null;
     }
+
     private ResultSet callCommandGetResultSetWithOutMonitor()
     {
         try
         {
+            ResultSet newResultSet = _sqlCommand.executeQuery();
             CachedRowSet cachedRowSet = new CachedRowSetImpl();
             if(isClosed())
                 openConnection();
-            ResultSet newResultSet = _sqlCommand.executeQuery();
+
             cachedRowSet.populate(newResultSet);
             newResultSet.close();
-            closeConnection();
             return cachedRowSet;
         }
         catch (Exception e)
@@ -194,9 +191,8 @@ public class DataAccess
         {
             if (_con != null)
                 closeConnection();
+            _sqlCommand = null;
         }
-
-        _sqlCommand = null;
 
         return null;
     }
@@ -207,9 +203,8 @@ public class DataAccess
 
         //Benchmark time start
         ThreadMXBean threadmxbean = ManagementFactory.getThreadMXBean();
-        long startTime = 0;
+        long startTime;
         long finishTime;
-
 
         if (_enableSqlMonitor)
             startTime =  threadmxbean.getCurrentThreadCpuTime();
@@ -228,6 +223,7 @@ public class DataAccess
         {
             if (_con != null)
                 closeConnection();
+            _sqlCommand = null;
         }
 
         if (_enableSqlMonitor)
@@ -236,8 +232,6 @@ public class DataAccess
             sqlMonitor((finishTime-startTime), "callCommand()");
         }
 
-        _sqlCommand = null;
-
         return returnVal;
     }
 
@@ -245,9 +239,8 @@ public class DataAccess
     {
         //Benchmark time start
         ThreadMXBean threadmxbean = ManagementFactory.getThreadMXBean();
-        long startTime = 0;
+        long startTime;
         long finishTime;
-
 
         if (_enableSqlMonitor)
             startTime =  threadmxbean.getCurrentThreadCpuTime();
@@ -270,6 +263,7 @@ public class DataAccess
         {
             if(_con != null)
                 closeConnection();
+            _sqlCommand = null;
         }
 
         if (_enableSqlMonitor)
@@ -278,8 +272,6 @@ public class DataAccess
             sqlMonitor((finishTime-startTime), "callCommandGetField()");
         }
 
-        _sqlCommand = null;
-
         return returnVal;
     }
 
@@ -287,7 +279,7 @@ public class DataAccess
     {
         //Benchmark time start
         ThreadMXBean threadmxbean = ManagementFactory.getThreadMXBean();
-        long startTime = 0;
+        long startTime;
         long finishTime;
 
         if (_enableSqlMonitor)
@@ -296,15 +288,12 @@ public class DataAccess
         try
         {
             ResultSet listData = callCommandGetResultSetWithOutMonitor();
-            CachedRowSet rowset = new CachedRowSetImpl();
+            CachedRowSet dataSet = new CachedRowSetImpl();
             if (listData != null)
             {
-                // && listData.next()
-                //listData.first();
-                rowset.populate(listData);
+                dataSet.populate(listData);
                 listData.close();
-                closeConnection();
-                return rowset;
+                return dataSet;
             }
         }
         catch (Exception e)
@@ -315,6 +304,7 @@ public class DataAccess
         {
             if(_con != null)
                 closeConnection();
+            _sqlCommand = null;
         }
 
         if (_enableSqlMonitor)
@@ -322,8 +312,6 @@ public class DataAccess
             finishTime = threadmxbean.getCurrentThreadCpuTime();
             sqlMonitor((finishTime - startTime), "callCommandGetField()");
         }
-
-        _sqlCommand = null;
 
         return null;
     }
@@ -352,6 +340,7 @@ public class DataAccess
             //ex.printStackTrace();
             return true;
         }
+
         return false;
     }
 }

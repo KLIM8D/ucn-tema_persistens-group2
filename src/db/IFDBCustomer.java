@@ -46,6 +46,6 @@ public interface IFDBCustomer {
 	 * @param customer 				the object containing the updated information you want stored
 	 * @return						returns the number of rows affected
 	 */
-	public int updateCUstomer(Customer customer) throws Exception;
+	public int updateCustomer(Customer customer) throws Exception;
 
 }

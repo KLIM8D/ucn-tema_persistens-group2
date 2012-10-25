@@ -25,7 +25,6 @@ public class DBCustomer implements IFDBCustomer
 	 */
 	public ArrayList<Customer> getAllCustomers(boolean retrieveAssociation)
 	{
-		
 		ArrayList<Customer> returnList = new ArrayList<Customer>();
 		try
 		{
@@ -43,6 +42,7 @@ public class DBCustomer implements IFDBCustomer
 		{
 			e.printStackTrace();
 		}
+
 		return returnList;
 	}
 	
@@ -61,14 +61,15 @@ public class DBCustomer implements IFDBCustomer
 			query.setLong(1, id);
 			_da.setSqlCommandText(query);
 			ResultSet customerResult = _da.callCommandGetRow();
+            customerResult.next();
 			return buildCustomer(customerResult, true);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+
 		return null;
-		
 	}
 	
 	/**
@@ -86,14 +87,15 @@ public class DBCustomer implements IFDBCustomer
 			query.setString(1, name);
 			_da.setSqlCommandText(query);
 			ResultSet customerResult = _da.callCommandGetRow();
+            customerResult.next();
 			return buildCustomer(customerResult, true);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+
 		return null;
-		
 	}
 	
 	public int insertCustomer(Customer customer) throws Exception
@@ -101,7 +103,7 @@ public class DBCustomer implements IFDBCustomer
 		return 0;
 	}
 	
-	public int updateCUstomer(Customer customer) throws Exception
+	public int updateCustomer(Customer customer) throws Exception
 	{
 		return 0;
 	}
@@ -127,6 +129,7 @@ public class DBCustomer implements IFDBCustomer
 		{
 			ex.printStackTrace();
 		}
+
 		return null;
 	}
 }

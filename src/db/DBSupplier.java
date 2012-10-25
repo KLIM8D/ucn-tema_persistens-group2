@@ -46,6 +46,7 @@ public class DBSupplier implements IFDBSupplier{
             query.setLong(1, id);
             _da.setSqlCommandText(query);
             ResultSet supplierResult = _da.callCommandGetRow();
+            supplierResult.next();
             return buildSupplier(supplierResult, true);
         }
         catch (Exception e)
@@ -64,6 +65,7 @@ public class DBSupplier implements IFDBSupplier{
             query.setString(1, name);
             _da.setSqlCommandText(query);
             ResultSet supplierResult = _da.callCommandGetRow();
+            supplierResult.next();
             return buildSupplier(supplierResult, true);
         }
         catch (Exception e)

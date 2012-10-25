@@ -8,7 +8,8 @@ import models.Contact;
 import models.ProductCategory;
 import models.Supplier;
 
-public class DBProductCategory implements IFDBProductCategory {
+public class DBProductCategory implements IFDBProductCategory
+{
 	 private DataAccess _da;
 	 public DBProductCategory()
 	 {	
@@ -46,6 +47,7 @@ public class DBProductCategory implements IFDBProductCategory {
             query.setLong(1, id);
             _da.setSqlCommandText(query);
             ResultSet categoryResult = _da.callCommandGetRow();
+            categoryResult.next();
             return buildProductCategory(categoryResult, true);
         }
         catch (Exception e)
@@ -64,6 +66,7 @@ public class DBProductCategory implements IFDBProductCategory {
             query.setString(1, name);
             _da.setSqlCommandText(query);
             ResultSet categoryResult = _da.callCommandGetRow();
+            categoryResult.next();
             return buildProductCategory(categoryResult, true);
         }
         catch (Exception e)
