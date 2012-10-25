@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class Product
 {
+    private long _id;
     private String _name;
     private BigDecimal _purchasePrice;
     private BigDecimal _salesPrice;
@@ -23,8 +24,9 @@ public class Product
     private Supplier _supplier;
     private ArrayList<ProductData> _productData;
 
-    public Product(String name, String purchasePrice, String salesPrice, String rentPrice, String countryOfOrigin, long minimumStock)
+    public Product(long id, String name, String purchasePrice, String salesPrice, String rentPrice, String countryOfOrigin, long minimumStock)
     {
+        _id = id;
         _name = name;
         _purchasePrice = new BigDecimal(purchasePrice);
         _salesPrice = new BigDecimal(salesPrice);
@@ -33,8 +35,9 @@ public class Product
         _minimumStock = minimumStock;
     }
 
-    public Product(String name, String purchasePrice, String salesPrice, String rentPrice, String countryOfOrigin, long minimumStock, ProductCategory category, Supplier supplier)
+    public Product(long id, String name, String purchasePrice, String salesPrice, String rentPrice, String countryOfOrigin, long minimumStock, ProductCategory category, Supplier supplier)
     {
+        _id = id;
         _name = name;
         _purchasePrice = new BigDecimal(purchasePrice);
         _salesPrice = new BigDecimal(salesPrice);
@@ -44,6 +47,11 @@ public class Product
         _category = category;
         _supplier = supplier;
     }
+
+    public long getId()
+    { return _id; }
+    public void setId(long value)
+    { _id = value; }
 
     public String getName()
     { return _name; }
@@ -87,6 +95,6 @@ public class Product
 
     public ArrayList<ProductData> getProductData()
     { return _productData; }
-    public void insertProductData(ProductData value)
+    public void addProductData(ProductData value)
     { _productData.add(value); }
 }

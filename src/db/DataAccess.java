@@ -16,7 +16,7 @@ public class DataAccess
 {
     private PreparedStatement _sqlCommand;
     private int _dbType;
-    private String _connectionString = "jdbc:sqlserver://IP-ADDR:1433;" +
+    private String _connectionString = "jdbc:sqlserver://IP-ADDR;" +
                                         "databaseName=DBNAME;" +
                                         "user=USERNAME;" +
                                         "password=PASSWORD";
@@ -32,6 +32,9 @@ public class DataAccess
 
     public void setDbType(int value)
     { _dbType = value; }
+
+    public Connection getCon()
+    { return _con; }
 
 
     public static DataAccess getInstance()

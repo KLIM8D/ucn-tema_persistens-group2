@@ -1,7 +1,6 @@
 package models;
 
 /**
- * @author: Morten Klim Sørensen - mail@kl1m.dk
  * Created: 24-10-2012
  * @version: 0.1
  * Filename: ProductCategory.java
@@ -11,10 +10,10 @@ package models;
 
 public class ProductCategory
 {
-    private int _categoryId;
+    private long _categoryId;
     private String _categoryName;
 
-    public ProductCategory(int categoryId, String categoryName)
+    public ProductCategory(long categoryId, String categoryName)
     {
         _categoryId = categoryId;
         _categoryName = categoryName;
@@ -25,7 +24,7 @@ public class ProductCategory
     public void setCategoryName(String value)
     { _categoryName = value; }
 
-    public int getCategoryId()
+    public long getCategoryId()
     { return _categoryId; }
     public void setCategoryId(int value)
     { _categoryId = value; }
