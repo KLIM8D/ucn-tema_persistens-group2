@@ -20,7 +20,7 @@ public class DBSupplier implements IFDBSupplier{
 		ArrayList<Supplier> returnList = new ArrayList<Supplier>();
         try
         {
-            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Suppliers");
+            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Supplier");
             _da.setSqlCommandText(query);
             ResultSet suppliers = _da.callCommandGetResultSet();
 
@@ -42,7 +42,7 @@ public class DBSupplier implements IFDBSupplier{
 	{
         try
         {
-            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Suppliers WHERE supplierId = ?");
+            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Supplier WHERE supplierId = ?");
             query.setLong(1, id);
             _da.setSqlCommandText(query);
             ResultSet supplierResult = _da.callCommandGetRow();
@@ -60,7 +60,7 @@ public class DBSupplier implements IFDBSupplier{
 	{
         try
         {
-            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Suppliers, Contacts WHERE name = ?");
+            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Supplier, Contacts WHERE name = ?");
             query.setString(1, name);
             _da.setSqlCommandText(query);
             ResultSet supplierResult = _da.callCommandGetRow();
