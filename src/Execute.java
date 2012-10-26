@@ -10,7 +10,7 @@ final class Execute
     	}
     	catch(Exception e)
     	{
-    		System.out.println("Ding dong the wich is dead!");
+    		System.out.println("Ding dong the witch is dead!");
     	}
     }
 }
