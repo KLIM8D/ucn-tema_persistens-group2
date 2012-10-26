@@ -5,30 +5,30 @@ import java.util.ArrayList;
 import models.Customer;
 import db.DBCustomer;
 
-public class CustomerCtrl {
+public class CustomerCtrl
+{
 
 	public CustomerCtrl()
 	{
 		
 	}
 	
-	public ArrayList<Customer> getAllCustomers(boolean retrieveAssociation) throws Exception
+	public ArrayList<Customer> getAllCustomers() throws Exception
 	{
 		DBCustomer DBC = new DBCustomer();
-		ArrayList<Customer> returnList = DBC.getAllCustomers(retrieveAssociation);
-		return returnList;
+        return DBC.getAllCustomers();
 	}
 	
-	public Customer getCustomerById(long id, boolean retrieveAssociation) throws Exception
+	public Customer getCustomerById(long id) throws Exception
 	{
 		DBCustomer DBC = new DBCustomer();
-		return DBC.getCustomerById(id, retrieveAssociation);
+		return DBC.getCustomerById(id);
 	}
 	
-	public Customer getCustomerByName(String name, boolean retrieveAssociation) throws Exception
+	public Customer getCustomerByName(String name) throws Exception
 	{
 		DBCustomer DBC = new DBCustomer();
-		return DBC.getCustomerByName(name, retrieveAssociation);
+		return DBC.getCustomerByName(name);
 	}
 	
 	public int insertCustomer(Customer supplier) throws Exception
@@ -42,5 +42,4 @@ public class CustomerCtrl {
 		DBCustomer DBC = new DBCustomer();
 		return DBC.updateCustomer(supplier);
 	}
-	
 }

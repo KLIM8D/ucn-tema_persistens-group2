@@ -20,7 +20,7 @@ public class Customer extends Contact
     public void setDiscount(BigDecimal discount)
     { _discount = discount; }
 
-    public boolean isBusiness()
+    public boolean getIsBusiness()
     { return _isBusiness; }
     public void setBusiness(boolean isBusiness)
     { _isBusiness = isBusiness; }
