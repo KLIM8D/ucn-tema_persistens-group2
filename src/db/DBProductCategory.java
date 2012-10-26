@@ -79,6 +79,20 @@ public class DBProductCategory implements IFDBProductCategory
         return _da.callCommand();
 	}
 
+    public int deleteProductCategory(ProductCategory productCategory) throws Exception
+    {
+        if(productCategory == null)
+            return 0;
+
+        if(getProductCategoryById(productCategory.getCategoryId()) == null)
+            return 0;
+
+        PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM ProductCategory WHERE categoryId = ?");
+        query.setLong(1, productCategory.getCategoryId());
+        _da.setSqlCommandText(query);
+        return _da.callCommand();
+    }
+
     private ProductCategory buildProductCategory(ResultSet row) throws Exception
     {
         if(row == null)
