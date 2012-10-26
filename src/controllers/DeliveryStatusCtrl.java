@@ -34,5 +34,4 @@ public class DeliveryStatusCtrl {
 		DBDeliveryStatus DBD = new DBDeliveryStatus();
 		return DBD.updateDeliveryStatus(deliveryStatus);
 	}
-	
 }
