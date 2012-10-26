@@ -75,6 +75,12 @@ public class DBCustomer implements IFDBCustomer
         return buildCustomer(customerResult);
 	}
 
+    /**
+     * Inserts a new customer in the database
+     *
+     * @param customer				the object containing the information you want stored
+     * @return						returns the number of rows affected
+     */
     @Override
 	public int insertCustomer(Customer customer) throws Exception
 	{
@@ -91,6 +97,12 @@ public class DBCustomer implements IFDBCustomer
         return _da.callCommand();
 	}
 
+    /**
+     * Update a existing contact in database
+     *
+     * @param customer 				the object containing the updated information you want stored
+     * @return						returns the number of rows affected
+     */
     @Override
 	public int updateCustomer(Customer customer) throws Exception
 	{
@@ -106,15 +118,24 @@ public class DBCustomer implements IFDBCustomer
         return _da.callCommand();
 	}
 
+    /**
+     * Delete an existing customer from the database
+     *
+     * @param customer 		the object containing the customer which should be deleted from the database
+     * @return int 			returns the number of rows affected
+     */
     @Override
     public int deleteCustomer(Customer customer) throws Exception
     {
         if(customer == null)
             return 0;
 
-        PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Customer WHERE phoneNo = ?");
+        PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Customer WHERE contactsKey = ?");
         query.setLong(1, customer.getPhoneNo());
         _da.setSqlCommandText(query);
+
+        DBContact dbContact = new DBContact();
+        dbContact.deleteContact(customer.getPhoneNo());
 
         return _da.callCommand();
     }

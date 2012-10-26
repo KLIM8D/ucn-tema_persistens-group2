@@ -26,16 +26,17 @@ public class DBContact implements IFDBContact
 		
 		ArrayList<Contact> returnList = new ArrayList<Contact>();
 
-			PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Contacts");
-			_da.setSqlCommandText(query);
-			ResultSet contacts = _da.callCommandGetResultSet();
-			
-			while(contacts.next())
-			{
-				Contact contact = buildContact(contacts);
-				returnList.add(contact);
-			}
-			return returnList;
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Contacts");
+        _da.setSqlCommandText(query);
+        ResultSet contacts = _da.callCommandGetResultSet();
+
+        while(contacts.next())
+        {
+            Contact contact = buildContact(contacts);
+            returnList.add(contact);
+        }
+
+        return returnList;
 	}
 	
 	/**
@@ -47,14 +48,13 @@ public class DBContact implements IFDBContact
 	@Override
 	public Contact getContactById(long id) throws Exception
 	{
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Contacts WHERE phoneNo = ?");
+        query.setLong(1, id);
+        _da.setSqlCommandText(query);
+        ResultSet contactResult = _da.callCommandGetRow();
+        contactResult.next();
 
-			PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Contacts WHERE phoneNo = ?");
-			query.setLong(1, id);
-			_da.setSqlCommandText(query);
-			ResultSet contactResult = _da.callCommandGetRow();
-            contactResult.next();
-			return buildContact(contactResult);
-
+        return buildContact(contactResult);
 	}
 	
 	/**
@@ -69,18 +69,19 @@ public class DBContact implements IFDBContact
 		if(contact == null)
 			return 0;
 
-			PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Contacts (phoneNo, name, address, zipCode, city, email, country) " +
-												                    "VALUES (?, ?, ?, ?, ?, ?, ?)");
-			
-			query.setLong(1, contact.getPhoneNo());
-			query.setString(2, contact.getName());
-			query.setString(3, contact.getAddress());
-			query.setLong(4, contact.getZipCode());
-			query.setString(5, contact.getCity());
-			query.setString(6, contact.getEmail());
-			query.setString(7, contact.getCountry());
-			_da.setSqlCommandText(query);
-			return _da.callCommand();
+        PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Contacts (phoneNo, name, address, zipCode, city, email, country) " +
+                                                                "VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+        query.setLong(1, contact.getPhoneNo());
+        query.setString(2, contact.getName());
+        query.setString(3, contact.getAddress());
+        query.setLong(4, contact.getZipCode());
+        query.setString(5, contact.getCity());
+        query.setString(6, contact.getEmail());
+        query.setString(7, contact.getCountry());
+        _da.setSqlCommandText(query);
+
+        return _da.callCommand();
 	}
 	
 	/**
@@ -109,25 +110,56 @@ public class DBContact implements IFDBContact
 		query.setString(6, contact.getEmail());
 		query.setString(7, contact.getCountry());
 		_da.setSqlCommandText(query);
+
 		return _da.callCommand();
 	}
+
+    /**
+     * Delete an existing contact from the database
+     *
+     * @param contact 		the object containing the contact which should be deleted from the database
+     * @return int 			returns the number of rows affected
+     */
+    public int deleteContact(Contact contact) throws Exception
+    {
+        if(contact == null)
+            return 0;
+
+        PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Contacts WHERE phoneNo = ?");
+        query.setLong(1, contact.getPhoneNo());
+        _da.setSqlCommandText(query);
+
+        return _da.callCommand();
+    }
+
+    /**
+     * Delete an existing contact from the database
+     *
+     * @param phoneNo 		the phoneNo of the contact which should be deleted from the database
+     * @return int 			returns the number of rows affected
+     */
+    public int deleteContact(long phoneNo) throws Exception
+    {
+        PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Contacts WHERE phoneNo = ?");
+        query.setLong(1, phoneNo);
+        _da.setSqlCommandText(query);
+
+        return _da.callCommand();
+    }
 	
 	private Contact buildContact(ResultSet row) throws Exception
 	{
 		if(row == null)
 			return null;
 
-			String name = row.getString("name");
-			String address = row.getString("address");
-			int zipCode = row.getInt("zipCode");
-			String city = row.getString("city");
-			long phoneNo = row.getLong("phoneNo");
-			String email = row.getString("email");
-			String country = row.getString("country");
-			
-			Contact contact = new Contact(name, address, zipCode, city, phoneNo, email, country);
-			
-			return contact;
+        String name = row.getString("name");
+        String address = row.getString("address");
+        int zipCode = row.getInt("zipCode");
+        String city = row.getString("city");
+        long phoneNo = row.getLong("phoneNo");
+        String email = row.getString("email");
+        String country = row.getString("country");
 
+        return new Contact(name, address, zipCode, city, phoneNo, email, country);
 	}
 }
