@@ -4,7 +4,8 @@ final class Execute
 {
     public static void main(String[] args)
     {
-    	try {
+    	try
+        {
     		SystemUI window = new views.SystemUI();
         	window.frmSystemWindow.setVisible(true);
     	}
