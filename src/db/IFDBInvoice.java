@@ -30,7 +30,7 @@ import models.Invoice;
 		public int insertInvoice(Invoice invoice) throws Exception;
 		
 		/**
-		 * Update a existing contact in database
+		 * Update a existing invoice in database
 		 * 
 		 * @param invoice 				the object containing the updated information you want stored
 		 * @return						returns the number of rows affected
