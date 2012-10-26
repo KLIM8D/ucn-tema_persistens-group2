@@ -66,9 +66,32 @@ public class DBContact implements IFDBContact
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Insert data in to database
+	 */
 	public int insertContact(Contact contact) throws Exception
 	{
+		if(contact == null)
+			return 0;
+		
+		try
+		{
+			PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Contacts (phoneNo, name, address, zipCode, city, email, country) " +
+												 "VALUES (?, ?, ?, ?, ?, ?, ?)");
+			
+			query.setLong(1, contact.getPhoneNo());
+			query.setString(2, contact.getName());
+			query.setString(3, contact.getAddress());
+			query.setInt(4, contact.getZipCode());
+			query.setString(5, contact.getCity());
+			query.setString(6, contact.getEmail());
+			query.setString(7, contact.getCountry());
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 		return 0;
 	}
 
