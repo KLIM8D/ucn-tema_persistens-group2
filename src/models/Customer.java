@@ -8,7 +8,7 @@ public class Customer extends Contact
 	private BigDecimal _discount;
 	private boolean _isBusiness;
 	
-	public Customer(String name, String address, int zipCode, String city, long phoneNo, String email, String country, BigDecimal discount, boolean isBusiness)
+	public Customer(String name, String address, long zipCode, String city, long phoneNo, String email, String country, BigDecimal discount, boolean isBusiness)
 	{
 		super(name, address, zipCode, city, phoneNo, email, country);
 		_discount = discount;
