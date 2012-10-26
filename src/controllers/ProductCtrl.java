@@ -22,17 +22,17 @@ public class ProductCtrl
         _dbProduct = new DBProduct();
     }
 
-    public ArrayList<Product> getAllProducts(boolean retrieveAssociation)
+    public ArrayList<Product> getAllProducts(boolean retrieveAssociation) throws Exception
     {
         return _dbProduct.getAllProducts(retrieveAssociation);
     }
 
-    public Product getProductById(long productId, boolean retrieveAssociation)
+    public Product getProductById(long productId, boolean retrieveAssociation) throws Exception
     {
         return _dbProduct.getProductById(productId,retrieveAssociation);
     }
 
-    public Product getProductByName(String name, boolean retrieveAssociation)
+    public Product getProductByName(String name, boolean retrieveAssociation) throws Exception
     {
         return _dbProduct.getProductByName(name, retrieveAssociation);
     }
@@ -42,5 +42,13 @@ public class ProductCtrl
         return _dbProduct.insertProduct(product);
     }
 
+    public int updateProduct(Product product) throws Exception
+    {
+        return _dbProduct.updateProduct(product);
+    }
 
+    public int deleteProduct(Product product) throws Exception
+    {
+        return _dbProduct.deleteProduct(product);
+    }
 }
