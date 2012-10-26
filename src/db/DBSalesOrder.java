@@ -155,19 +155,4 @@ public class DBSalesOrder implements IFDBSalesOrder
 		String deliveryState = row.getString("deliveryState");
 		return new DeliveryStatus(deliveryId, deliveryState);
 	}
-	
-	public Contact buildContact(ResultSet row) throws Exception
-	{
-		if(row == null)
-			return null;
-		
-		String name = row.getString("name");
-		String address = row.getString("address");
-		long zipCode = row.getLong("zipCode");
-		String city = row.getString("city");
-		long phoneNo = row.getLong("phoneNo");
-		String email = row.getString("email");
-		String country = row.getString("country");
-		return new Contact(name, address, zipCode, city, phoneNo, email, country);
-	}
 }
