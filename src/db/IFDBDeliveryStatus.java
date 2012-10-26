@@ -19,7 +19,7 @@ import models.DeliveryStatus;
 		 * @param id					the id of the DeliveryStatus you need returned
 		 * @return DeliveryStatus
 		 */
-		public DeliveryStatus getDeliveryStatusById(int id) throws Exception;
+		public DeliveryStatus getDeliveryStatusById(long id) throws Exception;
 		
 		/**
 		 * Inserts a new invoice in the database
@@ -36,4 +36,6 @@ import models.DeliveryStatus;
 		 * @return						returns the number of rows affected
 		 */
 		public int updateDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception;
+		
+		public int deleteDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception;
 }

@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import models.DeliveryStatus;
+import models.Product;
 
 public class DBDeliveryStatus implements IFDBDeliveryStatus {
 
@@ -30,7 +31,7 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus {
 		return returnList;
 	}
 
-	public DeliveryStatus getDeliveryStatusById(int id) throws Exception {
+	public DeliveryStatus getDeliveryStatusById(long id) throws Exception {
         PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM DeliveryStatus WHERE deliveryId = ?");
         query.setLong(1, id);
         _da.setSqlCommandText(query);
@@ -63,6 +64,19 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus {
         _da.setSqlCommandText(query);
 
         return _da.callCommand();
+	}
+	
+	public int deleteDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception {
+		if(deliveryStatus == null)
+			return 0;
+
+		if(getDeliveryStatusById(deliveryStatus.getDeliveryId()) == null)
+			return 0;
+
+		PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM DeliveryStatus WHERE deliveryId = ?");	 
+		query.setLong(1, deliveryStatus.getDeliveryId());
+		_da.setSqlCommandText(query);
+		return _da.callCommand();
 	}
 	
 	private DeliveryStatus buildDeliveryStatus(ResultSet row) throws Exception

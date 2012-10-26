@@ -34,4 +34,10 @@ public class DeliveryStatusCtrl {
 		DBDeliveryStatus DBD = new DBDeliveryStatus();
 		return DBD.updateDeliveryStatus(deliveryStatus);
 	}
+	
+	public int deleteDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception
+	{
+		DBDeliveryStatus DBD = new DBDeliveryStatus();
+		return DBD.deleteDeliveryStatus(deliveryStatus);
+	}
 }
