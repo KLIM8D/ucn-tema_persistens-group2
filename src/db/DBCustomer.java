@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class DBCustomer implements IFDBCustomer
 {
-
 	private DataAccess _da;
 	public DBCustomer()
 	{
@@ -19,23 +18,22 @@ public class DBCustomer implements IFDBCustomer
 	
 	/**
 	 * Retrieve all customers records from database
-	 * 
-	 * @param retrieveAssociation	set to true if customer data is wanted
+	 *
 	 * @return ArrayList<Customer>
 	 */
-	public ArrayList<Customer> getAllCustomers(boolean retrieveAssociation) throws Exception
+	public ArrayList<Customer> getAllCustomers() throws Exception
 	{
 		ArrayList<Customer> returnList = new ArrayList<Customer>();
 
-			PreparedStatement query = _da.getCon().prepareStatement("");
-			_da.setSqlCommandText(query);
-			ResultSet customers = _da.callCommandGetResultSet();
-			
-			while(customers.next())
-			{
-				Customer customer = buildCustomer(customers, retrieveAssociation);
-				returnList.add(customer);
-			}
+        PreparedStatement query = _da.getCon().prepareStatement("");
+        _da.setSqlCommandText(query);
+        ResultSet customers = _da.callCommandGetResultSet();
+
+        while(customers.next())
+        {
+            Customer customer = buildCustomer(customers);
+            returnList.add(customer);
+        }
 
 		return returnList;
 	}
@@ -44,37 +42,32 @@ public class DBCustomer implements IFDBCustomer
 	 *  Retrieve specific customer record by id
 	 *  
 	 *  @param id					the id of the record you wish to return
-	 *  @param retrieveAssociation	set to true if customer data is wanted
 	 *  @return Customer
 	 */
-	public Customer getCustomerById(long id, boolean retrieveAssociation) throws Exception
+	public Customer getCustomerById(long id) throws Exception
 	{
-			PreparedStatement query = _da.getCon().prepareStatement("");
-			query.setLong(1, id);
-			_da.setSqlCommandText(query);
-			ResultSet customerResult = _da.callCommandGetRow();
-            customerResult.next();
-			return buildCustomer(customerResult, true);
-
+        PreparedStatement query = _da.getCon().prepareStatement("");
+        query.setLong(1, id);
+        _da.setSqlCommandText(query);
+        ResultSet customerResult = _da.callCommandGetRow();
+        customerResult.next();
+        return buildCustomer(customerResult);
 	}
 	
 	/**
 	 * Retrieve specific customer record by name
 	 * 
 	 * @param name					the name of the record you wish to return
-	 * @param retrieveAssociation	set to true if customer data is wanted
 	 * @return Customer
 	 */
-	public Customer getCustomerByName(String name, boolean retrieveAssociation) throws Exception
+	public Customer getCustomerByName(String name) throws Exception
 	{
-		
-			PreparedStatement query = _da.getCon().prepareStatement("");
-			query.setString(1, name);
-			_da.setSqlCommandText(query);
-			ResultSet customerResult = _da.callCommandGetRow();
-            customerResult.next();
-			return buildCustomer(customerResult, true);
-		
+        PreparedStatement query = _da.getCon().prepareStatement("");
+        query.setString(1, name);
+        _da.setSqlCommandText(query);
+        ResultSet customerResult = _da.callCommandGetRow();
+        customerResult.next();
+        return buildCustomer(customerResult);
 	}
 	
 	public int insertCustomer(Customer customer) throws Exception
@@ -87,20 +80,17 @@ public class DBCustomer implements IFDBCustomer
 		return 0;
 	}
 	
-	private Customer buildCustomer(ResultSet row, boolean retrieveAssociation) throws Exception
+	private Customer buildCustomer(ResultSet row) throws Exception
 	{
 		if(row == null)
 			return null;
 		
-			long contactsKey = row.getLong("contactsKey");
-			BigDecimal discount = row.getBigDecimal("discount");
-			boolean isBusiness = row.getBoolean("isBusiness");
-			DBContact dbc = new DBContact();
-			Contact contact = dbc.getContactById(contactsKey);
-			
-			Customer customer = new Customer(contact.getName(), contact.getAddress(), contact.getZipCode(), contact.getCity(), contact.getPhoneNo(), contact.getEmail(), contact.getCountry(), discount, isBusiness);
-			
-			return customer;
+        long contactsKey = row.getLong("contactsKey");
+        BigDecimal discount = row.getBigDecimal("discount");
+        boolean isBusiness = row.getBoolean("isBusiness");
+        DBContact dbc = new DBContact();
+        Contact contact = dbc.getContactById(contactsKey);
 
+        return new Customer(contact.getName(), contact.getAddress(), contact.getZipCode(), contact.getCity(), contact.getPhoneNo(), contact.getEmail(), contact.getCountry(), discount, isBusiness);
 	}
 }

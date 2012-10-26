@@ -8,29 +8,26 @@ public interface IFDBCustomer {
 	
 	/**
 	 * Retrieve all customers from database
-	 * 
-	 * @param retrieveAssociation 	set to true if customer data is wanted
+	 *
 	 * @return ArrayList<Customer>
 	 */
-	public ArrayList<Customer> getAllCustomers(boolean retrieveAssociation) throws Exception;
+	public ArrayList<Customer> getAllCustomers() throws Exception;
 	
 	/**
 	 * Get specific customer by id
 	 * 
 	 * @param id					the id of the customer you need returned
-	 * @param retrieveAssociation	set to true if customer data is wanted
 	 * @return Customer
 	 */
-	public Customer getCustomerById(long id, boolean retrieveAssociation) throws Exception;
+	public Customer getCustomerById(long id) throws Exception;
 	
 	/**
 	 * Get specific customer by contact name
 	 * 
 	 * @param name					the name of the customer you need returned
-	 * @param retrieveAssociation	set to true if customer data is wanted
 	 * @return Customer
 	 */
-	public Customer getCustomerByName(String name, boolean retrieveAssociation) throws Exception;
+	public Customer getCustomerByName(String name) throws Exception;
 	
 	/**
 	 * Inserts a new customer in the database

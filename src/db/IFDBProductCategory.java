@@ -58,4 +58,13 @@ public interface IFDBProductCategory
      *
      */
     public int updateProductCategory(ProductCategory productCategory) throws Exception;
+
+    /**
+     * Delete an existing productCategory from the database
+     *
+     * @param productCategory the productCategory object which contains a valid ID
+     * @return int returns the number of rows affected
+     *
+     */
+    public int deleteProductCategory(ProductCategory productCategory) throws Exception;
 }

@@ -44,7 +44,7 @@ public class DBProductTest
     }*/
 
     @Test
-    public void getProduct()
+    public void getProduct() throws Exception
     {
         Product product = _dbProduct.getProductById(1, true);
         if(product != null)
@@ -71,7 +71,7 @@ public class DBProductTest
     }
 
     @Test
-    public void getProductByName()
+    public void getProductByName() throws Exception
     {
         Product product = _dbProduct.getProductByName("Test produkt", true);
         if(product != null)
@@ -98,7 +98,7 @@ public class DBProductTest
     }
 
     @Test
-    public void getAllProducts()
+    public void getAllProducts() throws Exception
     {
         ArrayList<Product> products = _dbProduct.getAllProducts(true);
         assertNotNull(products);
@@ -116,7 +116,7 @@ public class DBProductTest
     }
 
     @Test
-    public void deleteProduct()
+    public void deleteProduct() throws Exception
     {
         Product product = new Product(3L, "Test produkt updated", "4000.12", "6000.24", "2000.10", "UK", 5);
         int rowsAffected = _dbProduct.deleteProduct(product);
