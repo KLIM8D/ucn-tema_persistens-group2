@@ -1,7 +1,9 @@
 package controllers;
 
 import db.DBProduct;
+import db.DBProductData;
 import models.Product;
+import models.ProductData;
 
 import java.util.ArrayList;
 
@@ -16,10 +18,11 @@ import java.util.ArrayList;
 public class ProductCtrl
 {
     DBProduct _dbProduct;
-
+    DBProductData _dbProductData;
     public ProductCtrl()
     {
         _dbProduct = new DBProduct();
+        _dbProductData = new DBProductData();
     }
 
     public ArrayList<Product> getAllProducts(boolean retrieveAssociation) throws Exception
@@ -50,5 +53,20 @@ public class ProductCtrl
     public int deleteProduct(Product product) throws Exception
     {
         return _dbProduct.deleteProduct(product);
+    }
+
+    public int insertProductData(long productId, ProductData data) throws Exception
+    {
+        return _dbProductData.insertProductData(productId, data);
+    }
+
+    public int updateProductData(long productId, ProductData data) throws Exception
+    {
+        return _dbProductData.updateProductData(productId, data);
+    }
+
+    public int deleteProductData(long productId, ProductData data) throws Exception
+    {
+        return _dbProductData.deleteProductData(productId, data);
     }
 }

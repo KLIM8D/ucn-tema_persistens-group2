@@ -25,7 +25,6 @@ public class DBSalesOrder implements IFDBSalesOrder
 	@Override
 	public ArrayList<SalesOrder> getAllSalesOrders(boolean retrieveAssociation) throws Exception
 	{
-		// TODO Auto-generated method stub
 		ArrayList<SalesOrder> returnList = new ArrayList<SalesOrder>();
 		
 		PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM SalesOrders");
@@ -34,9 +33,10 @@ public class DBSalesOrder implements IFDBSalesOrder
 			
 		while (salesOrders.next())
 		{
-			SalesOrder salesOrder = buildSalesOrder(salesOrders, retrieveAssociation);      // buildSalesOrder not written 
+			SalesOrder salesOrder = buildSalesOrder(salesOrders, retrieveAssociation);
 			returnList.add(salesOrder);
 		}
+
 		return returnList;
 	}
 	
@@ -54,7 +54,8 @@ public class DBSalesOrder implements IFDBSalesOrder
 		query.setLong(1, id);
 		_da.setSqlCommandText(query);
 		ResultSet salesOrderResult = _da.callCommandGetRow();
-		return buildSalesOrder(salesOrderResult, true);					
+
+		return buildSalesOrder(salesOrderResult, retrieveAssociation);
 	}
 	
 	/**
@@ -65,9 +66,22 @@ public class DBSalesOrder implements IFDBSalesOrder
 	 * @return ArrayList of SalesOrders for a customer with customerName
 	 */
 	@Override
-	public ArrayList<SalesOrder> getAllSalesOrdersFromCustomer(String customerName, boolean retrieveAssociation)
+	public ArrayList<SalesOrder> getAllSalesOrdersFromCustomer(String customerName, boolean retrieveAssociation) throws Exception
 	{
-		return null;
+        ArrayList<SalesOrder> returnList = new ArrayList<SalesOrder>();
+
+		PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM SalesOrder, Contacts WHERE name = ?");
+        query.setString(1, customerName);
+        _da.setSqlCommandText(query);
+        ResultSet salesOrderResult = _da.callCommandGetResultSet();
+
+        while (salesOrderResult.next())
+        {
+            SalesOrder salesOrder = buildSalesOrder(salesOrderResult, retrieveAssociation);
+            returnList.add(salesOrder);
+        }
+
+        return returnList;
 	}
 	
 	/**
@@ -88,6 +102,7 @@ public class DBSalesOrder implements IFDBSalesOrder
 		query.setString(3, salesOrder.getOrderDate());
 		query.setString(4, salesOrder.getDeliveryDate());
 		_da.setSqlCommandText(query);
+
 		return _da.callCommand();
 	}
 	
@@ -102,8 +117,7 @@ public class DBSalesOrder implements IFDBSalesOrder
 	{
 		if(salesOrder == null)
 			return 0;
-		
-		
+
 		if(getSalesOrderFromId(salesOrder.getOrderId(), true) == null)
 			return 0;
 			
@@ -113,8 +127,28 @@ public class DBSalesOrder implements IFDBSalesOrder
 		query.setString(3, salesOrder.getOrderDate());
 		query.setString(4, salesOrder.getDeliveryDate());
 		_da.setSqlCommandText(query);
+
 		return _da.callCommand();
 	}
+
+    /**
+     * Delete a SalesOrder from the database and all the OrderItems associated with it
+     *
+     * @param salesOrder the salesOrder object that contain a valid id
+     * @return int returns the number of rows affected
+     */
+    @Override
+    public int deleteSalesOrder(SalesOrder salesOrder) throws Exception
+    {
+        if(salesOrder == null)
+            return 0;
+
+        PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM SalesOrder WHERE orderId = ?");
+        query.setLong(1, salesOrder.getOrderId());
+        _da.setSqlCommandText(query);
+
+        return _da.callCommand();
+    }
 	
 	private SalesOrder buildSalesOrder(ResultSet row, boolean retrieveAssociation) throws Exception
 	{
@@ -143,6 +177,7 @@ public class DBSalesOrder implements IFDBSalesOrder
 			Contact contact = dbContact.getContactById(contactsKey);
 			salesOrder.setContact(contact);
 		}
+
 		return salesOrder;	
 	}
 	
@@ -153,6 +188,7 @@ public class DBSalesOrder implements IFDBSalesOrder
 		
 		long deliveryId = row.getLong("deliveryId");
 		String deliveryState = row.getString("deliveryState");
+
 		return new DeliveryStatus(deliveryId, deliveryState);
 	}
 }
