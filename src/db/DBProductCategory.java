@@ -4,9 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import models.Contact;
 import models.ProductCategory;
-import models.Supplier;
 
 public class DBProductCategory implements IFDBProductCategory
 {
