@@ -11,7 +11,7 @@ public interface IFDBContact {
 	 * 
 	 * @return ArrayList<Contact>
 	 */
-	public ArrayList<Contact> getAllContacts();
+	public ArrayList<Contact> getAllContacts() throws Exception;
 	
 	/**
 	 * Retrieves contact by id from database
@@ -19,7 +19,7 @@ public interface IFDBContact {
 	 * @param id 			the ID of the contact that needs to be returned
 	 * @return Contact
 	 */
-	public Contact getContactById(long id);
+	public Contact getContactById(long id) throws Exception;
 	
 	/**
 	 * Inserts a new contact in database

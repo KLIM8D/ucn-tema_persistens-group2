@@ -20,12 +20,11 @@ public class DBContact implements IFDBContact
 	 * 
 	 * @return ArrayList<Contact>
 	 */
-	public ArrayList<Contact> getAllContacts()
+	public ArrayList<Contact> getAllContacts() throws Exception
 	{
 		
 		ArrayList<Contact> returnList = new ArrayList<Contact>();
-		try 
-		{
+
 			PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Contacts");
 			_da.setSqlCommandText(query);
 			ResultSet contacts = _da.callCommandGetResultSet();
@@ -35,12 +34,7 @@ public class DBContact implements IFDBContact
 				Contact contact = buildContact(contacts);
 				returnList.add(contact);
 			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return returnList;
+			return returnList;
 	}
 	
 	/**
@@ -49,22 +43,16 @@ public class DBContact implements IFDBContact
 	 * @param id 			the ID of the contact that needs to be returned
 	 * @return Contact
 	 */
-	public Contact getContactById(long id)
+	public Contact getContactById(long id) throws Exception
 	{
-		try
-		{
+
 			PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Contacts WHERE phoneNo = ?");
 			query.setLong(1, id);
 			_da.setSqlCommandText(query);
 			ResultSet contactResult = _da.callCommandGetRow();
             contactResult.next();
 			return buildContact(contactResult);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
+
 	}
 
 	public int insertContact(Contact contact) throws Exception
@@ -77,13 +65,11 @@ public class DBContact implements IFDBContact
 		return 0;
 	}
 	
-	private Contact buildContact(ResultSet row)
+	private Contact buildContact(ResultSet row) throws Exception
 	{
 		if(row == null)
 			return null;
-		
-		try
-		{
+
 			String name = row.getString("name");
 			String address = row.getString("address");
 			int zipCode = row.getInt("zipCode");
@@ -95,11 +81,6 @@ public class DBContact implements IFDBContact
 			Contact contact = new Contact(name, address, zipCode, city, phoneNo, email, country);
 			
 			return contact;
-		}
-		catch(Exception ex)
-		{
-			ex.printStackTrace();
-		}
-		return null;
+
 	}
 }

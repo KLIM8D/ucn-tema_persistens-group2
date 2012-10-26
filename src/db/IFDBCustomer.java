@@ -12,7 +12,7 @@ public interface IFDBCustomer {
 	 * @param retrieveAssociation 	set to true if customer data is wanted
 	 * @return ArrayList<Customer>
 	 */
-	public ArrayList<Customer> getAllCustomers(boolean retrieveAssociation);
+	public ArrayList<Customer> getAllCustomers(boolean retrieveAssociation) throws Exception;
 	
 	/**
 	 * Get specific customer by id
@@ -21,7 +21,7 @@ public interface IFDBCustomer {
 	 * @param retrieveAssociation	set to true if customer data is wanted
 	 * @return Customer
 	 */
-	public Customer getCustomerById(long id, boolean retrieveAssociation);
+	public Customer getCustomerById(long id, boolean retrieveAssociation) throws Exception;
 	
 	/**
 	 * Get specific customer by contact name
@@ -30,7 +30,7 @@ public interface IFDBCustomer {
 	 * @param retrieveAssociation	set to true if customer data is wanted
 	 * @return Customer
 	 */
-	public Customer getCustomerByName(String name, boolean retrieveAssociation);
+	public Customer getCustomerByName(String name, boolean retrieveAssociation) throws Exception;
 	
 	/**
 	 * Inserts a new customer in the database
