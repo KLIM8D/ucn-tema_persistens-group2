@@ -12,13 +12,13 @@ public class Contact
 {
     private String _name;
     private String _address;
-    private int _zipCode;
+    private long _zipCode;
     private String _city;
     private long _phoneNo;
     private String _email;
     private String _country;
 
-    public Contact(String name, String address, int zipCode, String city, long phoneNo, String email, String country)
+    public Contact(String name, String address, long zipCode, String city, long phoneNo, String email, String country)
     {
         _name = name;
         _address = address;
@@ -39,9 +39,9 @@ public class Contact
     public void setAddress(String value)
     { _address = value; }
 
-    public int getZipCode()
+    public long getZipCode()
     { return _zipCode; }
-    public void setZipCode(int value)
+    public void setZipCode(long value)
     { _zipCode = value; }
 
     public String getCity()
