@@ -15,84 +15,92 @@ public class DBSupplier implements IFDBSupplier{
         _da = DataAccess.getInstance();
     }
     
-	public ArrayList<Supplier> getAllSuppliers(boolean retrieveAssociation) 
+	public ArrayList<Supplier> getAllSuppliers(boolean retrieveAssociation) throws Exception
 	{
 		ArrayList<Supplier> returnList = new ArrayList<Supplier>();
-        try
-        {
-            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Supplier");
-            _da.setSqlCommandText(query);
-            ResultSet suppliers = _da.callCommandGetResultSet();
 
-            while(suppliers.next())
-            {
-                Supplier supplier = buildSupplier(suppliers, retrieveAssociation);
-                returnList.add(supplier);
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+		PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Supplier");
+		_da.setSqlCommandText(query);
+		ResultSet suppliers = _da.callCommandGetResultSet();
+		
+		while(suppliers.next())
+		{
+			Supplier supplier = buildSupplier(suppliers, retrieveAssociation);
+			returnList.add(supplier);
+		}
 
         return returnList;
 	}
 
-	public Supplier getSupplierById(long id, boolean retrieveAssociation)
+	public Supplier getSupplierById(long id, boolean retrieveAssociation) throws Exception
 	{
-        try
-        {
             PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Supplier WHERE supplierId = ?");
             query.setLong(1, id);
             _da.setSqlCommandText(query);
             ResultSet supplierResult = _da.callCommandGetRow();
             supplierResult.next();
             return buildSupplier(supplierResult, true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return null;
 	}
 	
-	public Supplier getSupplierByName(String name, boolean retrieveAssociation)
+	public Supplier getSupplierByName(String name, boolean retrieveAssociation) throws Exception
 	{
-        try
-        {
             PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Supplier, Contacts WHERE name = ?");
             query.setString(1, name);
             _da.setSqlCommandText(query);
             ResultSet supplierResult = _da.callCommandGetRow();
             supplierResult.next();
             return buildSupplier(supplierResult, true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return null;
 	}
 
 	public int insertSupplier(Supplier supplier) throws Exception
 	{
-		return 0;
+        if(supplier == null)
+            return 0;
+
+        try
+        {
+            PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Suppliers (contactsKey, contactPerson, bankAccount) " +
+                                       "VALUES (?, ?, ?)");
+
+            query.setLong(1, supplier.getPhoneNo());
+            query.setString(2, supplier.getContactPerson());
+            query.setString(3, supplier.getBankAccount());
+            
+            _da.setSqlCommandText(query);
+            return _da.callCommand();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return 0;
 	}
 
-	public int updateSupplier(Supplier supplier)
+	public int updateSupplier(Supplier supplier) throws Exception
 	{
-		return 0;
+        if(supplier == null)
+            return 0;
+
+            if(getSupplierById(supplier.getPhoneNo(), true) == null)
+                return 0;
+
+            PreparedStatement query = _da.getCon().prepareStatement("UPDATE Suppliers SET contactsKey = ?, contantPerson = ?, bankAccount = ? " +
+                    "WHERE productId = ?");
+
+            query.setLong(1, supplier.getPhoneNo());
+            query.setString(2, supplier.getContactPerson());
+            query.setString(3, supplier.getBankAccount());
+
+            _da.setSqlCommandText(query);
+            return _da.callCommand();
 	}
 	
-	private Supplier buildSupplier(ResultSet row, boolean retrieveAssociation)
+	private Supplier buildSupplier(ResultSet row, boolean retrieveAssociation) throws Exception
     {
         if(row == null)
             return null;
 
-        try
-        {
             long contactsKey = row.getLong("contactsKey");
             String contactPerson = row.getString("contactPerson");
             String bankAccount = row.getString("bankAccount");
@@ -102,11 +110,5 @@ public class DBSupplier implements IFDBSupplier{
             Supplier supplier = new Supplier(contact.getName(), contact.getAddress(), contact.getZipCode(), contact.getCity(), contact.getPhoneNo(), contact.getEmail(), contact.getCountry(), contactPerson, bankAccount);
 
             return supplier;
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        return null;
     }
 }

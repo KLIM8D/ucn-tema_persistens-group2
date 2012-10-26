@@ -31,24 +31,18 @@ public class DBProduct implements IFDBProduct
      * @return ArrayList<Product>
      */
     @Override
-    public ArrayList<Product> getAllProducts(boolean retrieveAssociation)
+    public ArrayList<Product> getAllProducts(boolean retrieveAssociation) throws Exception
     {
         ArrayList<Product> returnList = new ArrayList<Product>();
-        try
-        {
-            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Products");
-            _da.setSqlCommandText(query);
-            ResultSet products = _da.callCommandGetResultSet();
 
-            while(products.next())
-            {
-                Product product = buildProduct(products, retrieveAssociation);
-                returnList.add(product);
-            }
-        }
-        catch (Exception e)
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Products");
+        _da.setSqlCommandText(query);
+        ResultSet products = _da.callCommandGetResultSet();
+
+        while(products.next())
         {
-            e.printStackTrace();
+            Product product = buildProduct(products, retrieveAssociation);
+            returnList.add(product);
         }
 
         return returnList;
@@ -62,23 +56,14 @@ public class DBProduct implements IFDBProduct
      * @return Product
      */
     @Override
-    public Product getProductById(long id, boolean retrieveAssociation)
+    public Product getProductById(long id, boolean retrieveAssociation) throws Exception
     {
-        try
-        {
-            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Products WHERE productId = ?");
-            query.setLong(1, id);
-            _da.setSqlCommandText(query);
-            ResultSet productResult = _da.callCommandGetRow();
-            productResult.next();
-            return buildProduct(productResult, retrieveAssociation);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return null;
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Products WHERE productId = ?");
+        query.setLong(1, id);
+        _da.setSqlCommandText(query);
+        ResultSet productResult = _da.callCommandGetRow();
+        productResult.next();
+        return buildProduct(productResult, retrieveAssociation);
     }
 
     /**
@@ -89,23 +74,14 @@ public class DBProduct implements IFDBProduct
      * @return Product
      */
     @Override
-    public Product getProductByName(String name, boolean retrieveAssociation)
+    public Product getProductByName(String name, boolean retrieveAssociation) throws Exception
     {
-        try
-        {
-            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Products WHERE name = ?");
-            query.setString(1, name);
-            _da.setSqlCommandText(query);
-            ResultSet productResult = _da.callCommandGetRow();
-            productResult.next();
-            return buildProduct(productResult, retrieveAssociation);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return null;
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Products WHERE name = ?");
+        query.setString(1, name);
+        _da.setSqlCommandText(query);
+        ResultSet productResult = _da.callCommandGetRow();
+        productResult.next();
+        return buildProduct(productResult, retrieveAssociation);
     }
 
     /**
@@ -120,28 +96,19 @@ public class DBProduct implements IFDBProduct
         if(product == null)
             return 0;
 
-        try
-        {
-            PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Products (contactsKey, categoryKey, name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minimumStock) " +
-                                       "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Products (contactsKey, categoryKey, name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minimumStock) " +
+                                  "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-            query.setLong(1, product.getSupplier().getPhoneNo());
-            query.setLong(2, product.getCategory().getCategoryId());
-            query.setString(3, product.getName());
-            query.setDouble(4, product.getPurchasePrice().doubleValue());
-            query.setDouble(5, product.getSalesPrice().doubleValue());
-            query.setDouble(6, product.getRentPrice().doubleValue());
-            query.setString(7, product.getCountryOfOrigin());
-            query.setLong(8, product.getMinimumStock());
-            _da.setSqlCommandText(query);
-            return _da.callCommand();
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
-        return 0;
+        query.setLong(1, product.getSupplier().getPhoneNo());
+        query.setLong(2, product.getCategory().getCategoryId());
+        query.setString(3, product.getName());
+        query.setDouble(4, product.getPurchasePrice().doubleValue());
+        query.setDouble(5, product.getSalesPrice().doubleValue());
+        query.setDouble(6, product.getRentPrice().doubleValue());
+        query.setString(7, product.getCountryOfOrigin());
+        query.setLong(8, product.getMinimumStock());
+        _da.setSqlCommandText(query);
+        return _da.callCommand();
     }
 
     /**
@@ -151,37 +118,28 @@ public class DBProduct implements IFDBProduct
      * @return int returns the number of rows affected
      */
     @Override
-    public int updateProduct(Product product)
+    public int updateProduct(Product product) throws Exception
     {
         if(product == null)
             return 0;
 
-        try
-        {
-            if(getProductById(product.getId(), true) == null)
-                return 0;
+        if(getProductById(product.getId(), true) == null)
+            return 0;
 
-            PreparedStatement query = _da.getCon().prepareStatement("UPDATE Products SET contactsKey = ?, categoryKey = ?, name = ?, purchasePrice = ?, salesPrice = ?, rentPrice = ?, countryOfOrigin = ?, minimumStock = ? " +
-                    "WHERE productId = ?");
+        PreparedStatement query = _da.getCon().prepareStatement("UPDATE Products SET contactsKey = ?, categoryKey = ?, name = ?, purchasePrice = ?, salesPrice = ?, rentPrice = ?, countryOfOrigin = ?, minimumStock = ? " +
+                "WHERE productId = ?");
 
-            query.setLong(1, product.getSupplier().getPhoneNo());
-            query.setLong(2, product.getCategory().getCategoryId());
-            query.setString(3, product.getName());
-            query.setDouble(4, product.getPurchasePrice().doubleValue());
-            query.setDouble(5, product.getSalesPrice().doubleValue());
-            query.setDouble(6, product.getRentPrice().doubleValue());
-            query.setString(7, product.getCountryOfOrigin());
-            query.setLong(8, product.getMinimumStock());
-            query.setLong(9, product.getId());
-            _da.setSqlCommandText(query);
-            return _da.callCommand();
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
-        return 0;
+        query.setLong(1, product.getSupplier().getPhoneNo());
+        query.setLong(2, product.getCategory().getCategoryId());
+        query.setString(3, product.getName());
+        query.setDouble(4, product.getPurchasePrice().doubleValue());
+        query.setDouble(5, product.getSalesPrice().doubleValue());
+        query.setDouble(6, product.getRentPrice().doubleValue());
+        query.setString(7, product.getCountryOfOrigin());
+        query.setLong(8, product.getMinimumStock());
+        query.setLong(9, product.getId());
+        _da.setSqlCommandText(query);
+        return _da.callCommand();
     }
 
     /**
@@ -191,114 +149,64 @@ public class DBProduct implements IFDBProduct
      * @return int returns the number of rows affected
      */
     @Override
-    public int deleteProduct(Product product)
+    public int deleteProduct(Product product) throws Exception
     {
         if(product == null)
             return 0;
 
-        try
-        {
-            if(getProductById(product.getId(), true) == null)
-                return 0;
+        if(getProductById(product.getId(), true) == null)
+            return 0;
 
-            PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Products WHERE productId = ?");
-            query.setLong(1, product.getId());
-            _da.setSqlCommandText(query);
-            return _da.callCommand();
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
-        return 0;
+        PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Products WHERE productId = ?");
+        query.setLong(1, product.getId());
+        _da.setSqlCommandText(query);
+        return _da.callCommand();
     }
 
-    private Product buildProduct(ResultSet row, boolean retrieveAssociation)
+    private Product buildProduct(ResultSet row, boolean retrieveAssociation) throws Exception
     {
         if(row == null)
             return null;
 
-        try
-        {
-            long productId = row.getLong("productId");
-            String name = row.getString("name");
-            String purchasePrice = row.getString("purchasePrice");
-            String salesPrice = row.getString("salesPrice");
-            String rentPrice = row.getString("rentPrice");
-            String countryOfOrigin = row.getString("countryOfOrigin");
-            int minimumStock = row.getInt("minimumStock");
-            Product product = new Product(productId, name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minimumStock);
+        long productId = row.getLong("productId");
+        String name = row.getString("name");
+        String purchasePrice = row.getString("purchasePrice");
+        String salesPrice = row.getString("salesPrice");
+        String rentPrice = row.getString("rentPrice");
+        String countryOfOrigin = row.getString("countryOfOrigin");
+        int minimumStock = row.getInt("minimumStock");
+        Product product = new Product(productId, name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minimumStock);
 
-            if(retrieveAssociation)
+        if(retrieveAssociation)
+        {
+            //ProductCategory
+            DBProductCategory dbProductCategory = new DBProductCategory();
+            long categoryId = row.getLong("categoryKey");
+            ProductCategory category = dbProductCategory.getProductCategoryById(categoryId);
+            product.setCategory(category);
+
+            //ProductData
+            PreparedStatement queryProductData = _da.getCon().prepareStatement("SELECT * FROM ProductData WHERE productKey = ?");
+            queryProductData.setLong(1, productId);
+            _da.setSqlCommandText(queryProductData);
+            ResultSet dataResults = _da.callCommandGetResultSet();
+            while(dataResults.next())
             {
-                //ProductCategory
-                long categoryId = row.getLong("categoryKey");
-                PreparedStatement queryCategory = _da.getCon().prepareStatement("SELECT * FROM ProductCategory WHERE categoryId = ?");
-                queryCategory.setLong(1, categoryId);
-                _da.setSqlCommandText(queryCategory);
-                ResultSet categoryResults = _da.callCommandGetRow();
-                categoryResults.next();
-                ProductCategory category = buildProductCategory(categoryResults);
-                product.setCategory(category);
-
-                //ProductData
-                PreparedStatement queryProductData = _da.getCon().prepareStatement("SELECT * FROM ProductData WHERE productKey = ?");
-                queryProductData.setLong(1, productId);
-                _da.setSqlCommandText(queryProductData);
-                ResultSet dataResults = _da.callCommandGetResultSet();
-                while(dataResults.next())
-                {
-                    ProductData prodData = buildProductData(dataResults);
-                    product.addProductData(prodData);
-                }
+               ProductData prodData = buildProductData(dataResults);
+               product.addProductData(prodData);
             }
-
-            return product;
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
         }
 
-        return null;
+        return product;
     }
 
-    private ProductCategory buildProductCategory(ResultSet row)
+    private ProductData buildProductData(ResultSet row) throws Exception
     {
         if(row == null)
             return null;
 
-        try
-        {
-            long categoryId = row.getInt("categoryId");
-            String categoryName = row.getString("categoryName");
-            return new ProductCategory(categoryId, categoryName);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
-        return null;
-    }
-
-    private ProductData buildProductData(ResultSet row)
-    {
-        if(row == null)
-            return null;
-
-        try
-        {
-            String attribute = row.getString("attribute");
-            String attributeValue = row.getString("attributeValue");
-            return new ProductData(attribute, attributeValue);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
-        return null;
+        String attribute = row.getString("attribute");
+        String attributeValue = row.getString("attributeValue");
+        return new ProductData(attribute, attributeValue);
     }
 }

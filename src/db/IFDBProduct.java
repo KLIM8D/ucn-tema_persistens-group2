@@ -22,7 +22,7 @@ public interface IFDBProduct
     * @return ArrayList<Product>
     *
     */
-    public ArrayList<Product> getAllProducts(boolean retrieveAssociation);
+    public ArrayList<Product> getAllProducts(boolean retrieveAssociation) throws Exception;
 
     /**
      * Get a specific product by product id
@@ -32,7 +32,7 @@ public interface IFDBProduct
      * @return Product
      *
      */
-    public Product getProductById(long id, boolean retrieveAssociation);
+    public Product getProductById(long id, boolean retrieveAssociation) throws Exception;
 
     /**
      * Get a specific product by product name
@@ -42,7 +42,7 @@ public interface IFDBProduct
      * @return Product
      *
      */
-    public Product getProductByName(String name, boolean retrieveAssociation);
+    public Product getProductByName(String name, boolean retrieveAssociation) throws Exception;
 
     /**
     * Insert a new product to the database
@@ -60,7 +60,7 @@ public interface IFDBProduct
      * @return int returns the number of rows affected
      *
      */
-    public int updateProduct(Product product);
+    public int updateProduct(Product product) throws Exception;
 
     /**
      * Delete a product from the database
@@ -68,6 +68,6 @@ public interface IFDBProduct
      * @param product the product object which contains a valid ID
      * @return int returns the number of rows affected
      */
-    public int deleteProduct(Product product);
+    public int deleteProduct(Product product) throws Exception;
 
 }

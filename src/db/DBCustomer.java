@@ -23,11 +23,10 @@ public class DBCustomer implements IFDBCustomer
 	 * @param retrieveAssociation	set to true if customer data is wanted
 	 * @return ArrayList<Customer>
 	 */
-	public ArrayList<Customer> getAllCustomers(boolean retrieveAssociation)
+	public ArrayList<Customer> getAllCustomers(boolean retrieveAssociation) throws Exception
 	{
 		ArrayList<Customer> returnList = new ArrayList<Customer>();
-		try
-		{
+
 			PreparedStatement query = _da.getCon().prepareStatement("");
 			_da.setSqlCommandText(query);
 			ResultSet customers = _da.callCommandGetResultSet();
@@ -37,11 +36,6 @@ public class DBCustomer implements IFDBCustomer
 				Customer customer = buildCustomer(customers, retrieveAssociation);
 				returnList.add(customer);
 			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 
 		return returnList;
 	}
@@ -53,23 +47,15 @@ public class DBCustomer implements IFDBCustomer
 	 *  @param retrieveAssociation	set to true if customer data is wanted
 	 *  @return Customer
 	 */
-	public Customer getCustomerById(long id, boolean retrieveAssociation)
+	public Customer getCustomerById(long id, boolean retrieveAssociation) throws Exception
 	{
-		try
-		{
 			PreparedStatement query = _da.getCon().prepareStatement("");
 			query.setLong(1, id);
 			_da.setSqlCommandText(query);
 			ResultSet customerResult = _da.callCommandGetRow();
             customerResult.next();
 			return buildCustomer(customerResult, true);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 
-		return null;
 	}
 	
 	/**
@@ -79,23 +65,16 @@ public class DBCustomer implements IFDBCustomer
 	 * @param retrieveAssociation	set to true if customer data is wanted
 	 * @return Customer
 	 */
-	public Customer getCustomerByName(String name, boolean retrieveAssociation)
+	public Customer getCustomerByName(String name, boolean retrieveAssociation) throws Exception
 	{
-		try
-		{
+		
 			PreparedStatement query = _da.getCon().prepareStatement("");
 			query.setString(1, name);
 			_da.setSqlCommandText(query);
 			ResultSet customerResult = _da.callCommandGetRow();
             customerResult.next();
 			return buildCustomer(customerResult, true);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return null;
+		
 	}
 	
 	public int insertCustomer(Customer customer) throws Exception
@@ -108,13 +87,11 @@ public class DBCustomer implements IFDBCustomer
 		return 0;
 	}
 	
-	private Customer buildCustomer(ResultSet row, boolean retrieveAssociation)
+	private Customer buildCustomer(ResultSet row, boolean retrieveAssociation) throws Exception
 	{
 		if(row == null)
 			return null;
 		
-		try
-		{
 			long contactsKey = row.getLong("contactsKey");
 			BigDecimal discount = row.getBigDecimal("discount");
 			boolean isBusiness = row.getBoolean("isBusiness");
@@ -124,12 +101,6 @@ public class DBCustomer implements IFDBCustomer
 			Customer customer = new Customer(contact.getName(), contact.getAddress(), contact.getZipCode(), contact.getCity(), contact.getPhoneNo(), contact.getEmail(), contact.getCountry(), discount, isBusiness);
 			
 			return customer;
-		}
-		catch(Exception ex)
-		{
-			ex.printStackTrace();
-		}
 
-		return null;
 	}
 }

@@ -2,18 +2,18 @@ package models;
 
 public class DeliveryStatus
 {
-	private int _deliveryId;
+	private long _deliveryId;
 	private String _deliveryState;
 	
-	public DeliveryStatus(int deliveryId, String deliveryState)
+	public DeliveryStatus(long deliveryId, String deliveryState)
 	{
 		_deliveryId = deliveryId;
 		_deliveryState = deliveryState;
 	}
 
-	public int getDeliveryId()
+	public long getDeliveryId()
 	{ return _deliveryId; }
-	public void setDeliveryId(int value)
+	public void setDeliveryId(long value)
 	{ _deliveryId = value; }
 	
 	public String getDeliveryState()

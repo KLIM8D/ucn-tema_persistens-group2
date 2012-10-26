@@ -22,7 +22,7 @@ public interface IFDBSupplier
     * @return ArrayList<Supplier>
     *
     */
-    public ArrayList<Supplier> getAllSuppliers(boolean retrieveAssociation);
+    public ArrayList<Supplier> getAllSuppliers(boolean retrieveAssociation) throws Exception;
 
     /**
      * Get a specific supplier by supplier id
@@ -32,7 +32,7 @@ public interface IFDBSupplier
      * @return Supplier
      *
      */
-    public Supplier getSupplierById(long id, boolean retrieveAssociation);
+    public Supplier getSupplierById(long id, boolean retrieveAssociation) throws Exception;
 
     /**
      * Get a specific supplier by supplier name
@@ -42,7 +42,7 @@ public interface IFDBSupplier
      * @return Supplier
      *
      */
-    public Supplier getSupplierByName(String name, boolean retrieveAssociation);
+    public Supplier getSupplierByName(String name, boolean retrieveAssociation) throws Exception;
 
     /**
     * Insert a new supplier to the database
