@@ -56,36 +56,56 @@ public class DBContact implements IFDBContact
 	}
 	
 	/**
-	 * Insert data in to database
+	 * Insert contact data in to database
+	 * 
+	 * @param contact		the object that contains the data you want to add
+	 * @return int			returns the number of rows affected
 	 */
 	public int insertContact(Contact contact) throws Exception
 	{
 		if(contact == null)
 			return 0;
-		
-		try
-		{
+
 			PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Contacts (phoneNo, name, address, zipCode, city, email, country) " +
-												 "VALUES (?, ?, ?, ?, ?, ?, ?)");
+												                    "VALUES (?, ?, ?, ?, ?, ?, ?)");
 			
 			query.setLong(1, contact.getPhoneNo());
 			query.setString(2, contact.getName());
 			query.setString(3, contact.getAddress());
-			query.setInt(4, contact.getZipCode());
+			query.setLong(4, contact.getZipCode());
 			query.setString(5, contact.getCity());
 			query.setString(6, contact.getEmail());
 			query.setString(7, contact.getCountry());
-		}
-		catch(Exception ex)
-		{
-			ex.printStackTrace();
-		}
-		return 0;
+			_da.setSqlCommandText(query);
+			return _da.callCommand();
 	}
-
+	
+	/**
+	 * Update a existing contact data in the database
+	 * 
+	 * @param contact		the object containing the data you want to update
+	 * @return int			returns the number of rows affected
+	 */
 	public int updateContact(Contact contact) throws Exception
 	{
-		return 0;
+		if(contact == null)
+			return 0;
+		
+		if(getContactById(contact.getPhoneNo()) == null)
+			return 0;
+		
+		PreparedStatement query = _da.getCon().prepareStatement("UPDATE Contacts SET phoneNo = ?, name = ?, address = ?, zipCode = ?, city = ?, country = ? " +
+																"WHERE phoneNo = ?");
+		
+		query.setLong(1, contact.getPhoneNo());
+		query.setString(2, contact.getName());
+		query.setString(3, contact.getAddress());
+		query.setLong(4, contact.getZipCode());
+		query.setString(5, contact.getCity());
+		query.setString(6, contact.getEmail());
+		query.setString(7, contact.getCountry());
+		_da.setSqlCommandText(query);
+		return _da.callCommand();
 	}
 	
 	private Contact buildContact(ResultSet row) throws Exception
