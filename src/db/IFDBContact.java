@@ -36,4 +36,12 @@ public interface IFDBContact {
 	 * @return int 			returns the number of rows affected
 	 */
 	public int updateContact(Contact contact) throws Exception;
+
+    /**
+     * Delete an existing contact from the database
+     *
+     * @param contact 		the object containing the contact which should be deleted from the database
+     * @return int 			returns the number of rows affected
+     */
+    public int deleteContact(Contact contact) throws Exception;
 }

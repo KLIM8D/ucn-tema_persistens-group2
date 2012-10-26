@@ -45,4 +45,12 @@ public interface IFDBCustomer {
 	 */
 	public int updateCustomer(Customer customer) throws Exception;
 
+    /**
+     * Delete an existing customer from the database
+     *
+     * @param customer 		the object containing the customer which should be deleted from the database
+     * @return int 			returns the number of rows affected
+     */
+    public int deleteCustomer(Customer customer) throws Exception;
+
 }

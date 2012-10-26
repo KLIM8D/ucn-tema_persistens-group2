@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import models.SalesOrder;
 import db.DBSalesOrder;
 
-public class SalesOrderCtrl {
+public class SalesOrderCtrl
+{
 
 	DBSalesOrder _salesOrder;
 	
@@ -12,10 +13,9 @@ public class SalesOrderCtrl {
 	{
 		_salesOrder = new DBSalesOrder();
 	}
-	
-	
+
 	/**
-	 * Retrieves an Array of SalesOrder Obejcts
+	 * Retrieves an ArrayList of SalesOrder Obejcts
 	 * 
 	 */
 	public ArrayList<SalesOrder> getAllSalesOrders(boolean retrieveAssociation) throws Exception
@@ -24,7 +24,7 @@ public class SalesOrderCtrl {
 	}
 	
 	/**
-	 * Retrieves a SalesOrder Obejct given the ID of the order
+	 * Retrieves a SalesOrder object given the ID of the order
 	 * 
 	 */
 	public SalesOrder getSalesOrderFromId(long id, boolean retrieveAssociation) throws Exception
@@ -33,10 +33,10 @@ public class SalesOrderCtrl {
 	}
 	
 	/**
-	 * Retrieves an Array of SalesOrder Obejcts from the customers name
+	 * Retrieves an ArrayList of SalesOrder objects from the customers name
 	 * 
 	 */
-	public ArrayList<SalesOrder> getAllSalesOrdersFromCustomer(String customerName, boolean retrieveAssociation)
+	public ArrayList<SalesOrder> getAllSalesOrdersFromCustomer(String customerName, boolean retrieveAssociation) throws Exception
 	{
 		return _salesOrder.getAllSalesOrdersFromCustomer(customerName, retrieveAssociation);
 	}
@@ -51,11 +51,23 @@ public class SalesOrderCtrl {
 	}
 	
 	/**
-	 * Edits Existing SalesOrder in the DB with a new SalesOrder obejct.
+	 * Edits Existing SalesOrder in the DB with a new SalesOrder object.
 	 * 
 	 */
 	public int updateSalesOrder(SalesOrder salesOrder) throws Exception
 	{
 		return _salesOrder.updateSalesOrder(salesOrder);
 	}
+
+    /**
+    * Delete an SalesOrder and the associated OrderItems
+    *
+    * @param salesOrder the salesOrder object which should be deleted from the database
+    * @return number of rows affected
+    *
+    */
+    public int deleteSalesOrder(SalesOrder salesOrder) throws Exception
+    {
+        return _salesOrder.deleteSalesOrder(salesOrder);
+    }
 }

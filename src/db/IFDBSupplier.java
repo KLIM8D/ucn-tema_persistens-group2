@@ -18,31 +18,28 @@ public interface IFDBSupplier
     /**
     * Get all the suppliers from the database
     *
-    * @param retrieveAssociation set to true if you want Contact data.
     * @return ArrayList<Supplier>
     *
     */
-    public ArrayList<Supplier> getAllSuppliers(boolean retrieveAssociation) throws Exception;
+    public ArrayList<Supplier> getAllSuppliers() throws Exception;
 
     /**
      * Get a specific supplier by supplier id
      *
      * @param id the ID of the supplier you want returned
-     * @param retrieveAssociation set to true if you want Contact data.
      * @return Supplier
      *
      */
-    public Supplier getSupplierById(long id, boolean retrieveAssociation) throws Exception;
+    public Supplier getSupplierById(long id) throws Exception;
 
     /**
      * Get a specific supplier by supplier name
      *
      * @param name the name of the supplier you want returned
-     * @param retrieveAssociation set to true if you want Contact data.
      * @return Supplier
      *
      */
-    public Supplier getSupplierByName(String name, boolean retrieveAssociation) throws Exception;
+    public Supplier getSupplierByName(String name) throws Exception;
 
     /**
     * Insert a new supplier to the database
@@ -61,4 +58,13 @@ public interface IFDBSupplier
      *
      */
     public int updateSupplier(Supplier supplier) throws Exception;
+
+    /**
+     * Delete a supplier, that already exists in the database
+     *
+     * @param supplier the supplier object which contains a valid ID
+     * @return int returns the number of rows affected
+     *
+     */
+    public int deleteSupplier(Supplier supplier) throws Exception;
 }

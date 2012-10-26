@@ -13,7 +13,13 @@ public class DBProductCategory implements IFDBProductCategory
 	 {	
 		 _da = DataAccess.getInstance();
 	 }
-	 
+
+    /**
+     * Get all the productCategories from the database
+     *
+     * @return ArrayList<ProductCategory>
+     *
+     */
 	 @Override
  	 public ArrayList<ProductCategory> getAllProductCategories() throws Exception
 	 {
@@ -31,7 +37,14 @@ public class DBProductCategory implements IFDBProductCategory
 
  		 return returnList;
 	 }
-	 
+
+    /**
+     * Get a specific productCategory by productCategory id
+     *
+     * @param id the ID of the productCategory you want returned
+     * @return ProductCategory
+     *
+     */
 	 @Override
  	 public ProductCategory getProductCategoryById(long id) throws Exception
  	 {
@@ -42,7 +55,14 @@ public class DBProductCategory implements IFDBProductCategory
  		 categoryResult.next();
  		 return buildProductCategory(categoryResult);
  	 }
-	
+
+    /**
+     * Get a specific productCategory by productCategory name
+     *
+     * @param name the name of the productCategory you want returned
+     * @return ProductCategory
+     *
+     */
 	 @Override
  	 public ProductCategory getProductCategoryByName(String name) throws Exception
  	 {
@@ -53,7 +73,14 @@ public class DBProductCategory implements IFDBProductCategory
  		 categoryResult.next();
  		 return buildProductCategory(categoryResult);
  	 }
-	
+
+    /**
+     * Insert a new productCategory to the database
+     *
+     * @param productCategory the productCategory object with the data you want added
+     * @return int returns the number of rows affected
+     *
+     */
 	 @Override
  	 public int insertProductCategory(ProductCategory productCategory) throws Exception 
  	 {
@@ -65,7 +92,14 @@ public class DBProductCategory implements IFDBProductCategory
  		 _da.setSqlCommandText(query);
  		 return _da.callCommand();
  	 }
-	
+
+    /**
+     * Update a productCategory, that already exists in the database
+     *
+     * @param productCategory the productCategory object which contains a valid ID and the new data which should be updated
+     * @return int returns the number of rows affected
+     *
+     */
 	 @Override
  	 public int updateProductCategory(ProductCategory productCategory) throws Exception
  	 {
@@ -82,6 +116,13 @@ public class DBProductCategory implements IFDBProductCategory
  		 return _da.callCommand();
  	 }
 
+    /**
+     * Delete an existing productCategory from the database
+     *
+     * @param productCategory the productCategory object which contains a valid ID
+     * @return int returns the number of rows affected
+     *
+     */
 	 @Override
  	 public int deleteProductCategory(ProductCategory productCategory) throws Exception
  	 {

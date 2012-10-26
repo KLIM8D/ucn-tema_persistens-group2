@@ -4,7 +4,8 @@ import models.SalesOrder;
 
 import java.util.ArrayList;
 
-public interface IFDBSalesOrder {
+public interface IFDBSalesOrder
+{
 	
 	/**
 	 * Get all SalesOrders in the Database
@@ -48,4 +49,12 @@ public interface IFDBSalesOrder {
 	 * @return int returns the number of rows affected
 	 */
 	public int updateSalesOrder(SalesOrder salesOrder) throws Exception;
+
+    /**
+     * Delete a SalesOrder from the database and all the OrderItems associated with it
+     *
+     * @param salesOrder the salesOrder object that contain a valid id
+     * @return int returns the number of rows affected
+     */
+    public int deleteSalesOrder(SalesOrder salesOrder) throws Exception;
 }
