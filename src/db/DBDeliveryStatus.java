@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import models.DeliveryStatus;
-import models.Product;
 
 public class DBDeliveryStatus implements IFDBDeliveryStatus {
 

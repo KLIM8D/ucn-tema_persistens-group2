@@ -1,13 +1,10 @@
 package db;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 
-import models.Contact;
-import models.Customer;
 import models.Invoice;
 
 public class DBInvoice implements IFDBInvoice{
