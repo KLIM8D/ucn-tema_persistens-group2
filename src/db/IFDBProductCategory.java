@@ -18,31 +18,28 @@ public interface IFDBProductCategory
     /**
     * Get all the productCategories from the database
     *
-    * @param retrieveAssociation set to true if you want Contact data.
     * @return ArrayList<ProductCategory>
     *
     */
-    public ArrayList<ProductCategory> getAllProductCategorys(boolean retrieveAssociation);
+    public ArrayList<ProductCategory> getAllProductCategories() throws Exception;
 
     /**
      * Get a specific productCategory by productCategory id
      *
      * @param id the ID of the productCategory you want returned
-     * @param retrieveAssociation set to true if you want Contact data.
      * @return ProductCategory
      *
      */
-    public ProductCategory getProductCategoryById(long id, boolean retrieveAssociation);
+    public ProductCategory getProductCategoryById(long id) throws Exception;
 
     /**
      * Get a specific productCategory by productCategory name
      *
      * @param name the name of the productCategory you want returned
-     * @param retrieveAssociation set to true if you want Contact data.
      * @return ProductCategory
      *
      */
-    public ProductCategory getProductCategoryByName(String name, boolean retrieveAssociation);
+    public ProductCategory getProductCategoryByName(String name) throws Exception;
 
     /**
     * Insert a new productCategory to the database
@@ -60,5 +57,5 @@ public interface IFDBProductCategory
      * @return int returns the number of rows affected
      *
      */
-    public int updateProductCategory(ProductCategory productCategory);
+    public int updateProductCategory(ProductCategory productCategory) throws Exception;
 }

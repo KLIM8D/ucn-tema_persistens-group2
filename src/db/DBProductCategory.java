@@ -16,94 +16,76 @@ public class DBProductCategory implements IFDBProductCategory
 		 _da = DataAccess.getInstance();
 	 }
 	 
-	public ArrayList<ProductCategory> getAllProductCategorys(boolean retrieveAssociation)
+	public ArrayList<ProductCategory> getAllProductCategories() throws Exception
 	{
 		ArrayList<ProductCategory> returnList = new ArrayList<ProductCategory>();
-        try
-        {
-            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM ProductCategories");
-            _da.setSqlCommandText(query);
-            ResultSet productCategories = _da.callCommandGetResultSet();
 
-            while(productCategories.next())
-            {
-            	ProductCategory Categories = buildProductCategory(productCategories, retrieveAssociation);
-                returnList.add(Categories);
-            }
-        }
-        catch (Exception e)
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM ProductCategories");
+        _da.setSqlCommandText(query);
+        ResultSet productCategories = _da.callCommandGetResultSet();
+
+        while(productCategories.next())
         {
-            e.printStackTrace();
+         	ProductCategory Categories = buildProductCategory(productCategories);
+            returnList.add(Categories);
         }
 
         return returnList;
 	}
 
-	public ProductCategory getProductCategoryById(long id, boolean retrieveAssociation) 
+	public ProductCategory getProductCategoryById(long id) throws Exception
 	{
-		try
-        {
-            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM ProductCategory WHERE categoryId = ?");
-            query.setLong(1, id);
-            _da.setSqlCommandText(query);
-            ResultSet categoryResult = _da.callCommandGetRow();
-            categoryResult.next();
-            return buildProductCategory(categoryResult, true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return null;
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM ProductCategory WHERE categoryId = ?");
+        query.setLong(1, id);
+        _da.setSqlCommandText(query);
+        ResultSet categoryResult = _da.callCommandGetRow();
+        categoryResult.next();
+        return buildProductCategory(categoryResult);
 	}
 	
-	public ProductCategory getProductCategoryByName(String name, boolean retrieveAssociation) 
+	public ProductCategory getProductCategoryByName(String name) throws Exception
 	{
-        try
-        {
-            PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM productCategory WHERE categoryName = ?");
-            query.setString(1, name);
-            _da.setSqlCommandText(query);
-            ResultSet categoryResult = _da.callCommandGetRow();
-            categoryResult.next();
-            return buildProductCategory(categoryResult, true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return null;
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM productCategory WHERE categoryName = ?");
+        query.setString(1, name);
+        _da.setSqlCommandText(query);
+        ResultSet categoryResult = _da.callCommandGetRow();
+        categoryResult.next();
+        return buildProductCategory(categoryResult);
 	}
 	
 	public int insertProductCategory(ProductCategory productCategory) throws Exception 
 	{
-		return 0;
+        if(productCategory == null)
+            return 0;
+
+		PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO ProductCategory (categoryName) VALUES (?)");
+        query.setString(1, productCategory.getCategoryName());
+        _da.setSqlCommandText(query);
+        return _da.callCommand();
 	}
 	
-	public int updateProductCategory(ProductCategory productCategory) 
+	public int updateProductCategory(ProductCategory productCategory) throws Exception
 	{
-		return 0;
-	}
-	 
-	public ProductCategory buildProductCategory(ResultSet row, boolean retrieveAssociation)
-	{
-		 if(row == null)
-	            return null;
+        if(productCategory == null)
+            return 0;
 
-	        try
-	        {
-	            long categoryId = row.getLong("categoryId");
-	            String categoryName = row.getString("categoryName");          
-	        	
-	            ProductCategory PDC = new ProductCategory(categoryId, categoryName);
-	            return PDC;
-	        }
-	        catch (Exception ex) 
-	        {
-	            ex.printStackTrace();
-	        }
-	        return null;
+        if(getProductCategoryById(productCategory.getCategoryId()) == null)
+            return 0;
+
+        PreparedStatement query = _da.getCon().prepareStatement("UPDATE ProductCategory SET categoryName = ? WHERE categoryId = ?");
+        query.setString(1, productCategory.getCategoryName());
+        query.setLong(2, productCategory.getCategoryId());
+        _da.setSqlCommandText(query);
+        return _da.callCommand();
 	}
+
+    private ProductCategory buildProductCategory(ResultSet row) throws Exception
+    {
+        if(row == null)
+            return null;
+
+        long categoryId = row.getInt("categoryId");
+        String categoryName = row.getString("categoryName");
+        return new ProductCategory(categoryId, categoryName);
+    }
 }
