@@ -20,6 +20,7 @@ public class DBContact implements IFDBContact
 	 * 
 	 * @return ArrayList<Contact>
 	 */
+	@Override
 	public ArrayList<Contact> getAllContacts() throws Exception
 	{
 		
@@ -43,6 +44,7 @@ public class DBContact implements IFDBContact
 	 * @param id 			the ID of the contact that needs to be returned
 	 * @return Contact
 	 */
+	@Override
 	public Contact getContactById(long id) throws Exception
 	{
 
@@ -61,6 +63,7 @@ public class DBContact implements IFDBContact
 	 * @param contact		the object that contains the data you want to add
 	 * @return int			returns the number of rows affected
 	 */
+	@Override
 	public int insertContact(Contact contact) throws Exception
 	{
 		if(contact == null)
@@ -86,6 +89,7 @@ public class DBContact implements IFDBContact
 	 * @param contact		the object containing the data you want to update
 	 * @return int			returns the number of rows affected
 	 */
+	@Override
 	public int updateContact(Contact contact) throws Exception
 	{
 		if(contact == null)

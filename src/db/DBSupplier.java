@@ -31,7 +31,7 @@ public class DBSupplier implements IFDBSupplier{
 
         return returnList;
 	}
-
+	
 	public Supplier getSupplierById(long id, boolean retrieveAssociation) throws Exception
 	{
             PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Supplier WHERE supplierId = ?");
@@ -57,10 +57,8 @@ public class DBSupplier implements IFDBSupplier{
         if(supplier == null)
             return 0;
 
-        try
-        {
             PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Suppliers (contactsKey, contactPerson, bankAccount) " +
-                                       "VALUES (?, ?, ?)");
+                                                                    "VALUES (?, ?, ?)");
 
             query.setLong(1, supplier.getPhoneNo());
             query.setString(2, supplier.getContactPerson());
@@ -68,13 +66,6 @@ public class DBSupplier implements IFDBSupplier{
             
             _da.setSqlCommandText(query);
             return _da.callCommand();
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
-        return 0;
 	}
 
 	public int updateSupplier(Supplier supplier) throws Exception
@@ -86,7 +77,7 @@ public class DBSupplier implements IFDBSupplier{
                 return 0;
 
             PreparedStatement query = _da.getCon().prepareStatement("UPDATE Suppliers SET contactsKey = ?, contantPerson = ?, bankAccount = ? " +
-                    "WHERE productId = ?");
+                                                                    "WHERE productId = ?");
 
             query.setLong(1, supplier.getPhoneNo());
             query.setString(2, supplier.getContactPerson());

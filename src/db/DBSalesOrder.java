@@ -40,7 +40,6 @@ public class DBSalesOrder implements IFDBSalesOrder
 		return returnList;
 	}
 	
-	
 	/**
      * Get a specific salesOrder by salesOrder id
      *
@@ -58,7 +57,6 @@ public class DBSalesOrder implements IFDBSalesOrder
 		return buildSalesOrder(salesOrderResult, true);					
 	}
 	
-	
 	/**
 	 * Get all SalesOrders for a specific customer from customerName
 	 * 
@@ -66,11 +64,11 @@ public class DBSalesOrder implements IFDBSalesOrder
 	 * @param retrieveAssociation set to true if you want SalesOrders for customer to be returned
 	 * @return ArrayList of SalesOrders for a customer with customerName
 	 */
+	@Override
 	public ArrayList<SalesOrder> getAllSalesOrdersFromCustomer(String customerName, boolean retrieveAssociation)
 	{
 		return null;
 	}
-	
 	
 	/**
      * Insert a new salesOrder to the database
@@ -92,7 +90,6 @@ public class DBSalesOrder implements IFDBSalesOrder
 		_da.setSqlCommandText(query);
 		return _da.callCommand();
 	}
-	
 	
 	/**
      * Update a salesOrder, that already exists in the database
@@ -118,7 +115,6 @@ public class DBSalesOrder implements IFDBSalesOrder
 		_da.setSqlCommandText(query);
 		return _da.callCommand();
 	}
-	
 	
 	private SalesOrder buildSalesOrder(ResultSet row, boolean retrieveAssociation) throws Exception
 	{
@@ -149,7 +145,6 @@ public class DBSalesOrder implements IFDBSalesOrder
 		}
 		return salesOrder;	
 	}
-	
 	
 	private DeliveryStatus buildDeliveryStatus(ResultSet row) throws Exception
 	{
