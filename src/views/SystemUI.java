@@ -1,7 +1,6 @@
 package views;
 
 import java.awt.Cursor;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -12,44 +11,108 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SystemUI
 {
 
-	private JFrame frmSystemWindow;
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
-					SystemUI window = new SystemUI();
-					window.frmSystemWindow.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	protected static final int EXIT_ON_CLOSE = 0;
+	public JFrame frmSystemWindow;
 
 	public SystemUI()
 	{
-		initialize();
-	}
-
-	private void initialize()
-	{
-		frmSystemWindow = new JFrame();
+		frmSystemWindow = new JFrame(GlobalUI.systemInformation(01) + " - " + GlobalUI.systemInformation(02) + " (build" + GlobalUI.systemInformation(03) + ")");
 		frmSystemWindow.setResizable(false);
-		frmSystemWindow.setTitle("System Window");
 		frmSystemWindow.setBounds(100, 100, 800, 600);
 		frmSystemWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSystemWindow.getContentPane().setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmSystemWindow.setJMenuBar(menuBar);
+		
+		JMenu mnFiles = new JMenu("Filer");
+		menuBar.add(mnFiles);
+		
+		JMenu mnNew = new JMenu("Ny(t)");
+		mnFiles.add(mnNew);
+		
+		JMenuItem mntmNewOrder = new JMenuItem("Ordre");
+		mntmNewOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				newOrder();
+			}
+		});
+		mnNew.add(mntmNewOrder);
+		
+		JMenuItem mntmNewContact = new JMenuItem("Kontakt");
+		mntmNewContact.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				newContact();
+			}
+		});
+		mnNew.add(mntmNewContact);
+		
+		JMenuItem mntmNewProduct = new JMenuItem("Produkt");
+		mntmNewProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				newProduct();
+			}
+		});
+		mnNew.add(mntmNewProduct);
+		
+		JMenu mnOpen = new JMenu("Åben");
+		mnFiles.add(mnOpen);
+		
+		JMenuItem mntmOpenOrder = new JMenuItem("Ordre");
+		mntmOpenOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectOrder();
+			}
+		});
+		mnOpen.add(mntmOpenOrder);
+		
+		JMenuItem mntmOpenContacts = new JMenuItem("Kontakter");
+		mntmOpenContacts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectContacts();
+			}
+		});
+		mnOpen.add(mntmOpenContacts);
+		
+		JMenuItem mntmOpenProductBase = new JMenuItem("Produktbase");
+		mntmOpenProductBase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectProductBase();
+			}
+		});
+		mnOpen.add(mntmOpenProductBase);
+		
+		JSeparator separator = new JSeparator();
+		mnFiles.add(separator);
+		
+		JMenuItem mntmExit = new JMenuItem("Afslut");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(EXIT_ON_CLOSE);
+			}
+		});
+		mnFiles.add(mntmExit);
+		
+		JMenu mnAbout = new JMenu("Om");
+		menuBar.add(mnAbout);
+		
+		JMenuItem mntmAboutApplication = new JMenuItem("Applikationen");
+		mntmAboutApplication.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame aboutFrame = views.AboutUI.createWindow();
+				aboutFrame.setLocationRelativeTo(frmSystemWindow);
+			}
+		});
+		mnAbout.add(mntmAboutApplication);
 		
 		JPanel pnlQuickSelection = new JPanel();
 		pnlQuickSelection.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -64,7 +127,7 @@ public class SystemUI
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				orderSelect();
+				selectOrder();
 			}
 		});
 		lblOrder.setHorizontalAlignment(SwingConstants.LEFT);
@@ -79,7 +142,7 @@ public class SystemUI
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				contactsSelect();
+				selectContacts();
 			}
 		});
 		lblContacts.setText("Kontakter");
@@ -94,7 +157,7 @@ public class SystemUI
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				productsSelect();
+				selectProductBase();
 			}
 		});
 		lblProducts.setText("Produktbase");
@@ -108,19 +171,39 @@ public class SystemUI
 		pnlInfo.setBounds(4, 217, 180, 326);
 		pnlInfo.setBackground(Color.WHITE);
 		frmSystemWindow.getContentPane().add(pnlInfo);
+		
+		JPanel pnlMain = new JPanel();
+		pnlMain.setBounds(187, 4, 605, 537);
+		frmSystemWindow.getContentPane().add(pnlMain);
+		pnlMain.setLayout(null);
 	}
 	
-	private void orderSelect()
+	private void newOrder()
 	{
 		
 	}
 	
-	private void contactsSelect()
+	private void newContact()
 	{
 		
 	}
 	
-	private void productsSelect()
+	private void newProduct()
+	{
+		
+	}
+	
+	private void selectOrder()
+	{
+		
+	}
+	
+	private void selectContacts()
+	{
+		
+	}
+	
+	private void selectProductBase()
 	{
 		
 	}
