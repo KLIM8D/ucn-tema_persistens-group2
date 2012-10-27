@@ -45,6 +45,15 @@ public class Helper
             data.setText(null);
         }
     }
+
+    public static int showConfirmDialog(String objectName)
+    {
+        int option = JOptionPane.showConfirmDialog (null, String.format("Er du sikker på du vil slette dette %s?", objectName));
+        if (option == JOptionPane.YES_OPTION )
+            return 1;
+
+        return 0;
+    }
 	
 	//Added because of stupid a bug with setLocationRelativeTo(null) for some JFrames or JDialogs
 	public static void centerOnScreen(final Component c)

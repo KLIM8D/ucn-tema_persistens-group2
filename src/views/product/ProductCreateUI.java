@@ -80,6 +80,7 @@ public class ProductCreateUI
         _frame.setBounds(0, 0, 509, 528);
         _frame.setResizable(false);
         _frame.setVisible(true);
+        _frame.setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

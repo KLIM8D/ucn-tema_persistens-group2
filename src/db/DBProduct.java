@@ -171,10 +171,16 @@ public class DBProduct implements IFDBProduct
         if(getProductById(product.getId(), true) == null)
             return 0;
 
+        int rowsAffected = 0;
+        DBProductData dbProductData = new DBProductData();
+        rowsAffected += dbProductData.deleteProductData(product.getId());
+
         PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Products WHERE productId = ?");
         query.setLong(1, product.getId());
         _da.setSqlCommandText(query);
-        return _da.callCommand();
+        rowsAffected += _da.callCommand();
+
+        return rowsAffected;
     }
 
     private Product buildProduct(ResultSet row, boolean retrieveAssociation) throws Exception

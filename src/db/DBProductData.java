@@ -65,7 +65,7 @@ public class DBProductData implements IFDBProductData
     }
 
     /**
-     * Insert a new product to the database
+     * Delete product data from the database
      *
      * @param productId the ID of the product where the data should be deleted
      * @param data      the data which contains the attribute
@@ -80,6 +80,22 @@ public class DBProductData implements IFDBProductData
         PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM ProductData WHERE productKey = ? AND attribute = ?");
         query.setLong(1, productId);
         query.setString(2, data.getAttribute());
+        _da.setSqlCommandText(query);
+
+        return _da.callCommand();
+    }
+
+    /**
+     * Delete ALL product data associated to a product from the database
+     *
+     * @param productId the ID of the product where the data should be deleted
+     * @return int returns the number of rows affected
+     */
+    @Override
+    public int deleteProductData(long productId) throws Exception
+    {
+        PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM ProductData WHERE productKey = ?");
+        query.setLong(1, productId);
         _da.setSqlCommandText(query);
 
         return _da.callCommand();

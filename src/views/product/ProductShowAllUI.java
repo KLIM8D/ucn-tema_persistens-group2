@@ -150,7 +150,9 @@ public class ProductShowAllUI
         {
             public boolean isCellEditable(int data, int columns)
             {
-                return columns == 5;
+                if(columns == 5 || columns == 6)
+                    return true;
+                return false;
             }
         };
 
@@ -168,7 +170,7 @@ public class ProductShowAllUI
         //Grid / Table end
     }
 
-    private void addButton(int columnIndex)
+    private void addButton(final int columnIndex)
     {
         @SuppressWarnings("serial")
         Action show = new AbstractAction()
@@ -178,7 +180,24 @@ public class ProductShowAllUI
                 JTable table = (JTable) e.getSource();
                 int row = Integer.valueOf(e.getActionCommand());
                 long itemNumber = Long.parseLong(table.getValueAt(row, 0).toString());
-                txtProductId.setText(itemNumber + "");
+                if(columnIndex == 5)
+                    txtProductId.setText(itemNumber + "");
+                else
+                {
+                    try
+                    {
+                        if(Helper.showConfirmDialog("produkt") == 1)
+                        {
+                            Product product = _prodCtrl.getProductById(itemNumber, true);
+                            _prodCtrl.deleteProduct(product);
+                            addData();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        JOptionPane.showMessageDialog(null, Logging.handleException(ex, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
             }
         };
         ButtonColumn buttonColumn = new ButtonColumn(table, show, columnIndex);
@@ -216,7 +235,7 @@ public class ProductShowAllUI
             {
                 Object[][] row = new Object[][]
                 {
-                        {prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSupplier().getName(), prod.getCountryOfOrigin(), prod.getSalesPrice(), prod.getPurchasePrice(), prod.getRentPrice(), "Rediger", "Slet" }
+                        {prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSalesPrice().doubleValue() + " kr", "Rediger", "Slet" }
                 };
                 model.setDataVector(row, columnNames);
             }
@@ -243,7 +262,7 @@ public class ProductShowAllUI
             {
                 Object[][] row = new Object[][]
                 {
-                        {prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSupplier().getName(), prod.getCountryOfOrigin(), prod.getSalesPrice(), prod.getPurchasePrice(), prod.getRentPrice(), "Rediger", "Slet" }
+                        {prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSalesPrice().doubleValue() + " kr", "Rediger", "Slet" }
                 };
                 model.setDataVector(row, columnNames);
             }

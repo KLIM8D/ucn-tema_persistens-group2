@@ -41,4 +41,12 @@ public interface IFDBProductData
      *
      */
     public int deleteProductData(long productId, ProductData data) throws Exception;
+
+    /**
+     * Delete ALL product data associated to a product from the database
+     *
+     * @param productId the ID of the product where the data should be deleted
+     * @return int returns the number of rows affected
+     */
+    public int deleteProductData(long productId) throws Exception;
 }
