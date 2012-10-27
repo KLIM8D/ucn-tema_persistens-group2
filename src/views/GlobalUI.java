@@ -1,6 +1,7 @@
 package views;
 
-public class GlobalUI {
+public class GlobalUI
+{
 	private static String _systemTitle = "Tema Persistens";
 	private static String _systemDescription = "UCN-DM79, Gruppe 2";
 	private static String _systemBuild = "29102012";

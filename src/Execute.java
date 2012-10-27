@@ -11,7 +11,7 @@ final class Execute
     	}
     	catch(Exception e)
     	{
-    		System.out.println("Ding dong the witch is dead!");
+    		e.printStackTrace();
     	}
     }
 }

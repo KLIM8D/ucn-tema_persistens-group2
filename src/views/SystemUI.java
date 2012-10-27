@@ -1,5 +1,7 @@
 package views;
 
+import views.product.ShowAllUI;
+
 import java.awt.Cursor;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,6 +24,7 @@ public class SystemUI
 
 	protected static final int EXIT_ON_CLOSE = 0;
 	public JFrame frmSystemWindow;
+    private JPanel pnlMain;
 
 	public SystemUI()
 	{
@@ -172,7 +175,8 @@ public class SystemUI
 		pnlInfo.setBackground(Color.WHITE);
 		frmSystemWindow.getContentPane().add(pnlInfo);
 		
-		JPanel pnlMain = new JPanel();
+		pnlMain = new JPanel();
+        pnlMain.setVisible(true);
 		pnlMain.setBounds(187, 4, 605, 537);
 		frmSystemWindow.getContentPane().add(pnlMain);
 		pnlMain.setLayout(null);
@@ -200,11 +204,23 @@ public class SystemUI
 	
 	private void selectContacts()
 	{
-		
+        pnlMain.removeAll();
+		JLabel ok = new JLabel("wadawdw");
+        ok.setBounds(200, 200, 103, 15);
+        pnlMain.add(ok);
+        pnlMain.revalidate();
+        pnlMain.repaint();
 	}
 	
 	private void selectProductBase()
 	{
-		
+       pnlMain.removeAll();
+       ShowAllUI showAllUI = new ShowAllUI();
+       JPanel panel = showAllUI.createWindow();
+       panel.setVisible(true);
+       panel.setBounds(0, 0, 1000, 1000);
+       pnlMain.add(panel);
+       pnlMain.revalidate();
+       pnlMain.repaint();
 	}
 }
