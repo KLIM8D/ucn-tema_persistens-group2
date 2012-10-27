@@ -25,7 +25,7 @@ public class SystemUI
 
 	protected static final int EXIT_ON_CLOSE = 0;
 	public JFrame frmSystemWindow;
-    private JPanel pnlMain;
+	private JPanel pnlMain;
 
 	public SystemUI()
 	{
@@ -215,11 +215,11 @@ public class SystemUI
 	
 	private void selectProductBase()
 	{
-       pnlMain.removeAll();
-       ProductShowAllUI productShowAllUI = new ProductShowAllUI();
-       JPanel panel = productShowAllUI.createWindow();
-       pnlMain.add(panel);
-       pnlMain.revalidate();
-       pnlMain.repaint();
+		pnlMain.removeAll();
+		ProductShowAllUI productShowAllUI = new ProductShowAllUI();
+		JPanel panel = productShowAllUI.createWindow();
+		pnlMain.add(panel);
+		pnlMain.revalidate();
+		pnlMain.repaint();
 	}
 }
