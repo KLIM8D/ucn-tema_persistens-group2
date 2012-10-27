@@ -207,12 +207,25 @@ public class SystemUI
 	
 	private void selectContacts()
 	{
-		pnlMain.removeAll();
-		ContactShowAllUI contactShowAllUI = new ContactShowAllUI();
-		JPanel panel = contactShowAllUI.createWindow();
-		pnlMain.add(panel);
-		pnlMain.revalidate();
-		pnlMain.repaint();
+		DataNotificationUI info = new views.DataNotificationUI();
+		info.setVisible(true);
+		
+		try
+		{
+			pnlMain.removeAll();
+			ContactShowAllUI contactShowAllUI = new ContactShowAllUI();
+			JPanel panel = contactShowAllUI.createWindow();
+			pnlMain.add(panel);
+			pnlMain.revalidate();
+			pnlMain.repaint();
+			
+			info.dispose();
+		}
+		catch(Exception err)
+		{
+			JOptionPane.showMessageDialog(null, Logging.handleException(err, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+		}
+		
 	}
 	
 	private void selectProductBase()
