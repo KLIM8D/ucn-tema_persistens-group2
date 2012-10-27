@@ -1,6 +1,7 @@
 package views;
 
 import views.product.ProductShowAllUI;
+import views.contact.ContactShowAllUI;
 
 import java.awt.Cursor;
 import javax.swing.JFrame;
@@ -204,7 +205,12 @@ public class SystemUI
 	
 	private void selectContacts()
 	{
-
+		pnlMain.removeAll();
+		ContactShowAllUI contactShowAllUI = new ContactShowAllUI();
+		JPanel panel = contactShowAllUI.createWindow();
+		pnlMain.add(panel);
+		pnlMain.revalidate();
+		pnlMain.repaint();
 	}
 	
 	private void selectProductBase()
