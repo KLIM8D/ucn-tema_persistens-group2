@@ -9,11 +9,12 @@ package db;
  */
 
 import com.sun.rowset.CachedRowSetImpl;
-
 import javax.sql.rowset.CachedRowSet;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class DataAccess
 {
@@ -66,6 +67,10 @@ public class DataAccess
         }
     }
 
+    /**
+     * Open the connection to the database
+     *
+     */
     public void openConnection()
     {
         try
@@ -80,6 +85,10 @@ public class DataAccess
         }
     }
 
+    /**
+     * Close the connection to the database
+     *
+     */
     public static void closeConnection()
     {
         try
@@ -92,6 +101,10 @@ public class DataAccess
         }
     }
 
+    /**
+     * Set AutoCommit to false. Which will hold back any transactions/queries
+     *
+     */
     public static void startTransaction()
     {
         try
@@ -104,6 +117,10 @@ public class DataAccess
         }
     }
 
+    /**
+     * Set AutoCommit to true. Which will execute the queries immediately
+     *
+     */
     public static void commitTransaction()
     {
         try
@@ -116,6 +133,10 @@ public class DataAccess
         }
     }
 
+    /**
+    * Rollback the failed update you performed
+    *
+    */
     public static void rollbackTransaction()
     {
         try
@@ -129,6 +150,12 @@ public class DataAccess
         }
     }
 
+    /**
+     * Get a ResultSet which contains the rows returned from the database. comment
+     *
+     * @return ResultSet the rows returned from the database
+     *
+     */
     public ResultSet callCommandGetResultSet()
     {
         //Benchmark time start
@@ -170,6 +197,13 @@ public class DataAccess
         return null;
     }
 
+    /**
+    * Get a ResultSet which contains the rows returned from the database. comment
+    * The method doesn't contain benchmark/query execution time.
+    *
+    * @return ResultSet the rows returned from the database
+    *
+    */
     private ResultSet callCommandGetResultSetWithOutMonitor()
     {
         try
@@ -197,6 +231,12 @@ public class DataAccess
         return null;
     }
 
+    /**
+    * Used for insert, update and delete
+    *
+    * @return int number of rows affected by the query
+    *
+    */
     public int callCommand()
     {
         int returnVal = 0;
@@ -235,6 +275,12 @@ public class DataAccess
         return returnVal;
     }
 
+    /**
+    * Get a single value from a column
+    *
+    * @return String the value from the database
+    *
+    */
     public String callCommandGetField()
     {
         //Benchmark time start
@@ -275,6 +321,12 @@ public class DataAccess
         return returnVal;
     }
 
+    /**
+    * Get a single row from the database
+    *
+    * @return ResultSet which contains the row
+    *
+    */
     public ResultSet callCommandGetRow()
     {
         //Benchmark time start
@@ -314,6 +366,31 @@ public class DataAccess
         }
 
         return null;
+    }
+
+    /**
+    * Format a Date object to SQL datetime format
+    *
+    * @param d the date which you want formated
+    * @return returns a formated String
+    *
+    */
+    public String dateToSqlDate(java.util.Date d)
+    {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return df.format(d);
+    }
+
+    /**
+    * Get SQL current date and time
+    *
+    * @param sqlDate the sql.Date object which you want time extracted from
+    * @return Returns java.util.date
+    *
+    */
+    public java.util.Date sqlDateToDate(java.sql.Date sqlDate)
+    {
+        return new Date(sqlDate.getTime());
     }
 
     private void sqlMonitor(long sqlExecutionTime, String dalFunction)
