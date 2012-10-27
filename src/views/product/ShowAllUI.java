@@ -1,7 +1,6 @@
 package views.product;
 
 import controllers.ProductCtrl;
-import controllers.ProductCategoryCtrl;
 import models.Product;
 import utils.ButtonColumn;
 import utils.Helper;
@@ -28,7 +27,6 @@ public class ShowAllUI
 
     //Controllers
     private ProductCtrl _prodCtrl;
-    private ProductCategoryCtrl _categoryCtrl;
 
     private JTextField txtProductId;
     private JTextField txtProductName;
@@ -52,7 +50,6 @@ public class ShowAllUI
     private void createElements()
     {
         _prodCtrl = new ProductCtrl();
-        _categoryCtrl = new ProductCategoryCtrl();
         _panel = new JPanel();
         _panel.setBorder(new EmptyBorder(5, 5, 5, 5));
         _panel.setVisible(true);
@@ -177,7 +174,6 @@ public class ShowAllUI
         }
         catch (Exception e)
         {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, Logging.handleException(e, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
         }
     }

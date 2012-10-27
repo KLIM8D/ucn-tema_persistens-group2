@@ -393,6 +393,31 @@ public class DataAccess
         return new Date(sqlDate.getTime());
     }
 
+    /**
+    * Returns the next ID/Identity value for the table
+    *
+    * @param tableName the tables you want the value returned from
+    * @return long the next ID/identity value
+    *
+    */
+    public long getNextId(String tableName)
+    {
+        try
+        {
+            _sqlCommand = getCon().prepareStatement("SELECT IDENT_CURRENT(?) + IDENT_INCR(?)");
+            _sqlCommand.setString(1, tableName);
+            _sqlCommand.setString(2, tableName);
+            String returnVal = callCommandGetField();
+            return Long.parseLong(returnVal);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
     private void sqlMonitor(long sqlExecutionTime, String dalFunction)
     {
         StringBuilder sb = new StringBuilder();

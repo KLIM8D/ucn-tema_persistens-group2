@@ -2,6 +2,7 @@ import db.DBProduct;
 
 import static org.junit.Assert.*;
 
+import db.DataAccess;
 import models.Product;
 import models.ProductCategory;
 import models.Supplier;
@@ -115,11 +116,20 @@ public class DBProductTest
         assertEquals(1, rowsAffected);
     }
 
-    @Test
+    /*@Test
     public void deleteProduct() throws Exception
     {
         Product product = new Product(3L, "Test produkt updated", "4000.12", "6000.24", "2000.10", "UK", 5);
         int rowsAffected = _dbProduct.deleteProduct(product);
         assertEquals(1, rowsAffected);
+    }*/
+
+    @Test
+    public void getNextId() throws Exception
+    {
+        DataAccess _da = DataAccess.getInstance();
+        long id = _da.getNextId("Products");
+        System.out.println(id);
+        assertEquals(4, id);
     }
 }
