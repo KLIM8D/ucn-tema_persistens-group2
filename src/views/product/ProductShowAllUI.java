@@ -51,13 +51,41 @@ public class ProductShowAllUI
     {
         _prodCtrl = new ProductCtrl();
         _panel = new JPanel();
+        _panel.setLayout(null);
         _panel.setBorder(new EmptyBorder(5, 5, 5, 5));
         _panel.setVisible(true);
         _panel.setBounds(5, 5, 825, 705);
 
+        //Top navigation
+        JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        navPanel.setBounds(5, 0, 825, 35);
+        JButton btnCreateProduct = new JButton("Tilføj produkt");
+        btnCreateProduct.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                ProductCreateUI.createWindow();
+            }
+        });
+        btnCreateProduct.setBounds(10, 5, 61, 25);
+        navPanel.add(btnCreateProduct);
+
+        JButton btnCreateCategory = new JButton("Tilføj produkt kategori");
+        btnCreateCategory.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                //ohøj
+            }
+        });
+        btnCreateCategory.setBounds(86, 5, 61, 25);
+        navPanel.add(btnCreateCategory);
+
+        _panel.add(navPanel);
+
         //Search
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        searchPanel.setBounds(5, 5, 825, 35);
+        searchPanel.setBounds(5, 40, 825, 35);
 
         JLabel lblProductId = new JLabel("Produkt nummer: ");
         lblProductId.setBounds(187, 10, 126, 15);
@@ -106,7 +134,6 @@ public class ProductShowAllUI
                 }
             }
         });
-        _panel.setLayout(null);
         btnSearch.setBounds(656, 5, 61, 25);
         searchPanel.add(btnSearch);
 
@@ -117,7 +144,7 @@ public class ProductShowAllUI
         JPanel gridPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         _panel.add(gridPanel);
 
-        columnNames = new String[]{"Produkt nummer", "Produkt navn", "Minimums beholdning", "Kategori", "Pris", " "};
+        columnNames = new String[]{"Produkt nummer", "Produkt navn", "Min. beholdning", "Kategori", "Pris", " ", " "};
 
         table = new JTable()
         {
@@ -134,14 +161,14 @@ public class ProductShowAllUI
         addData();
 
         JScrollPane scrollPane = new JScrollPane(table);
-        gridPanel.setBounds(new Rectangle(0, 40, 825, 700));
+        gridPanel.setBounds(new Rectangle(0, 75, 825, 700));
         table.setPreferredScrollableViewportSize(new Dimension(815, 700));
         scrollPane.setPreferredSize(new Dimension(815, 700));
         gridPanel.add(scrollPane);
         //Grid / Table end
     }
 
-    private void addShowButton()
+    private void addButton(int columnIndex)
     {
         @SuppressWarnings("serial")
         Action show = new AbstractAction()
@@ -154,7 +181,7 @@ public class ProductShowAllUI
                 txtProductId.setText(itemNumber + "");
             }
         };
-        ButtonColumn buttonColumn = new ButtonColumn(table, show, 5);
+        ButtonColumn buttonColumn = new ButtonColumn(table, show, columnIndex);
         buttonColumn.setMnemonic(KeyEvent.VK_D);
     }
 
@@ -167,10 +194,11 @@ public class ProductShowAllUI
             model.setDataVector(data, columnNames);
             for(Product prod : products)
             {
-                Object[] row = new Object[]{prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSalesPrice().doubleValue() + " kr", "Rediger" };
+                Object[] row = new Object[]{prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSalesPrice().doubleValue() + " kr", "Rediger", "Slet" };
                 model.addRow(row);
             }
-            addShowButton();
+            addButton(5);
+            addButton(6);
         }
         catch (Exception e)
         {
@@ -188,7 +216,7 @@ public class ProductShowAllUI
             {
                 Object[][] row = new Object[][]
                 {
-                        {prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSupplier().getName(), prod.getCountryOfOrigin(), prod.getSalesPrice(), prod.getPurchasePrice(), prod.getRentPrice(), "Rediger" }
+                        {prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSupplier().getName(), prod.getCountryOfOrigin(), prod.getSalesPrice(), prod.getPurchasePrice(), prod.getRentPrice(), "Rediger", "Slet" }
                 };
                 model.setDataVector(row, columnNames);
             }
@@ -196,7 +224,8 @@ public class ProductShowAllUI
             {
                 JOptionPane.showMessageDialog(null, "Der blev ikke fundet noget produkt, med produkt nummeret: " + itemNumber, "Information", JOptionPane.WARNING_MESSAGE);
             }
-            addShowButton();
+            addButton(5);
+            addButton(6);
         }
         catch (Exception e)
         {
@@ -214,7 +243,7 @@ public class ProductShowAllUI
             {
                 Object[][] row = new Object[][]
                 {
-                        {prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSupplier().getName(), prod.getCountryOfOrigin(), prod.getSalesPrice(), prod.getPurchasePrice(), prod.getRentPrice(), "Rediger" }
+                        {prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSupplier().getName(), prod.getCountryOfOrigin(), prod.getSalesPrice(), prod.getPurchasePrice(), prod.getRentPrice(), "Rediger", "Slet" }
                 };
                 model.setDataVector(row, columnNames);
             }
@@ -222,7 +251,8 @@ public class ProductShowAllUI
             {
                 JOptionPane.showMessageDialog(null, "Der blev ikke fundet noget produkt med navnet: " + itemName, "Information", JOptionPane.WARNING_MESSAGE);
             }
-            addShowButton();
+            addButton(5);
+            addButton(6);
         }
         catch (Exception e)
         {

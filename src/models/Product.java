@@ -33,6 +33,7 @@ public class Product
         _rentPrice = new BigDecimal(rentPrice);
         _countryOfOrigin = countryOfOrigin;
         _minimumStock = minimumStock;
+        _productData = new ArrayList<ProductData>();
     }
 
     public Product(long id, String name, String purchasePrice, String salesPrice, String rentPrice, String countryOfOrigin, long minimumStock, ProductCategory category, Supplier supplier)
@@ -46,6 +47,7 @@ public class Product
         _minimumStock = minimumStock;
         _category = category;
         _supplier = supplier;
+        _productData = new ArrayList<ProductData>();
     }
 
     public long getId()
@@ -95,6 +97,8 @@ public class Product
 
     public ArrayList<ProductData> getProductData()
     { return _productData; }
+    public void setProductData(ArrayList<ProductData> value)
+    { _productData  = value; }
     public void addProductData(ProductData value)
     { _productData.add(value); }
 }

@@ -25,7 +25,7 @@ public class DBProductCategory implements IFDBProductCategory
 	 {
  		 ArrayList<ProductCategory> returnList = new ArrayList<ProductCategory>();
 
- 		 PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM ProductCategories");
+ 		 PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM ProductCategory");
  		 _da.setSqlCommandText(query);
  		 ResultSet productCategories = _da.callCommandGetResultSet();
 

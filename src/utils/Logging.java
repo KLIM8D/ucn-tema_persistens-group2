@@ -27,7 +27,8 @@ public class Logging
         {
             case 0:
                 return "Kunne ikke hente den nødvendige data. Prøv igen senere eller kontakt support";
-
+            case 1:
+                return "Det var pt. ikke muligt at oprette et produkt. Prøv igen senere eller kontakt support";
             default:
                 return "Der skete en fejl i udførselen af denne handling. Kontakt support";
         }

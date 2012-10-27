@@ -112,13 +112,17 @@ public class DBProduct implements IFDBProduct
         query.setDouble(6, product.getRentPrice().doubleValue());
         query.setString(7, product.getCountryOfOrigin());
         query.setLong(8, product.getMinimumStock());
-
-        DBProductData dbProductData = new DBProductData();
-        for(ProductData data : product.getProductData())
-            dbProductData.insertProductData(product.getId(), data);
-
         _da.setSqlCommandText(query);
-        return _da.callCommand();
+        int rowsAffected = _da.callCommand();
+
+        if(product.getProductData().size() > 0)
+        {
+            DBProductData dbProductData = new DBProductData();
+            for(ProductData data : product.getProductData())
+                dbProductData.insertProductData(product.getId(), data);
+        }
+
+        return rowsAffected;
     }
 
     /**

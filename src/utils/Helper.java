@@ -15,7 +15,7 @@ public class Helper
 		}
 		catch (NumberFormatException err) 
 		{
-			JOptionPane.showMessageDialog(null, "Only numbers are allowed in this field", "Error!", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Dette felt kan kun indeholde tal", "Information", JOptionPane.WARNING_MESSAGE, new ImageIcon(Helper.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
 			data.setText(null);
 		}
 	}
@@ -28,7 +28,7 @@ public class Helper
 		}
 		catch (NumberFormatException err) 
 		{
-			JOptionPane.showMessageDialog(null, "Only numbers are allowed in this field", "Error!", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Dette felt kan kun indeholde tal", "Information", JOptionPane.WARNING_MESSAGE, new ImageIcon(Helper.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
 			data.setText(null);
 		}
 	}
@@ -41,7 +41,7 @@ public class Helper
         }
         catch (NumberFormatException err)
         {
-            JOptionPane.showMessageDialog(null, "Only decimal are allowed in this field", "Error!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Dette felt kan kun indeholde decimal tal", "Information", JOptionPane.WARNING_MESSAGE, new ImageIcon(Helper.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
             data.setText(null);
         }
     }
@@ -56,7 +56,6 @@ public class Helper
 	    int y = (screenSize.height / 2) - (height / 2);
 	    c.setLocation(x, y);
 	}
-	
 
     public static <E> ArrayList<E> makeCollection(Iterable<E> iter)
     {
@@ -65,5 +64,4 @@ public class Helper
             list.add(item);
         return list;
     }
-
 }
