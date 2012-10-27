@@ -48,9 +48,10 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus
         query.setLong(1, id);
         _da.setSqlCommandText(query);
         ResultSet deliveryResult = _da.callCommandGetRow();
-        deliveryResult.next();
+        if(deliveryResult.next())
+            return buildDeliveryStatus(deliveryResult);
 
-        return buildDeliveryStatus(deliveryResult);
+        return null;
 	}
 
     /**

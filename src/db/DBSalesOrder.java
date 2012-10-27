@@ -54,8 +54,10 @@ public class DBSalesOrder implements IFDBSalesOrder
 		query.setLong(1, id);
 		_da.setSqlCommandText(query);
 		ResultSet salesOrderResult = _da.callCommandGetRow();
+        if(salesOrderResult.next())
+		    return buildSalesOrder(salesOrderResult, retrieveAssociation);
 
-		return buildSalesOrder(salesOrderResult, retrieveAssociation);
+        return null;
 	}
 	
 	/**

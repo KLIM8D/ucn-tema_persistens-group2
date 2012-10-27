@@ -50,7 +50,7 @@ public class DBSupplier implements IFDBSupplier
     @Override
 	public Supplier getSupplierById(long id) throws Exception
 	{
-        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Supplier WHERE supplierId = ?");
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Supplier WHERE contactsKey = ?");
         query.setLong(1, id);
         _da.setSqlCommandText(query);
         ResultSet supplierResult = _da.callCommandGetRow();

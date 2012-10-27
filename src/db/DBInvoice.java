@@ -50,9 +50,10 @@ public class DBInvoice implements IFDBInvoice
         query.setLong(1, id);
         _da.setSqlCommandText(query);
         ResultSet invoiceResult = _da.callCommandGetRow();
-        invoiceResult.next();
+        if(invoiceResult.next())
+            return buildInvoice(invoiceResult);
 
-        return buildInvoice(invoiceResult);
+        return null;
 	}
 
     /**

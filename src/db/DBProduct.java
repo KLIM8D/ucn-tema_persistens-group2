@@ -3,6 +3,7 @@ package db;
 import models.Product;
 import models.ProductCategory;
 import models.ProductData;
+import models.Supplier;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,8 +63,10 @@ public class DBProduct implements IFDBProduct
         query.setLong(1, id);
         _da.setSqlCommandText(query);
         ResultSet productResult = _da.callCommandGetRow();
-        productResult.next();
-        return buildProduct(productResult, retrieveAssociation);
+        if(productResult.next())
+            return buildProduct(productResult, retrieveAssociation);
+
+        return null;
     }
 
     /**
@@ -80,8 +83,10 @@ public class DBProduct implements IFDBProduct
         query.setString(1, name);
         _da.setSqlCommandText(query);
         ResultSet productResult = _da.callCommandGetRow();
-        productResult.next();
-        return buildProduct(productResult, retrieveAssociation);
+        if(productResult.next())
+            return buildProduct(productResult, retrieveAssociation);
+
+        return null;
     }
 
     /**
@@ -195,6 +200,12 @@ public class DBProduct implements IFDBProduct
                ProductData prodData = buildProductData(dataResults);
                product.addProductData(prodData);
             }
+
+            //Supplier
+            DBSupplier dbSupplier = new DBSupplier();
+            long supplierId = row.getLong("contactsKey");
+            Supplier supplier = dbSupplier.getSupplierById(supplierId);
+            product.setSupplier(supplier);
         }
 
         return product;

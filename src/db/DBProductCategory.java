@@ -48,12 +48,14 @@ public class DBProductCategory implements IFDBProductCategory
 	 @Override
  	 public ProductCategory getProductCategoryById(long id) throws Exception
  	 {
- 		 PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM ProductCategory WHERE categoryId = ?");
- 		 query.setLong(1, id);
- 		 _da.setSqlCommandText(query);
- 		 ResultSet categoryResult = _da.callCommandGetRow();
- 		 categoryResult.next();
- 		 return buildProductCategory(categoryResult);
+ 		  PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM ProductCategory WHERE categoryId = ?");
+ 		  query.setLong(1, id);
+ 		  _da.setSqlCommandText(query);
+ 		  ResultSet categoryResult = _da.callCommandGetRow();
+ 		  if(categoryResult.next())
+ 		     return buildProductCategory(categoryResult);
+
+          return null;
  	 }
 
     /**
@@ -66,12 +68,14 @@ public class DBProductCategory implements IFDBProductCategory
 	 @Override
  	 public ProductCategory getProductCategoryByName(String name) throws Exception
  	 {
- 		 PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM productCategory WHERE categoryName = ?");
- 		 query.setString(1, name);
- 		 _da.setSqlCommandText(query);
- 		 ResultSet categoryResult = _da.callCommandGetRow();
- 		 categoryResult.next();
- 		 return buildProductCategory(categoryResult);
+ 		  PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM productCategory WHERE categoryName = ?");
+ 		  query.setString(1, name);
+ 		  _da.setSqlCommandText(query);
+ 		  ResultSet categoryResult = _da.callCommandGetRow();
+          if(categoryResult.next())
+              return buildProductCategory(categoryResult);
+
+          return null;
  	 }
 
     /**

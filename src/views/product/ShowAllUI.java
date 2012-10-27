@@ -8,6 +8,7 @@ import utils.Helper;
 import utils.Logging;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
@@ -53,11 +54,13 @@ public class ShowAllUI
         _prodCtrl = new ProductCtrl();
         _categoryCtrl = new ProductCategoryCtrl();
         _panel = new JPanel();
+        _panel.setBorder(new EmptyBorder(5, 5, 5, 5));
         _panel.setVisible(true);
+        _panel.setBounds(5, 5, 825, 705);
 
         //Search
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        searchPanel.setBounds(5, 5, 904, 35);
+        searchPanel.setBounds(5, 5, 825, 35);
 
         JLabel lblProductId = new JLabel("Produkt nummer: ");
         lblProductId.setBounds(187, 10, 126, 15);
@@ -117,17 +120,13 @@ public class ShowAllUI
         JPanel gridPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         _panel.add(gridPanel);
 
-        columnNames = new String[]{"Produkt nummer", "Produkt navn", "Minimums beholdning", "Kategori", "Leverandør", "Produceret i", "Pris", "Købs pris", "Pris for leje",  " "};
+        columnNames = new String[]{"Produkt nummer", "Produkt navn", "Minimums beholdning", "Kategori", "Pris", " "};
 
         table = new JTable()
         {
             public boolean isCellEditable(int data, int columns)
             {
-                /*if(columns != 9)
-                    return false;
-
-                return true;*/
-                return columns == 9;
+                return columns == 5;
             }
         };
 
@@ -138,6 +137,9 @@ public class ShowAllUI
         addData();
 
         JScrollPane scrollPane = new JScrollPane(table);
+        gridPanel.setBounds(new Rectangle(0, 40, 825, 700));
+        table.setPreferredScrollableViewportSize(new Dimension(815, 700));
+        scrollPane.setPreferredSize(new Dimension(815, 700));
         gridPanel.add(scrollPane);
         //Grid / Table end
     }
@@ -155,7 +157,7 @@ public class ShowAllUI
                 txtProductId.setText(itemNumber + "");
             }
         };
-        ButtonColumn buttonColumn = new ButtonColumn(table, show, 6);
+        ButtonColumn buttonColumn = new ButtonColumn(table, show, 5);
         buttonColumn.setMnemonic(KeyEvent.VK_D);
     }
 
@@ -168,7 +170,7 @@ public class ShowAllUI
             model.setDataVector(data, columnNames);
             for(Product prod : products)
             {
-                Object[] row = new Object[]{prod.getId(), prod.getName(), prod.getMinimumStock(), "Kategori", "Leverandør", prod.getCountryOfOrigin(), prod.getSalesPrice(), prod.getPurchasePrice(), prod.getRentPrice(), "Rediger" };
+                Object[] row = new Object[]{prod.getId(), prod.getName(), prod.getMinimumStock(), prod.getCategory().getCategoryName(), prod.getSalesPrice().doubleValue() + " kr", "Rediger" };
                 model.addRow(row);
             }
             addShowButton();

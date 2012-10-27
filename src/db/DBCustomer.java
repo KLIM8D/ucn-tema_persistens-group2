@@ -52,9 +52,10 @@ public class DBCustomer implements IFDBCustomer
         query.setLong(1, id);
         _da.setSqlCommandText(query);
         ResultSet customerResult = _da.callCommandGetRow();
-        customerResult.next();
+        if(customerResult.next())
+            return buildCustomer(customerResult);
 
-        return buildCustomer(customerResult);
+        return null;
 	}
 	
 	/**
@@ -70,9 +71,10 @@ public class DBCustomer implements IFDBCustomer
         query.setString(1, name);
         _da.setSqlCommandText(query);
         ResultSet customerResult = _da.callCommandGetRow();
-        customerResult.next();
+        if(customerResult.next())
+            return buildCustomer(customerResult);
 
-        return buildCustomer(customerResult);
+        return null;
 	}
 
     /**

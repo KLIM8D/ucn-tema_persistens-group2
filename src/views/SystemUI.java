@@ -30,7 +30,7 @@ public class SystemUI
 	{
 		frmSystemWindow = new JFrame(GlobalUI.systemInformation(01) + " - " + GlobalUI.systemInformation(02) + " (build" + GlobalUI.systemInformation(03) + ")");
 		frmSystemWindow.setResizable(false);
-		frmSystemWindow.setBounds(100, 100, 800, 600);
+		frmSystemWindow.setBounds(100, 100, 1024, 768);
 		frmSystemWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSystemWindow.getContentPane().setLayout(null);
 		
@@ -171,13 +171,13 @@ public class SystemUI
 		
 		JPanel pnlInfo = new JPanel();
 		pnlInfo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		pnlInfo.setBounds(4, 217, 180, 326);
+		pnlInfo.setBounds(4, 217, 180, 494);
 		pnlInfo.setBackground(Color.WHITE);
 		frmSystemWindow.getContentPane().add(pnlInfo);
 		
 		pnlMain = new JPanel();
         pnlMain.setVisible(true);
-		pnlMain.setBounds(187, 4, 605, 537);
+		pnlMain.setBounds(187, 4, 829, 705);
 		frmSystemWindow.getContentPane().add(pnlMain);
 		pnlMain.setLayout(null);
 	}
@@ -204,12 +204,7 @@ public class SystemUI
 	
 	private void selectContacts()
 	{
-        pnlMain.removeAll();
-		JLabel ok = new JLabel("wadawdw");
-        ok.setBounds(200, 200, 103, 15);
-        pnlMain.add(ok);
-        pnlMain.revalidate();
-        pnlMain.repaint();
+
 	}
 	
 	private void selectProductBase()
@@ -217,8 +212,6 @@ public class SystemUI
        pnlMain.removeAll();
        ShowAllUI showAllUI = new ShowAllUI();
        JPanel panel = showAllUI.createWindow();
-       panel.setVisible(true);
-       panel.setBounds(0, 0, 1000, 1000);
        pnlMain.add(panel);
        pnlMain.revalidate();
        pnlMain.repaint();
