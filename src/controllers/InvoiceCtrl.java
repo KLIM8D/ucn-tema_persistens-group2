@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import models.Invoice;
 import db.DBInvoice;
 
-public class InvoiceCtrl {
+public class InvoiceCtrl
+{
 	
 	public InvoiceCtrl()
 	{

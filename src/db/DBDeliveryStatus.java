@@ -5,16 +5,22 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import models.DeliveryStatus;
 
-public class DBDeliveryStatus implements IFDBDeliveryStatus {
+public class DBDeliveryStatus implements IFDBDeliveryStatus
+{
 
 	private DataAccess _da;
 	public DBDeliveryStatus()
 	{
 		_da = DataAccess.getInstance();
 	}
-	
-	public ArrayList<DeliveryStatus> getAllDeliveryStatus() throws Exception {
-		
+
+    /**
+     * Retrieve all deliveryStatus' from database
+     *
+     * @return ArrayList<deliveryStatus>
+     */
+	public ArrayList<DeliveryStatus> getAllDeliveryStatus() throws Exception
+    {
 		ArrayList<DeliveryStatus> returnList = new ArrayList<DeliveryStatus>();
 
         PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Invoice");
@@ -30,7 +36,14 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus {
 		return returnList;
 	}
 
-	public DeliveryStatus getDeliveryStatusById(long id) throws Exception {
+    /**
+     * Get specific DeliveryStatus by id
+     *
+     * @param id					the id of the DeliveryStatus you need returned
+     * @return DeliveryStatus
+     */
+	public DeliveryStatus getDeliveryStatusById(long id) throws Exception
+    {
         PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM DeliveryStatus WHERE deliveryId = ?");
         query.setLong(1, id);
         _da.setSqlCommandText(query);
@@ -40,21 +53,38 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus {
         return buildDeliveryStatus(deliveryResult);
 	}
 
-	public int insertDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception {
-		 if(deliveryStatus == null)
-	            return 0;
+    /**
+     * Inserts a new invoice in the database
+     *
+     * @param deliveryStatus		the object containing the information you want stored
+     * @return						returns the number of rows affected
+     */
+	public int insertDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception
+    {
+        if(deliveryStatus == null)
+            return 0;
 
-	        PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO DeliveryStatus (deliveryId, deliveryState) VALUES (?, ?)");
+        PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO DeliveryStatus (deliveryId, deliveryState) VALUES (?, ?)");
 
-	        query.setLong(1, deliveryStatus.getDeliveryId());
-	        query.setString(2, deliveryStatus.getDeliveryState());
-	        _da.setSqlCommandText(query);
+        query.setLong(1, deliveryStatus.getDeliveryId());
+        query.setString(2, deliveryStatus.getDeliveryState());
+        _da.setSqlCommandText(query);
 
-	        return _da.callCommand();
+        return _da.callCommand();
 	}
 
-	public int updateDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception {
+    /**
+     * Update a existing DeliveryStatus in database
+     *
+     * @param deliveryStatus 		the object containing the updated information you want stored
+     * @return						returns the number of rows affected
+     */
+	public int updateDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception
+    {
 		if(deliveryStatus == null)
+            return 0;
+
+        if(getDeliveryStatusById(deliveryStatus.getDeliveryId()) == null)
             return 0;
 
         PreparedStatement query = _da.getCon().prepareStatement("UPDATE DeliveryStatus SET deliverState = ? WHERE deliveryId = ?");
@@ -64,8 +94,15 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus {
 
         return _da.callCommand();
 	}
-	
-	public int deleteDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception {
+
+    /**
+     * Delete an existing DeliveryStatus from the database
+     *
+     * @param deliveryStatus 		the object containing a valid ID and which should be deleted from the database
+     * @return						returns the number of rows affected
+     */
+	public int deleteDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception
+    {
 		if(deliveryStatus == null)
 			return 0;
 
@@ -75,9 +112,10 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus {
 		PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM DeliveryStatus WHERE deliveryId = ?");	 
 		query.setLong(1, deliveryStatus.getDeliveryId());
 		_da.setSqlCommandText(query);
+
 		return _da.callCommand();
 	}
-	
+
 	private DeliveryStatus buildDeliveryStatus(ResultSet row) throws Exception
 	{
 		if(row == null)
@@ -88,5 +126,4 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus {
 
         return new DeliveryStatus(deliveryId, deliveryState);
 	}
-
 }

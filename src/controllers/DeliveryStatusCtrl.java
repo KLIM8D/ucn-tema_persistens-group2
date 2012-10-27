@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import models.DeliveryStatus;
 import db.DBDeliveryStatus;
 
-public class DeliveryStatusCtrl {
+public class DeliveryStatusCtrl
+{
 
 	public DeliveryStatusCtrl()
 	{

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import models.Supplier;
 import db.DBSupplier;
 
-public class SupplierCtrl {
+public class SupplierCtrl
+{
 
 	public SupplierCtrl()
 	{

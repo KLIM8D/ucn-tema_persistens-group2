@@ -4,11 +4,13 @@ import java.util.Date;
 
 public class Invoice
 {
+    private long _orderKey;
 	private int _invoiceNo;
 	private Date _paymentDate;
 	
-	public Invoice(int invoiceNo, Date paymentDate)
+	public Invoice(long orderKey, int invoiceNo, Date paymentDate)
 	{
+        _orderKey = orderKey;
 		_invoiceNo = invoiceNo;
 		_paymentDate = paymentDate;
 	}
@@ -22,4 +24,9 @@ public class Invoice
 	{ return _paymentDate; }
 	public void setPaymentDate(Date value)
 	{ _paymentDate = value; }
+
+    public long getOrderKey()
+    { return _orderKey; }
+    public void setOrderKey(long value)
+    { _orderKey = value; }
 }

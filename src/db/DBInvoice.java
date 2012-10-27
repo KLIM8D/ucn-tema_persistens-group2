@@ -7,16 +7,22 @@ import java.util.Date;
 
 import models.Invoice;
 
-public class DBInvoice implements IFDBInvoice{
+public class DBInvoice implements IFDBInvoice
+{
 
 	private DataAccess _da;
 	public DBInvoice()
 	{
 		_da = DataAccess.getInstance();
 	}
-	
-	public ArrayList<Invoice> getAllInvoices() throws Exception {
-		
+
+    /**
+     * Retrieve all invoices from database
+     *
+     * @return ArrayList<Invoice>
+     */
+	public ArrayList<Invoice> getAllInvoices() throws Exception
+    {
 		ArrayList<Invoice> returnList = new ArrayList<Invoice>();
 
         PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Invoice");
@@ -32,7 +38,14 @@ public class DBInvoice implements IFDBInvoice{
 		return returnList;
 	}
 
-	public Invoice getInvoiceById(int id) throws Exception {
+    /**
+     * Get specific invoice by id
+     *
+     * @param id					the id of the invoice you need returned
+     * @return Invoice
+     */
+	public Invoice getInvoiceById(int id) throws Exception
+    {
         PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Invoice WHERE invoiceNo = ?");
         query.setLong(1, id);
         _da.setSqlCommandText(query);
@@ -42,26 +55,41 @@ public class DBInvoice implements IFDBInvoice{
         return buildInvoice(invoiceResult);
 	}
 
-	public int insertInvoice(Invoice invoice) throws Exception {
-		 if(invoice == null)
-	            return 0;
+    /**
+     * Inserts a new invoice in the database
+     *
+     * @param invoice				the object containing the information you want stored
+     * @return						returns the number of rows affected
+     */
+	public int insertInvoice(Invoice invoice) throws Exception
+    {
+		if(invoice == null)
+	        return 0;
 
-	        PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Invoice (invoiceNo, paymentDay) VALUES (?, ?)");
+        PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO Invoice (orderKey, invoiceNo, paymentDay) VALUES (?, ?, ?)");
+        query.setLong(1, invoice.getOrderKey());
+        query.setInt(2, invoice.getInvoiceNo());
+        query.setDate(3, (java.sql.Date) invoice.getPaymentDate());
+        _da.setSqlCommandText(query);
 
-	        query.setInt(1, invoice.getInvoiceNo());
-	        query.setDate(2, (java.sql.Date) invoice.getPaymentDate());
-	        _da.setSqlCommandText(query);
-
-	        return _da.callCommand();
+        return _da.callCommand();
 	}
 
-	public int updateInvoice(Invoice invoice) throws Exception {
+    /**
+     * Update a existing invoice in database
+     *
+     * @param invoice 				the object containing the updated information you want stored
+     * @return						returns the number of rows affected
+     */
+	public int updateInvoice(Invoice invoice) throws Exception
+    {
 		if(invoice == null)
             return 0;
 
         PreparedStatement query = _da.getCon().prepareStatement("UPDATE Invoice SET invoiceNo = ?, paymentDay = ? WHERE orderKey = ?");
         query.setInt(1, invoice.getInvoiceNo());
         query.setDate(2, (java.sql.Date) invoice.getPaymentDate());
+        query.setLong(3, invoice.getOrderKey());
         _da.setSqlCommandText(query);
 
         return _da.callCommand();
@@ -71,11 +99,11 @@ public class DBInvoice implements IFDBInvoice{
 	{
 		if(row == null)
 			return null;
-		
+
+        long orderKey = row.getLong("orderKey");
         int invoiceNo = row.getInt("invoiceNo");
         Date paymentDate = row.getDate("paymentDate");
 
-        return new Invoice(invoiceNo, paymentDate);
+        return new Invoice(orderKey, invoiceNo, paymentDate);
 	}
-	
 }
