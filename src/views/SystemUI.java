@@ -1,5 +1,6 @@
 package views;
 
+import utils.Logging;
 import views.product.ProductShowAllUI;
 import views.contact.ContactShowAllUI;
 
@@ -11,6 +12,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -214,12 +216,24 @@ public class SystemUI
 	}
 	
 	private void selectProductBase()
-	{
-		pnlMain.removeAll();
-		ProductShowAllUI productShowAllUI = new ProductShowAllUI();
-		JPanel panel = productShowAllUI.createWindow();
-		pnlMain.add(panel);
-		pnlMain.revalidate();
-		pnlMain.repaint();
+	{	
+		DataNotificationUI info = new views.DataNotificationUI();
+		info.setVisible(true);
+		
+		try
+		{
+			pnlMain.removeAll();
+			ProductShowAllUI productShowAllUI = new ProductShowAllUI();
+			JPanel panel = productShowAllUI.createWindow();
+			pnlMain.add(panel);
+			pnlMain.revalidate();
+			pnlMain.repaint();
+			
+			info.dispose();
+		}
+		catch(Exception err)
+		{
+			JOptionPane.showMessageDialog(null, Logging.handleException(err, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 }
