@@ -16,12 +16,12 @@ import java.util.ArrayList;
 /**
  * Created: 27-10-2012
  * @version: 0.1
- * Filename: ShowAllUI.java
+ * Filename: ProductShowAllUI.java
  * Description:
  * @changes
  */
 
-public class ShowAllUI
+public class ProductShowAllUI
 {
     private static JPanel _panel;
 
@@ -42,7 +42,7 @@ public class ShowAllUI
         return _panel;
     }
 
-    public ShowAllUI()
+    public ProductShowAllUI()
     {
 
     }

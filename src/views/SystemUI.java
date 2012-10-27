@@ -1,6 +1,6 @@
 package views;
 
-import views.product.ShowAllUI;
+import views.product.ProductShowAllUI;
 
 import java.awt.Cursor;
 import javax.swing.JFrame;
@@ -210,8 +210,8 @@ public class SystemUI
 	private void selectProductBase()
 	{
        pnlMain.removeAll();
-       ShowAllUI showAllUI = new ShowAllUI();
-       JPanel panel = showAllUI.createWindow();
+       ProductShowAllUI productShowAllUI = new ProductShowAllUI();
+       JPanel panel = productShowAllUI.createWindow();
        pnlMain.add(panel);
        pnlMain.revalidate();
        pnlMain.repaint();

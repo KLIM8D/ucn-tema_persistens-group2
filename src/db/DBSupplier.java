@@ -119,7 +119,7 @@ public class DBSupplier implements IFDBSupplier
             return 0;
 
         PreparedStatement query = _da.getCon().prepareStatement("UPDATE Supplier SET contactsKey = ?, contactPerson = ?, bankAccount = ? " +
-                                                                "WHERE productId = ?");
+                                                                "WHERE contactsKey = ?");
 
         query.setLong(1, supplier.getPhoneNo());
         query.setString(2, supplier.getContactPerson());

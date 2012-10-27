@@ -13,22 +13,21 @@ import utils.Logging;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
  * Created: 27-10-2012
  * @version: 0.1
- * Filename: CreateUI.java
+ * Filename: ProductCreateUI.java
  * Description:
  * @changes
  */
 
-public class CreateUI
+public class ProductCreateUI
 {
     private static JFrame _frame;
-    private static CreateUI _instance;
+    private static ProductCreateUI _instance;
     private JPanel contentPane;
 
     //Controllers
@@ -47,12 +46,12 @@ public class CreateUI
     public static JFrame createWindow()
     {
         if(_instance == null)
-            _instance = new CreateUI();
+            _instance = new ProductCreateUI();
 
         return _frame;
     }
 
-    private CreateUI()
+    private ProductCreateUI()
     {
         createElements();
     }

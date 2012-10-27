@@ -55,10 +55,10 @@ public class DBProductData implements IFDBProductData
         if(data == null)
             return 0;
 
-        PreparedStatement query = _da.getCon().prepareStatement("UPDATE ProductData SET attribute = ?, attributeValue = ? WHERE productKey = ?");
-        query.setString(1, data.getAttribute());
-        query.setString(2, data.getAttributeValue());
-        query.setLong(3, productId);
+        PreparedStatement query = _da.getCon().prepareStatement("UPDATE ProductData SET attributeValue = ? WHERE productKey = ? AND attribute = ?");
+        query.setString(1, data.getAttributeValue());
+        query.setLong(2, productId);
+        query.setString(3, data.getAttribute());
         _da.setSqlCommandText(query);
 
         return _da.callCommand();
