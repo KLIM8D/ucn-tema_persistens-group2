@@ -71,7 +71,7 @@ public class SupplierCreateUI
         contentPane.setLayout(null);
         _frame.setContentPane(contentPane);
 
-        JLabel lblSupplierName = new JLabel("Leverandør navn");
+        JLabel lblSupplierName = new JLabel("LeverandÃ¸r navn");
         lblSupplierName.setBounds(12, 12, 99, 15);
         contentPane.add(lblSupplierName);
 
@@ -163,7 +163,7 @@ public class SupplierCreateUI
 
             _supCtrl.insertSupplier(supplier);
 
-            JOptionPane.showMessageDialog(null, "Leverandøren er nu oprettet", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "LeverandÃ¸ren er nu oprettet", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
             _instance = null;
             _frame.dispose();
         }
