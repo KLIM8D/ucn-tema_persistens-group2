@@ -1,4 +1,4 @@
-package views.supplier;
+package views.contact;
 
 import controllers.SupplierCtrl;
 import db.DataAccess;
@@ -49,7 +49,7 @@ public class SupplierCreateUI
         return _frame;
     }
 
-    private SupplierCreateUI()
+    public SupplierCreateUI()
     {
         createElements();
     }
