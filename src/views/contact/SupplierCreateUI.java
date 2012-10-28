@@ -61,39 +61,39 @@ public class SupplierCreateUI
         contentPane.setLayout(null);
         _frame.setContentPane(contentPane);
 
-        JLabel lblSupplierName = new JLabel("Navn");
+        JLabel lblSupplierName = new JLabel("Navn:");
         lblSupplierName.setBounds(12,12,120,15);
         contentPane.add(lblSupplierName);
         
-        JLabel lblSupplierAddress = new JLabel("Adresse");
+        JLabel lblSupplierAddress = new JLabel("Adresse:");
         lblSupplierAddress.setBounds(12,37,120,15);
         contentPane.add(lblSupplierAddress);
         
-        JLabel lblSupplierZipCode = new JLabel("Postnummer");
+        JLabel lblSupplierZipCode = new JLabel("Postnummer:");
         lblSupplierZipCode.setBounds(12,62,120,15);
         contentPane.add(lblSupplierZipCode);
         
-        JLabel lblSupplierCity = new JLabel("By");
+        JLabel lblSupplierCity = new JLabel("By:");
         lblSupplierCity.setBounds(222,62,120,15);
         contentPane.add(lblSupplierCity);
         
-        JLabel lblSupplierNumber = new JLabel("Telefonnummer");
+        JLabel lblSupplierNumber = new JLabel("Telefonnummer:");
         lblSupplierNumber.setBounds(12,87,120,15);
         contentPane.add(lblSupplierNumber);
         
-        JLabel lblSupplierEmail = new JLabel("Email");
+        JLabel lblSupplierEmail = new JLabel("Email:");
         lblSupplierEmail.setBounds(244,87,120,15);
         contentPane.add(lblSupplierEmail);
         
-        JLabel lblSupplierCountry = new JLabel("Landkode");
+        JLabel lblSupplierCountry = new JLabel("Landkode:");
         lblSupplierCountry.setBounds(12,112,120,15);
         contentPane.add(lblSupplierCountry);
         
-        JLabel lblSupplierContact = new JLabel("Kontakt Person");
+        JLabel lblSupplierContact = new JLabel("Kontaktperson:");
         lblSupplierContact.setBounds(12,145,120,15);
         contentPane.add(lblSupplierContact);
         
-        JLabel lblSupplierBankAcc = new JLabel("Bankkonto");
+        JLabel lblSupplierBankAcc = new JLabel("Bankkonto:");
         lblSupplierBankAcc.setBounds(12,170,120,15);
         contentPane.add(lblSupplierBankAcc);
         
