@@ -42,4 +42,10 @@ public class CustomerCtrl
 		DBCustomer DBC = new DBCustomer();
 		return DBC.updateCustomer(supplier);
 	}
+	
+	public int deleteCustomer(Customer customer) throws Exception
+	{
+		DBCustomer DBC = new DBCustomer();
+		return DBC.deleteCustomer(customer);
+	}
 }
