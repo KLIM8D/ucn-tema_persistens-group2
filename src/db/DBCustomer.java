@@ -136,13 +136,13 @@ public class DBCustomer implements IFDBCustomer
             return 0;
 
         int rowsAffected = 0;
-        DBContact DBCo = new DBContact();
-        rowsAffected += DBCo.deleteContact(customer.getPhoneNo());
-        
         PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Customer WHERE contactsKey = ?");
         query.setLong(1, customer.getPhoneNo());
         _da.setSqlCommandText(query);
         rowsAffected += _da.callCommand();
+
+        DBContact DBCo = new DBContact();
+        rowsAffected += DBCo.deleteContact(customer.getPhoneNo());
 
         return rowsAffected;
     }

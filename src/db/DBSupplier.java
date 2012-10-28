@@ -146,13 +146,13 @@ public class DBSupplier implements IFDBSupplier
 			 return 0;
 
         int rowsAffected = 0;
-        DBContact DBCo = new DBContact();
-        rowsAffected += DBCo.deleteContact(supplier.getPhoneNo());
-        
         PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Supplier WHERE contactsKey = ?");
         query.setLong(1, supplier.getPhoneNo());
         _da.setSqlCommandText(query);
         rowsAffected += _da.callCommand();
+
+        DBContact DBCo = new DBContact();
+        rowsAffected += DBCo.deleteContact(supplier.getPhoneNo());
 
         return rowsAffected;
     }
