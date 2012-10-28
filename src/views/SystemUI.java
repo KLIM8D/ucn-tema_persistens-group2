@@ -4,6 +4,7 @@ import utils.Logging;
 import views.contact.ContactShowAllUI;
 import views.product.ProductCreateUI;
 import views.product.ProductShowAllUI;
+import views.salesorder.OrderCreateUI;
 import views.salesorder.OrderShowAllUI;
 
 import javax.swing.*;
@@ -179,7 +180,7 @@ public class SystemUI
 	
 	private void newOrder()
 	{
-		
+        OrderCreateUI.createWindow();
 	}
 	
 	private void newContact()

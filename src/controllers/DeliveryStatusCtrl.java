@@ -12,25 +12,25 @@ public class DeliveryStatusCtrl
 		
 	}
 	
-	public ArrayList<DeliveryStatus> getAllInvoice() throws Exception
+	public ArrayList<DeliveryStatus> getAllDeliveryStatus() throws Exception
 	{
 		DBDeliveryStatus DBD = new DBDeliveryStatus();
         return DBD.getAllDeliveryStatus();
 	}
 	
-	public DeliveryStatus getInvoiceById(int id) throws Exception
+	public DeliveryStatus getDeliveryStatusById(int id) throws Exception
 	{
 		DBDeliveryStatus DBD = new DBDeliveryStatus();
 		return DBD.getDeliveryStatusById(id);
 	}
 	
-	public int insertInvoice(DeliveryStatus deliveryStatus) throws Exception
+	public int insertDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception
 	{
 		DBDeliveryStatus DBD = new DBDeliveryStatus();
 		return DBD.insertDeliveryStatus(deliveryStatus);
 	}
 	
-	public int updateInvoice(DeliveryStatus deliveryStatus) throws Exception
+	public int updateDeliveryStatus(DeliveryStatus deliveryStatus) throws Exception
 	{
 		DBDeliveryStatus DBD = new DBDeliveryStatus();
 		return DBD.updateDeliveryStatus(deliveryStatus);

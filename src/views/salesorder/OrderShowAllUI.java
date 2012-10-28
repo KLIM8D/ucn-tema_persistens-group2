@@ -68,7 +68,7 @@ public class OrderShowAllUI
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                //ohøj
+                OrderCreateUI.createWindow();
             }
         });
         btnCreateOrder.setBounds(10, 5, 61, 25);

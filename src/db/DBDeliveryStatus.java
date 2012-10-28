@@ -23,7 +23,7 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus
     {
 		ArrayList<DeliveryStatus> returnList = new ArrayList<DeliveryStatus>();
 
-        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Invoice");
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM DeliveryStatus");
         _da.setSqlCommandText(query);
         ResultSet deliveryStatus = _da.callCommandGetResultSet();
 
@@ -65,10 +65,8 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus
         if(deliveryStatus == null)
             return 0;
 
-        PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO DeliveryStatus (deliveryId, deliveryState) VALUES (?, ?)");
-
-        query.setLong(1, deliveryStatus.getDeliveryId());
-        query.setString(2, deliveryStatus.getDeliveryState());
+        PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO DeliveryStatus (deliveryState) VALUES (?)");
+        query.setString(1, deliveryStatus.getDeliveryState());
         _da.setSqlCommandText(query);
 
         return _da.callCommand();
