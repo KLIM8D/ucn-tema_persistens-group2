@@ -36,6 +36,8 @@ public class SupplierCtrl
 	public int insertSupplier(Supplier supplier) throws Exception
 	{
 		DBSupplier DBS = new DBSupplier();
+		DBContact DBC = new DBContact();
+		DBC.insertContact(new Contact(supplier.getName(), supplier.getAddress(), supplier.getZipCode(), supplier.getCity(), supplier.getPhoneNo(), supplier.getEmail(), supplier.getCountry()));
 		return DBS.insertSupplier(supplier);
 	}
 	
@@ -43,12 +45,6 @@ public class SupplierCtrl
 	{
 		DBSupplier DBS = new DBSupplier();
 		return DBS.updateSupplier(supplier);
-	}
-	
-	public Contact getContact(long PhoneNo) throws Exception
-	{
-		DBContact DBC = new DBContact();
-		return DBC.getContactById(PhoneNo);
 	}
 	
 	public int deleteSupplier(Supplier supplier) throws Exception
