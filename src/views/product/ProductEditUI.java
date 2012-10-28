@@ -330,7 +330,7 @@ public class ProductEditUI
         }
         catch (Exception e)
         {
-            JOptionPane.showMessageDialog(null, Logging.handleException(e, 1), "Fejl", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, Logging.handleException(e, 2), "Fejl", JOptionPane.WARNING_MESSAGE);
         }
     }
 

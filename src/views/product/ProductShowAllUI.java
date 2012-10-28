@@ -75,7 +75,7 @@ public class ProductShowAllUI
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                //ohøj
+                ProductCategoryUI.createWindow();
             }
         });
         btnCreateCategory.setBounds(86, 5, 61, 25);
