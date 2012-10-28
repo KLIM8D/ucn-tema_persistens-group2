@@ -67,7 +67,7 @@ public class CustomerCreateUI
 
         _frame = new JFrame();
         _frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        _frame.setTitle("Opret Leverandør");
+        _frame.setTitle("Opret Kunde");
         _frame.setBounds(0, 0, 509, 528);
         _frame.setResizable(false);
         _frame.setVisible(true);
@@ -78,7 +78,7 @@ public class CustomerCreateUI
         contentPane.setLayout(null);
         _frame.setContentPane(contentPane);
 
-        JLabel lblCustomerName = new JLabel("LeverandÃ¸r navn");
+        JLabel lblCustomerName = new JLabel("Navn");
         lblCustomerName.setBounds(12, 12, 99, 15);
         contentPane.add(lblCustomerName);
         
@@ -158,34 +158,7 @@ public class CustomerCreateUI
         txtBusiness = new Checkbox();
         txtBusiness.setBounds(142, 210, 350, 19);
         contentPane.add(txtBusiness);
-        //txtBusiness.setColumns(10);
         
-        
-        JSeparator separator = new JSeparator();
-        separator.setBounds(12, 226, 480, 1);
-        contentPane.add(separator);
-
-
-        tblData = new JTable()
-        {
-            public boolean isCellEditable(int data, int columns)
-            {
-                return columns == 3;
-            }
-        };
-        tblData.setBounds(12, 353, 475, 100);
-        model = new DefaultTableModel();
-
-        tblData.setModel(model);
-        tblData.setFillsViewportHeight(true);
-
-        JScrollPane scrollPane = new JScrollPane(tblData);
-        scrollPane.setSize(481, 105);
-        tblData.setPreferredScrollableViewportSize(new Dimension(475, 100));
-        scrollPane.setPreferredSize(new Dimension(481, 100));
-        scrollPane.setLocation(12, 353);
-        contentPane.add(scrollPane);
-
 
         JButton btnCancel = new JButton("Annuller");
         btnCancel.addActionListener(new ActionListener()
