@@ -3,6 +3,7 @@ package views.contact;
 import controllers.SupplierCtrl;
 import db.DataAccess;
 import models.Supplier;
+import utils.Helper;
 import utils.JTextFieldLimit;
 import utils.Logging;
 
@@ -107,6 +108,15 @@ public class SupplierCreateUI
         txtAddress.setColumns(10);
         
         txtZipCode = new JTextField();
+        txtZipCode.addKeyListener(new KeyAdapter()
+        {
+            public void keyReleased(KeyEvent e)
+            {
+                if(txtZipCode.getText().length() > 0)
+                    Helper.checkIfInt(txtZipCode);
+            }
+        });
+        txtZipCode.setDocument(new JTextFieldLimit(4));
         txtZipCode.setBounds(142,60,50,19);
         contentPane.add(txtZipCode);
         txtZipCode.setColumns(10);
@@ -117,7 +127,16 @@ public class SupplierCreateUI
         txtCity.setColumns(10);
         
         txtPhoneNo = new JTextField();
+        txtPhoneNo.addKeyListener(new KeyAdapter()
+        {
+            public void keyReleased(KeyEvent e)
+            {
+                if(txtPhoneNo.getText().length() > 0)
+                    Helper.checkIfLong(txtPhoneNo);
+            }
+        });
         txtPhoneNo.setBounds(142,85,75,19);
+        txtPhoneNo.setDocument(new JTextFieldLimit(8));
         contentPane.add(txtPhoneNo);
         txtPhoneNo.setColumns(10);
         
@@ -143,7 +162,7 @@ public class SupplierCreateUI
         txtBankAccount.setColumns(10);
         
         JSeparator separator = new JSeparator();
-        separator.setBounds(12,135,480,1);
+        separator.setBounds(12, 135, 480, 1);
         contentPane.add(separator);
         
         
