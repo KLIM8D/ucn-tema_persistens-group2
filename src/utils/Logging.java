@@ -29,6 +29,12 @@ public class Logging
                 return "Kunne ikke hente den nødvendige data. Prøv igen senere eller kontakt support";
             case 1:
                 return "Det var pt. ikke muligt at oprette et produkt. Prøv igen senere eller kontakt support";
+            case 2:
+                return "Det var pt. ikke muligt at opdatere produktet. Prøv igen senere eller kontakt support";
+            case 3:
+                return "Det var pt. ikke muligt at oprette en produkt kategori. Prøv igen senere eller kontakt support";
+            case 4:
+                return "Det var pt. ikke muligt at opdatere produkt kategorien. Prøv igen senere eller kontakt support";
             default:
                 return "Der skete en fejl i udførselen af denne handling. Kontakt support";
         }
