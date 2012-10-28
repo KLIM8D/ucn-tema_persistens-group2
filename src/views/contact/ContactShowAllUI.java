@@ -180,7 +180,9 @@ public class ContactShowAllUI {
 		{
 			public boolean isCellEditable(int data, int columns)
 			{
-				return columns == 6;
+				if(columns == 6 || columns == 7)
+					return true;
+				return false;
 			}
 		};
 		
@@ -204,7 +206,9 @@ public class ContactShowAllUI {
 		{
 			public boolean isCellEditable(int data, int columns)
 			{
-				return columns == 6;
+				if(columns == 6 || columns == 7)
+					return true;
+				return false;
 			}
 		};
 		
@@ -235,7 +239,7 @@ public class ContactShowAllUI {
 				long itemNumber = Long.parseLong(custTable.getValueAt(row, 0).toString());
 				if(columnIndex == 6)
 				{
-					//CreateCustomerUI.createWindow(itemNumber);
+					//EditCustomerUI.createWindow(itemNumber);
 				}
 				else
 				{
@@ -271,7 +275,7 @@ public class ContactShowAllUI {
 				long itemNumber = Long.parseLong(suppTable.getValueAt(row, 0).toString());
 				if(columnIndex == 6)
 				{
-					//CreateSupplierUI.createWindow(itemNumber);
+					//EditSupplierUI.createWindow(itemNumber);
 				}
 				else
 				{
