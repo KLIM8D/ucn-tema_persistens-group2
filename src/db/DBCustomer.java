@@ -131,15 +131,20 @@ public class DBCustomer implements IFDBCustomer
     {
         if(customer == null)
             return 0;
+        
+        if(getCustomerById(customer.getPhoneNo()) == null)
+            return 0;
 
+        int rowsAffected = 0;
+        DBContact DBCo = new DBContact();
+        rowsAffected += DBCo.deleteContact(customer.getPhoneNo());
+        
         PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Customer WHERE contactsKey = ?");
         query.setLong(1, customer.getPhoneNo());
         _da.setSqlCommandText(query);
+        rowsAffected += _da.callCommand();
 
-        DBContact dbContact = new DBContact();
-        dbContact.deleteContact(customer.getPhoneNo());
-
-        return _da.callCommand();
+        return rowsAffected;
     }
 
 	private Customer buildCustomer(ResultSet row) throws Exception

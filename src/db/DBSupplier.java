@@ -141,15 +141,20 @@ public class DBSupplier implements IFDBSupplier
     {
         if(supplier == null)
             return 0;
+        
+        if(getSupplierById(supplier.getPhoneNo()) == null)
+			 return 0;
 
+        int rowsAffected = 0;
+        DBContact DBCo = new DBContact();
+        rowsAffected += DBCo.deleteContact(supplier.getPhoneNo());
+        
         PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM Supplier WHERE contactsKey = ?");
         query.setLong(1, supplier.getPhoneNo());
         _da.setSqlCommandText(query);
+        rowsAffected += _da.callCommand();
 
-        DBContact dbContact = new DBContact();
-        dbContact.deleteContact(supplier.getPhoneNo());
-
-        return _da.callCommand();
+        return rowsAffected;
     }
 	
 	private Supplier buildSupplier(ResultSet row) throws Exception

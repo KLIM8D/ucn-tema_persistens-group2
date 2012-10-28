@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import models.Customer;
 import db.DBCustomer;
+import db.DBContact;
 
 public class CustomerCtrl
 {
