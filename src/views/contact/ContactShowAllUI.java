@@ -240,7 +240,7 @@ public class ContactShowAllUI {
 				long itemNumber = Long.parseLong(custTable.getValueAt(row, 0).toString());
 				if(columnIndex == 6)
 				{
-					//EditCustomerUI.createWindow(itemNumber);
+					//CostumerEditUI.createWindow(itemNumber);
 				}
 				else
 				{
@@ -276,7 +276,7 @@ public class ContactShowAllUI {
 				long itemNumber = Long.parseLong(suppTable.getValueAt(row, 0).toString());
 				if(columnIndex == 6)
 				{
-					//EditSupplierUI.createWindow(itemNumber);
+					SupplierEditUI.createWindow(itemNumber);
 				}
 				else
 				{
