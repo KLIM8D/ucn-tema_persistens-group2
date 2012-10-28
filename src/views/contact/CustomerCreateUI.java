@@ -68,7 +68,7 @@ public class CustomerCreateUI
         _frame = new JFrame();
         _frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         _frame.setTitle("Opret Kunde");
-        _frame.setBounds(0, 0, 509, 528);
+        _frame.setBounds(0, 0, 505, 300);
         _frame.setResizable(false);
         _frame.setVisible(true);
         _frame.setLocationRelativeTo(null);
@@ -79,27 +79,27 @@ public class CustomerCreateUI
         _frame.setContentPane(contentPane);
 
         JLabel lblCustomerName = new JLabel("Navn");
-        lblCustomerName.setBounds(12, 12, 99, 15);
+        lblCustomerName.setBounds(12, 12, 120, 15);
         contentPane.add(lblCustomerName);
         
         JLabel lblCustomerAddress = new JLabel("Adresse");
-        lblCustomerAddress.setBounds(12, 37, 99, 15);
+        lblCustomerAddress.setBounds(12, 37, 120, 15);
         contentPane.add(lblCustomerAddress);
         
         JLabel lblCustomerZipCode = new JLabel("Postnummer");
-        lblCustomerZipCode.setBounds(12, 62, 99, 15);
+        lblCustomerZipCode.setBounds(12, 62, 120, 15);
         contentPane.add(lblCustomerZipCode);
         
         JLabel lblCustomerCity = new JLabel("By");
-        lblCustomerCity.setBounds(12, 87, 99, 15);
+        lblCustomerCity.setBounds(12, 87, 120, 15);
         contentPane.add(lblCustomerCity);
         
         JLabel lblCustomerNumber = new JLabel("Telefonnummer");
-        lblCustomerNumber.setBounds(12, 112, 99, 15);
+        lblCustomerNumber.setBounds(12, 112, 120, 15);
         contentPane.add(lblCustomerNumber);
         
         JLabel lblCustomerEmail = new JLabel("Email");
-        lblCustomerEmail.setBounds(12, 137, 99, 15);
+        lblCustomerEmail.setBounds(12, 137, 120, 15);
         contentPane.add(lblCustomerEmail);
         
         JLabel lblCustomerCountry = new JLabel("Land");
@@ -107,11 +107,11 @@ public class CustomerCreateUI
         contentPane.add(lblCustomerCountry);
         
         JLabel lblCustomerContact = new JLabel("Rabat");
-        lblCustomerContact.setBounds(12, 187, 99, 15);
+        lblCustomerContact.setBounds(12, 187, 120, 15);
         contentPane.add(lblCustomerContact);
         
         JLabel lblCustomerBankAcc = new JLabel("Erhvervskunde");
-        lblCustomerBankAcc.setBounds(12, 212, 99, 15);
+        lblCustomerBankAcc.setBounds(12, 212, 120, 15);
         contentPane.add(lblCustomerBankAcc);
         
         txtName = new JTextField();
