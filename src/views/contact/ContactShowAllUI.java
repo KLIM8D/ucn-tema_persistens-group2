@@ -233,6 +233,42 @@ public class ContactShowAllUI {
 		buttonColumn.setMnemonic(KeyEvent.VK_D);
 	}
 	
+	private void addButtonsToSupplier(final int columnIndex)
+	{
+		@SuppressWarnings("serial")
+		Action show = new AbstractAction()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				JTable suppTable = (JTable) e.getSource();
+				int row = Integer.valueOf(e.getActionCommand());
+				long itemNumber = Long.parseLong(suppTable.getValueAt(row, 0).toString());
+				if(columnIndex == 6)
+				{
+					//CreateSupplierUI.createWindow(itemNumber);
+				}
+				else
+				{
+					try
+					{
+						if(Helper.showConfirmDialog("leverandør") == 1)
+						{
+							Supplier supplier = _suppCtrl.getSupplierById(itemNumber, true);
+							_suppCtrl.deleteSupplier(supplier);
+							addSupplierData();
+						}
+					}
+					catch(Exception err)
+					{
+						JOptionPane.showMessageDialog(null, Logging.handleException(err, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			}
+		};
+		ButtonColumn buttonColumn = new ButtonColumn(suppTable, show, columnIndex);
+		buttonColumn.setMnemonic(KeyEvent.VK_D);
+	}
+	
 	private void addCustomerData()
 	{
 		try
@@ -263,9 +299,11 @@ public class ContactShowAllUI {
 			suppModel.setDataVector(data, columnNames);
 			for(Supplier supp : suppliers)
 			{
-				Object[] row = new Object[]{supp.getPhoneNo(), supp.getName(), supp.getAddress(), supp.getCity(), supp.getEmail(), supp.getCountry()};
+				Object[] row = new Object[]{supp.getPhoneNo(), supp.getName(), supp.getAddress(), supp.getCity(), supp.getEmail(), supp.getCountry(), "Rediger", "Slet"};
 				suppModel.addRow(row);
 			}
+			addButtonsToSupplier(6);
+			addButtonsToSupplier(7);
 		}
 		catch(Exception e)
 		{
