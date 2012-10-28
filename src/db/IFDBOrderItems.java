@@ -3,7 +3,6 @@ package db;
 import java.util.ArrayList;
 
 import models.OrderItems;
-import models.SalesOrder;
 
 public interface IFDBOrderItems 
 {

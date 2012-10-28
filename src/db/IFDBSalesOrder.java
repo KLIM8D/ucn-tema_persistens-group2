@@ -22,16 +22,25 @@ public interface IFDBSalesOrder
 	 * @param retrieveAssociation set to true if SalesOrder with id is to be returned
 	 * @return SalesOrder object with ID
 	 */
-	public SalesOrder getSalesOrderFromId(long id, boolean retrieveAssociation) throws Exception;
+	public SalesOrder getSalesOrderById(long id, boolean retrieveAssociation) throws Exception;
 	
 	/**
-	 * Get all SalesOrders for a specific customer from customerName
+	 * Get all SalesOrders for a specific customer by customerName
 	 * 
 	 * @param customerName the name of a customer for whom all SalesOrders are to be returned
 	 * @param retrieveAssociation set to true if you want SalesOrders for customer to be returned
 	 * @return ArrayList of SalesOrders for a customer with customerName
 	 */
-	public ArrayList<SalesOrder> getAllSalesOrdersFromCustomer(String customerName, boolean retrieveAssociation) throws Exception;
+	public ArrayList<SalesOrder> getAllSalesOrdersByCustomer(String customerName, boolean retrieveAssociation) throws Exception;
+
+    /**
+     * Get all SalesOrders for a specific customer by customerId
+     *
+     * @param customerId the ID/PhoneNo of a customer for whom all SalesOrders are to be returned
+     * @param retrieveAssociation set to true if you want SalesOrders for customer to be returned
+     * @return ArrayList of SalesOrders for a customer with customerName
+     */
+    public ArrayList<SalesOrder> getAllSalesOrdersByCustomer(long customerId, boolean retrieveAssociation) throws Exception;
 	
 	/**
 	 * Insert a new SalesOrder into the database

@@ -66,7 +66,7 @@ public class SupplierCreateUI
 
         _frame = new JFrame();
         _frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        _frame.setTitle("Opret Leverandør");
+        _frame.setTitle("Opret LeverandÃ¸r");
         _frame.setBounds(0, 0, 505, 300);
         _frame.setResizable(false);
         _frame.setVisible(true);

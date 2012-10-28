@@ -2,7 +2,9 @@ package views;
 
 import utils.Logging;
 import views.contact.ContactShowAllUI;
+import views.product.ProductCreateUI;
 import views.product.ProductShowAllUI;
+import views.salesorder.OrderShowAllUI;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -187,12 +189,29 @@ public class SystemUI
 	
 	private void newProduct()
 	{
-		
+        ProductCreateUI.createWindow();
 	}
 	
 	private void selectOrder()
 	{
-		
+        DataNotificationUI info = new views.DataNotificationUI();
+        info.setVisible(true);
+
+        try
+        {
+            pnlMain.removeAll();
+            OrderShowAllUI orderShowAllUI = new OrderShowAllUI();
+            JPanel panel = orderShowAllUI.createWindow();
+            pnlMain.add(panel);
+            pnlMain.revalidate();
+            pnlMain.repaint();
+
+            info.dispose();
+        }
+        catch(Exception err)
+        {
+            JOptionPane.showMessageDialog(null, Logging.handleException(err, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+        }
 	}
 	
 	private void selectContacts()

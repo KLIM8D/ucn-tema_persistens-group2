@@ -27,19 +27,28 @@ public class SalesOrderCtrl
 	 * Retrieves a SalesOrder object given the ID of the order
 	 * 
 	 */
-	public SalesOrder getSalesOrderFromId(long id, boolean retrieveAssociation) throws Exception
+	public SalesOrder getSalesOrderById(long id, boolean retrieveAssociation) throws Exception
 	{
-		return _salesOrder.getSalesOrderFromId(id, retrieveAssociation);
+		return _salesOrder.getSalesOrderById(id, retrieveAssociation);
 	}
 	
 	/**
-	 * Retrieves an ArrayList of SalesOrder objects from the customers name
+	 * Retrieves an ArrayList of SalesOrder objects by the customers name
 	 * 
 	 */
-	public ArrayList<SalesOrder> getAllSalesOrdersFromCustomer(String customerName, boolean retrieveAssociation) throws Exception
+	public ArrayList<SalesOrder> getAllSalesOrdersByCustomer(String customerName, boolean retrieveAssociation) throws Exception
 	{
-		return _salesOrder.getAllSalesOrdersFromCustomer(customerName, retrieveAssociation);
+		return _salesOrder.getAllSalesOrdersByCustomer(customerName, retrieveAssociation);
 	}
+
+    /**
+     * Retrieves an ArrayList of SalesOrder objects by the customers id / phone no
+     *
+     */
+    public ArrayList<SalesOrder> getAllSalesOrdersByCustomer(long customerId, boolean retrieveAssociation) throws Exception
+    {
+        return _salesOrder.getAllSalesOrdersByCustomer(customerId, retrieveAssociation);
+    }
 	
 	/**
 	 * Takes a new salesOrder object and adds it in the DB.

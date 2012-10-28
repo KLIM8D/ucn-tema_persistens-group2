@@ -27,7 +27,7 @@ public class DBSalesOrder implements IFDBSalesOrder
 	{
 		ArrayList<SalesOrder> returnList = new ArrayList<SalesOrder>();
 		
-		PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM SalesOrders");
+		PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM SalesOrder");
 		_da.setSqlCommandText(query);
 		ResultSet salesOrders = _da.callCommandGetResultSet();
 			
@@ -48,9 +48,9 @@ public class DBSalesOrder implements IFDBSalesOrder
      * @return salesOrder
      */
 	@Override
-	public SalesOrder getSalesOrderFromId(long id, boolean retrieveAssociation) throws Exception
+	public SalesOrder getSalesOrderById(long id, boolean retrieveAssociation) throws Exception
 	{	
-		PreparedStatement query = _da.getCon().prepareStatement("SELECT FROM * SalesOrder WHERE id = ?");
+		PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM SalesOrder WHERE orderId = ?");
 		query.setLong(1, id);
 		_da.setSqlCommandText(query);
 		ResultSet salesOrderResult = _da.callCommandGetRow();
@@ -61,14 +61,14 @@ public class DBSalesOrder implements IFDBSalesOrder
 	}
 	
 	/**
-	 * Get all SalesOrders for a specific customer from customerName
+	 * Get all SalesOrders for a specific customer by customerName
 	 * 
 	 * @param customerName the name of a customer for whom all SalesOrders are to be returned
 	 * @param retrieveAssociation set to true if you want SalesOrders for customer to be returned
 	 * @return ArrayList of SalesOrders for a customer with customerName
 	 */
 	@Override
-	public ArrayList<SalesOrder> getAllSalesOrdersFromCustomer(String customerName, boolean retrieveAssociation) throws Exception
+	public ArrayList<SalesOrder> getAllSalesOrdersByCustomer(String customerName, boolean retrieveAssociation) throws Exception
 	{
         ArrayList<SalesOrder> returnList = new ArrayList<SalesOrder>();
 
@@ -85,6 +85,31 @@ public class DBSalesOrder implements IFDBSalesOrder
 
         return returnList;
 	}
+
+    /**
+     * Get all SalesOrders for a specific customer by customerId
+     *
+     * @param customerId the ID/PhoneNo of a customer for whom all SalesOrders are to be returned
+     * @param retrieveAssociation set to true if you want SalesOrders for customer to be returned
+     * @return ArrayList of SalesOrders for a customer with customerName
+     */
+    public ArrayList<SalesOrder> getAllSalesOrdersByCustomer(long customerId, boolean retrieveAssociation) throws Exception
+    {
+        ArrayList<SalesOrder> returnList = new ArrayList<SalesOrder>();
+
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM SalesOrder WHERE contactsKey = ?");
+        query.setLong(1, customerId);
+        _da.setSqlCommandText(query);
+        ResultSet salesOrderResult = _da.callCommandGetResultSet();
+
+        while (salesOrderResult.next())
+        {
+            SalesOrder salesOrder = buildSalesOrder(salesOrderResult, retrieveAssociation);
+            returnList.add(salesOrder);
+        }
+
+        return returnList;
+    }
 	
 	/**
      * Insert a new salesOrder to the database
@@ -98,7 +123,7 @@ public class DBSalesOrder implements IFDBSalesOrder
 		if(salesOrder == null)
 			return 0;
 		
-		PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO SalesOrder (contactsKey, deliveryKey, orderDate, deliveryDate) " + "VALUES (?, ?, ?, ?)");
+		PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO SalesOrder (contactsKey, deliveryKey, orderDate, deliveryDate) VALUES (?, ?, ?, ?)");
 		query.setLong(1, salesOrder.getContact().getPhoneNo());
 		query.setLong(2, salesOrder.getDeliveryStatus().getDeliveryId());
 		query.setString(3, salesOrder.getOrderDate());
@@ -120,10 +145,10 @@ public class DBSalesOrder implements IFDBSalesOrder
 		if(salesOrder == null)
 			return 0;
 
-		if(getSalesOrderFromId(salesOrder.getOrderId(), true) == null)
+		if(getSalesOrderById(salesOrder.getOrderId(), true) == null)
 			return 0;
 			
-		PreparedStatement query = _da.getCon().prepareStatement("UPDATE SalesOrder SET contactsKey = ?, deliveryKey = ?, orderDate = ?, deliveryDate = ? " + "WHERE orderId = ?");
+		PreparedStatement query = _da.getCon().prepareStatement("UPDATE SalesOrder SET contactsKey = ?, deliveryKey = ?, orderDate = ?, deliveryDate = ? WHERE orderId = ?");
 		query.setLong(1, salesOrder.getContact().getPhoneNo());
 		query.setLong(2, salesOrder.getDeliveryStatus().getDeliveryId());
 		query.setString(3, salesOrder.getOrderDate());
@@ -166,12 +191,9 @@ public class DBSalesOrder implements IFDBSalesOrder
 		{
 			// DeliveryStatus
 			long deliveryId = row.getLong("deliveryKey");
-			PreparedStatement queryDelivery = _da.getCon().prepareStatement("SELECT * FROM DeliveryStatus WHERE deliveryId = ?");
-			queryDelivery.setLong(1, deliveryId);
-			_da.setSqlCommandText(queryDelivery);
-			ResultSet deliveryResults = _da.callCommandGetRow();
-			DeliveryStatus status = buildDeliveryStatus(deliveryResults);
-			salesOrder.setDeliveryStatus(status);
+            DBDeliveryStatus dbDeliveryStatus = new DBDeliveryStatus();
+            DeliveryStatus status = dbDeliveryStatus.getDeliveryStatusById(deliveryId);
+            salesOrder.setDeliveryStatus(status);
 			
 			// Contact
 			long contactsKey = row.getLong("contactsKey");

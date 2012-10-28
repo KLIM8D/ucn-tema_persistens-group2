@@ -2,17 +2,12 @@ package db;
 
 import java.math.BigDecimal;
 
-import models.Contact;
-import models.DeliveryStatus;
-import models.Invoice;
 import models.OrderItems;
-import models.SalesOrder;
 import models.Product;
 
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DBOrderItems implements IFDBOrderItems
 {
