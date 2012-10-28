@@ -33,8 +33,14 @@ public class SupplierCreateUI
     //Controllers
     private SupplierCtrl _supCtrl;
 
+    private JTextField txtName;
+    private JTextField txtAddress;
+    private JTextField txtZipCode;
+    private JTextField txtCity;
+    private JTextField txtPhoneNo;
+    private JTextField txtEmail;
+    private JTextField txtCountry;
     private JTextField txtBankAccount;
-    private JTextField txtSupplierNumber;
     private JTextField txtContactPerson;
     private JComboBox<String> drpSuppliers;
     private String[] columnNames;
@@ -60,7 +66,7 @@ public class SupplierCreateUI
 
         _frame = new JFrame();
         _frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        _frame.setTitle("Opret produkt");
+        _frame.setTitle("Opret Leverandør");
         _frame.setBounds(0, 0, 509, 528);
         _frame.setResizable(false);
         _frame.setVisible(true);
@@ -74,21 +80,84 @@ public class SupplierCreateUI
         JLabel lblSupplierName = new JLabel("LeverandÃ¸r navn");
         lblSupplierName.setBounds(12, 12, 99, 15);
         contentPane.add(lblSupplierName);
-
+        
+        JLabel lblSupplierAddress = new JLabel("Adresse");
+        lblSupplierAddress.setBounds(12, 37, 99, 15);
+        contentPane.add(lblSupplierAddress);
+        
+        JLabel lblSupplierZipCode = new JLabel("Postnummer");
+        lblSupplierZipCode.setBounds(12, 62, 99, 15);
+        contentPane.add(lblSupplierZipCode);
+        
+        JLabel lblSupplierCity = new JLabel("By");
+        lblSupplierCity.setBounds(12, 87, 99, 15);
+        contentPane.add(lblSupplierCity);
+        
         JLabel lblSupplierNumber = new JLabel("Telefonnummer");
-        lblSupplierNumber.setBounds(12, 37, 99, 15);
+        lblSupplierNumber.setBounds(12, 112, 99, 15);
         contentPane.add(lblSupplierNumber);
+        
+        JLabel lblSupplierEmail = new JLabel("Email");
+        lblSupplierEmail.setBounds(12, 137, 99, 15);
+        contentPane.add(lblSupplierEmail);
+        
+        JLabel lblSupplierCountry = new JLabel("Land");
+        lblSupplierCountry.setBounds(12, 162, 99, 15);
+        contentPane.add(lblSupplierCountry);
+        
+        JLabel lblSupplierContact = new JLabel("Kontakt Person");
+        lblSupplierContact.setBounds(12, 187, 99, 15);
+        contentPane.add(lblSupplierContact);
+        
+        JLabel lblSupplierBankAcc = new JLabel("Bankkonto");
+        lblSupplierBankAcc.setBounds(12, 212, 99, 15);
+        contentPane.add(lblSupplierBankAcc);
+        
+        txtName = new JTextField();
+        txtName.setBounds(142, 10, 350, 19);
+        contentPane.add(txtName);
+        txtName.setColumns(10);
 
+        txtAddress = new JTextField();
+        txtAddress.setBounds(142, 35, 350, 19);
+        contentPane.add(txtAddress);
+        txtAddress.setColumns(10);
+        
+        txtZipCode = new JTextField();
+        txtZipCode.setBounds(142, 60, 350, 19);
+        contentPane.add(txtZipCode);
+        txtZipCode.setColumns(10);
+        
+        txtCity = new JTextField();
+        txtCity.setBounds(142, 85, 350, 19);
+        contentPane.add(txtCity);
+        txtCity.setColumns(10);
+        
+        txtPhoneNo = new JTextField();
+        txtPhoneNo.setBounds(142, 110, 350, 19);
+        contentPane.add(txtPhoneNo);
+        txtPhoneNo.setColumns(10);
+        
+        txtEmail = new JTextField();
+        txtEmail.setBounds(142, 135, 350, 19);
+        contentPane.add(txtEmail);
+        txtEmail.setColumns(10);
+        
+        txtCountry = new JTextField();
+        txtCountry.setDocument(new JTextFieldLimit(2));
+        txtCountry.setBounds(142, 160, 350, 19);
+        contentPane.add(txtCountry);
+        txtCountry.setColumns(10);
+        
         txtBankAccount = new JTextField();
-        txtBankAccount.setBounds(142, 10, 350, 19);
+        txtBankAccount.setBounds(142, 185, 350, 19);
         contentPane.add(txtBankAccount);
         txtBankAccount.setColumns(10);
-
-        txtSupplierNumber = new JTextField();
-        txtSupplierNumber.setDocument(new JTextFieldLimit(2));
-        txtSupplierNumber.setBounds(142, 35, 350, 19);
-        contentPane.add(txtSupplierNumber);
-        txtSupplierNumber.setColumns(10);
+        
+        txtContactPerson = new JTextField();
+        txtContactPerson.setBounds(142, 210, 350, 19);
+        contentPane.add(txtContactPerson);
+        txtContactPerson.setColumns(10);
         
         
         JSeparator separator = new JSeparator();
@@ -155,11 +224,16 @@ public class SupplierCreateUI
         try
         {
             DataAccess da = DataAccess.getInstance();
-            long phoneNo = da.getNextId("Suppliers");
-            String bankAccount = txtBankAccount.getText();
+            String name = txtName.getText();
+            String address = txtAddress.getText();
+            long zipCode = Long.parseLong(txtZipCode.getText());
+            String city = txtCity.getText();
+            long phoneNo = Long.parseLong(txtZipCode.getText());
+            String email = txtEmail.getText();
+            String country = txtCountry.getText();
             String contactPerson = txtContactPerson.getText();
-            Contact contact = _supCtrl.getContact(phoneNo);
-            Supplier supplier = new Supplier(contact.getName(), contact.getAddress(), contact.getZipCode(), contact.getCity(), contact.getPhoneNo(), contact.getEmail(), contact.getCountry(), contactPerson, bankAccount);
+            String bankAccount = txtBankAccount.getText();
+            Supplier supplier = new Supplier(name, address, zipCode, city, phoneNo, email, country, contactPerson, bankAccount);
 
             _supCtrl.insertSupplier(supplier);
 
