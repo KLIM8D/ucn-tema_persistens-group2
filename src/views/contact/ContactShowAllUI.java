@@ -117,6 +117,7 @@ public class ContactShowAllUI {
 		JButton btnAddCustomer = new JButton("Tilføj ny kunde");
 		btnAddCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CustomerCreateUI.createWindow();
 			}
 		});
 		btnAddCustomer.setBounds(647,8,170,25);

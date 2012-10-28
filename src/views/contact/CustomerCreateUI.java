@@ -1,8 +1,8 @@
 package views.contact;
 
-import controllers.SupplierCtrl;
+import controllers.CustomerCtrl;
 import db.DataAccess;
-import models.Supplier;
+import models.Customer;
 import models.Contact;
 import utils.ButtonColumn;
 import utils.Helper;
@@ -14,24 +14,25 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
  * Created: 27-10-2012
  * @version: 0.1
- * Filename: SupplierCreateUI.java
+ * Filename: CustomerCreateUI.java
  * Description:
  * @changes
  */
 
-public class SupplierCreateUI
+public class CustomerCreateUI
 {
     private static JFrame _frame;
-    private static SupplierCreateUI _instance;
+    private static CustomerCreateUI _instance;
     private JPanel contentPane;
 
     //Controllers
-    private SupplierCtrl _supCtrl;
+    private CustomerCtrl _cusCtrl;
 
     private JTextField txtName;
     private JTextField txtAddress;
@@ -40,9 +41,9 @@ public class SupplierCreateUI
     private JTextField txtPhoneNo;
     private JTextField txtEmail;
     private JTextField txtCountry;
-    private JTextField txtBankAccount;
-    private JTextField txtContactPerson;
-    private JComboBox<String> drpSuppliers;
+    private JTextField txtDiscount;
+    private Checkbox txtBusiness;
+    private JComboBox<String> drpCustomers;
     private String[] columnNames;
     private DefaultTableModel model;
     private JTable tblData;
@@ -50,19 +51,19 @@ public class SupplierCreateUI
     public static JFrame createWindow()
     {
         if(_instance == null)
-            _instance = new SupplierCreateUI();
+            _instance = new CustomerCreateUI();
 
         return _frame;
     }
 
-    public SupplierCreateUI()
+    public CustomerCreateUI()
     {
         createElements();
     }
 
     private void createElements()
     {
-        _supCtrl = new SupplierCtrl();
+        _cusCtrl = new CustomerCtrl();
 
         _frame = new JFrame();
         _frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -77,41 +78,41 @@ public class SupplierCreateUI
         contentPane.setLayout(null);
         _frame.setContentPane(contentPane);
 
-        JLabel lblSupplierName = new JLabel("Navn");
-        lblSupplierName.setBounds(12, 12, 99, 15);
-        contentPane.add(lblSupplierName);
+        JLabel lblCustomerName = new JLabel("Leverandør navn");
+        lblCustomerName.setBounds(12, 12, 99, 15);
+        contentPane.add(lblCustomerName);
         
-        JLabel lblSupplierAddress = new JLabel("Adresse");
-        lblSupplierAddress.setBounds(12, 37, 99, 15);
-        contentPane.add(lblSupplierAddress);
+        JLabel lblCustomerAddress = new JLabel("Adresse");
+        lblCustomerAddress.setBounds(12, 37, 99, 15);
+        contentPane.add(lblCustomerAddress);
         
-        JLabel lblSupplierZipCode = new JLabel("Postnummer");
-        lblSupplierZipCode.setBounds(12, 62, 99, 15);
-        contentPane.add(lblSupplierZipCode);
+        JLabel lblCustomerZipCode = new JLabel("Postnummer");
+        lblCustomerZipCode.setBounds(12, 62, 99, 15);
+        contentPane.add(lblCustomerZipCode);
         
-        JLabel lblSupplierCity = new JLabel("By");
-        lblSupplierCity.setBounds(12, 87, 99, 15);
-        contentPane.add(lblSupplierCity);
+        JLabel lblCustomerCity = new JLabel("By");
+        lblCustomerCity.setBounds(12, 87, 99, 15);
+        contentPane.add(lblCustomerCity);
         
-        JLabel lblSupplierNumber = new JLabel("Telefonnummer");
-        lblSupplierNumber.setBounds(12, 112, 99, 15);
-        contentPane.add(lblSupplierNumber);
+        JLabel lblCustomerNumber = new JLabel("Telefonnummer");
+        lblCustomerNumber.setBounds(12, 112, 99, 15);
+        contentPane.add(lblCustomerNumber);
         
-        JLabel lblSupplierEmail = new JLabel("Email");
-        lblSupplierEmail.setBounds(12, 137, 99, 15);
-        contentPane.add(lblSupplierEmail);
+        JLabel lblCustomerEmail = new JLabel("Email");
+        lblCustomerEmail.setBounds(12, 137, 99, 15);
+        contentPane.add(lblCustomerEmail);
         
-        JLabel lblSupplierCountry = new JLabel("Land");
-        lblSupplierCountry.setBounds(12, 162, 99, 15);
-        contentPane.add(lblSupplierCountry);
+        JLabel lblCustomerCountry = new JLabel("Land");
+        lblCustomerCountry.setBounds(12, 162, 99, 15);
+        contentPane.add(lblCustomerCountry);
         
-        JLabel lblSupplierContact = new JLabel("Kontakt Person");
-        lblSupplierContact.setBounds(12, 187, 99, 15);
-        contentPane.add(lblSupplierContact);
+        JLabel lblCustomerContact = new JLabel("Rabat");
+        lblCustomerContact.setBounds(12, 187, 99, 15);
+        contentPane.add(lblCustomerContact);
         
-        JLabel lblSupplierBankAcc = new JLabel("Bankkonto");
-        lblSupplierBankAcc.setBounds(12, 212, 99, 15);
-        contentPane.add(lblSupplierBankAcc);
+        JLabel lblCustomerBankAcc = new JLabel("Erhvervskunde");
+        lblCustomerBankAcc.setBounds(12, 212, 99, 15);
+        contentPane.add(lblCustomerBankAcc);
         
         txtName = new JTextField();
         txtName.setBounds(142, 10, 350, 19);
@@ -149,17 +150,43 @@ public class SupplierCreateUI
         contentPane.add(txtCountry);
         txtCountry.setColumns(10);
         
-        txtBankAccount = new JTextField();
-        txtBankAccount.setBounds(142, 185, 350, 19);
-        contentPane.add(txtBankAccount);
-        txtBankAccount.setColumns(10);
+        txtDiscount = new JTextField();
+        txtDiscount.setBounds(142, 185, 350, 19);
+        contentPane.add(txtDiscount);
+        txtDiscount.setColumns(10);
         
-        txtContactPerson = new JTextField();
-        txtContactPerson.setBounds(142, 210, 350, 19);
-        contentPane.add(txtContactPerson);
-        txtContactPerson.setColumns(10);
+        txtBusiness = new Checkbox();
+        txtBusiness.setBounds(142, 210, 350, 19);
+        contentPane.add(txtBusiness);
+        //txtBusiness.setColumns(10);
         
         
+        JSeparator separator = new JSeparator();
+        separator.setBounds(12, 226, 480, 1);
+        contentPane.add(separator);
+
+
+        tblData = new JTable()
+        {
+            public boolean isCellEditable(int data, int columns)
+            {
+                return columns == 3;
+            }
+        };
+        tblData.setBounds(12, 353, 475, 100);
+        model = new DefaultTableModel();
+
+        tblData.setModel(model);
+        tblData.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(tblData);
+        scrollPane.setSize(481, 105);
+        tblData.setPreferredScrollableViewportSize(new Dimension(475, 100));
+        scrollPane.setPreferredSize(new Dimension(481, 100));
+        scrollPane.setLocation(12, 353);
+        contentPane.add(scrollPane);
+
+
         JButton btnCancel = new JButton("Annuller");
         btnCancel.addActionListener(new ActionListener()
         {
@@ -177,7 +204,7 @@ public class SupplierCreateUI
         {
             public void actionPerformed(ActionEvent e)
             {
-                createSupplier();
+                createCustomer();
             }
         });
         btnCreate.setBounds(246, 470, 117, 25);
@@ -193,7 +220,7 @@ public class SupplierCreateUI
         });
     }
 
-    private void createSupplier()
+    private void createCustomer()
     {
         try
         {
@@ -205,11 +232,11 @@ public class SupplierCreateUI
             long phoneNo = Long.parseLong(txtZipCode.getText());
             String email = txtEmail.getText();
             String country = txtCountry.getText();
-            String contactPerson = txtContactPerson.getText();
-            String bankAccount = txtBankAccount.getText();
-            Supplier supplier = new Supplier(name, address, zipCode, city, phoneNo, email, country, contactPerson, bankAccount);
+            BigDecimal discount = new BigDecimal(txtDiscount.getText());
+            boolean isBusiness = txtBusiness.getState();
+            Customer customer = new Customer(name, address, zipCode, city, phoneNo, email, country, discount, isBusiness);
 
-            _supCtrl.insertSupplier(supplier);
+            _cusCtrl.insertCustomer(customer);
 
             JOptionPane.showMessageDialog(null, "Leverandøren er nu oprettet", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
             _instance = null;
