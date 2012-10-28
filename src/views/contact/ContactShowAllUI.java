@@ -81,7 +81,7 @@ public class ContactShowAllUI {
 		lblCustPhoneNo.setBounds(12,14,125,15);
 		pnlCustomers.add(lblCustPhoneNo);
 		
-		JTextField txtCustPhoneNo = new JTextField();
+		final JTextField txtCustPhoneNo = new JTextField();
 		txtCustPhoneNo.setBounds(138,12,115,19);
 		pnlCustomers.add(txtCustPhoneNo);
 		
@@ -89,13 +89,26 @@ public class ContactShowAllUI {
 		lblCustName.setBounds(265,14,40,15);
 		pnlCustomers.add(lblCustName);
 		
-		JTextField txtCustName = new JTextField();
+		final JTextField txtCustName = new JTextField();
 		txtCustName.setBounds(313,12,115,19);
 		pnlCustomers.add(txtCustName);
 		
 		JButton btnSearchCustomer = new JButton("Søg");
 		btnSearchCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(txtCustPhoneNo.getText().length() > 0)
+				{
+					long itemNumber = Long.parseLong(txtCustPhoneNo.getText());
+					addCustomerData(itemNumber);
+				}
+				if(txtCustName.getText().length() > 0 && txtCustPhoneNo.getText().length() <= 0)
+				{
+					addCustomerData(txtCustName.getText());
+				}
+				if(txtCustName.getText().length() <= 0 && txtCustPhoneNo.getText().length() <= 0)
+				{
+					addCustomerData();
+				}
 			}
 		});
 		btnSearchCustomer.setBounds(439,8,117,25);
@@ -114,7 +127,7 @@ public class ContactShowAllUI {
 		lblSuppPhoneNo.setBounds(12,14,125,15);
 		pnlSuppliers.add(lblSuppPhoneNo);
 				
-		JTextField txtSuppPhoneNo = new JTextField();
+		final JTextField txtSuppPhoneNo = new JTextField();
 		txtSuppPhoneNo.setBounds(138,12,115,19);
 		pnlSuppliers.add(txtSuppPhoneNo);
 				
@@ -122,13 +135,26 @@ public class ContactShowAllUI {
 		lblSuppName.setBounds(265,14,40,15);
 		pnlSuppliers.add(lblSuppName);
 				
-		JTextField txtSuppName = new JTextField();
+		final JTextField txtSuppName = new JTextField();
 		txtSuppName.setBounds(313,12,115,19);
 		pnlSuppliers.add(txtSuppName);
 				
 		JButton btnSearchSupplier = new JButton("Søg");
 		btnSearchSupplier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(txtSuppPhoneNo.getText().length() > 0)
+				{
+					long itemNumber = Long.parseLong(txtSuppPhoneNo.getText());
+					addSupplierData(itemNumber);
+				}
+				if(txtSuppName.getText().length() > 0 && txtSuppPhoneNo.getText().length() <= 0)
+				{
+					addSupplierData(txtSuppName.getText());
+				}
+				if(txtSuppName.getText().length() <= 0 && txtSuppPhoneNo.getText().length() <= 0)
+				{
+					addSupplierData();
+				}
 			}
 		});
 		btnSearchSupplier.setBounds(439,8,117,25);
@@ -290,6 +316,60 @@ public class ContactShowAllUI {
 		}
 	}
 	
+	private void addCustomerData(long itemNumber)
+	{
+		try
+		{
+			Customer cust = _custCtrl.getCustomerById(itemNumber);
+			
+			if(cust != null)
+			{
+				Object[][] row = new Object[][]
+				{
+						{cust.getPhoneNo(), cust.getName(), cust.getAddress(), cust.getCity(), cust.getEmail(), cust.getCountry(), "Rediger", "Slet"}
+				};
+				custModel.setDataVector(row, columnNames);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Der blev ikke fundet noget kunde, med telefon nummeret: " + itemNumber, "Information", JOptionPane.WARNING_MESSAGE);
+			}
+			addButtonsToCustomer(6);
+			addButtonsToCustomer(7);
+		}
+		catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, Logging.handleException(e, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+        }
+	}
+	
+	private void addCustomerData(String itemName)
+	{
+		try
+		{
+			Customer cust = _custCtrl.getCustomerByName(itemName);
+			
+			if(cust != null)
+			{
+				Object[][] row = new Object[][]
+				{
+						{cust.getPhoneNo(), cust.getName(), cust.getAddress(), cust.getCity(), cust.getEmail(), cust.getCountry(), "Rediger", "Slet"}
+				};
+				custModel.setDataVector(row, columnNames);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Der blev ikke fundet noget kunde, med navnet: " + itemName, "Information", JOptionPane.WARNING_MESSAGE);
+			}
+			addButtonsToCustomer(6);
+			addButtonsToCustomer(7);
+		}
+		catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, Logging.handleException(e, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+        }
+	}
+	
 	private void addSupplierData()
 	{
 		try
@@ -309,5 +389,59 @@ public class ContactShowAllUI {
 		{
 			JOptionPane.showMessageDialog(null, Logging.handleException(e, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
 		}
+	}
+	
+	private void addSupplierData(long itemNumber)
+	{
+		try
+		{
+			Supplier supp = _suppCtrl.getSupplierById(itemNumber, true);
+			
+			if(supp != null)
+			{
+				Object[][] row = new Object[][]
+				{
+						{supp.getPhoneNo(), supp.getName(), supp.getAddress(), supp.getCity(), supp.getEmail(), supp.getCountry(), "Rediger", "Slet"}
+				};
+				suppModel.setDataVector(row, columnNames);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Der blev ikke fundet noget leverandør, med telefon nummeret: " + itemNumber, "Information", JOptionPane.WARNING_MESSAGE);
+			}
+			addButtonsToSupplier(6);
+			addButtonsToSupplier(7);
+		}
+		catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, Logging.handleException(e, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+        }
+	}
+	
+	private void addSupplierData(String itemName)
+	{
+		try
+		{
+			Supplier supp = _suppCtrl.getSupplierByName(itemName, true);
+			
+			if(supp != null)
+			{
+				Object[][] row = new Object[][]
+				{
+						{supp.getPhoneNo(), supp.getName(), supp.getAddress(), supp.getCity(), supp.getEmail(), supp.getCountry(), "Rediger", "Slet"}
+				};
+				suppModel.setDataVector(row, columnNames);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Der blev ikke fundet noget leverandør, med navnet: " + itemName, "Information", JOptionPane.WARNING_MESSAGE);
+			}
+			addButtonsToSupplier(6);
+			addButtonsToSupplier(7);
+		}
+		catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, Logging.handleException(e, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+        }
 	}
 }
