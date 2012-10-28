@@ -70,7 +70,7 @@ public class ProductShowAllUI
         btnCreateProduct.setBounds(10, 5, 61, 25);
         navPanel.add(btnCreateProduct);
 
-        JButton btnCreateCategory = new JButton("Tilføj produkt kategori");
+        JButton btnCreateCategory = new JButton("Adm. produkt kategorier");
         btnCreateCategory.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
@@ -181,7 +181,9 @@ public class ProductShowAllUI
                 int row = Integer.valueOf(e.getActionCommand());
                 long itemNumber = Long.parseLong(table.getValueAt(row, 0).toString());
                 if(columnIndex == 5)
-                    txtProductId.setText(itemNumber + "");
+                {
+                    ProductEditUI.createWindow(itemNumber);
+                }
                 else
                 {
                     try

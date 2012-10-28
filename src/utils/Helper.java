@@ -73,4 +73,19 @@ public class Helper
             list.add(item);
         return list;
     }
+
+    public static int selectDropdownIndex(JComboBox<String> dropdown, String findValue)
+    {
+        int drpIndex = 0;
+        for (int i=0; i< dropdown.getItemCount(); i++)
+        {
+            String currentValue = dropdown.getItemAt(i);
+            if(findValue.equalsIgnoreCase(currentValue))
+            {
+                drpIndex = i;
+                break;
+            }
+        }
+        return drpIndex;
+    }
 }

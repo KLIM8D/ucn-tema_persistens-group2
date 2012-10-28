@@ -119,7 +119,7 @@ public class DBProduct implements IFDBProduct
         {
             DBProductData dbProductData = new DBProductData();
             for(ProductData data : product.getProductData())
-                dbProductData.insertProductData(product.getId(), data);
+                rowsAffected += dbProductData.insertProductData(product.getId(), data);
         }
 
         return rowsAffected;
@@ -153,7 +153,14 @@ public class DBProduct implements IFDBProduct
         query.setLong(8, product.getMinimumStock());
         query.setLong(9, product.getId());
         _da.setSqlCommandText(query);
-        return _da.callCommand();
+        int rowsAffected = _da.callCommand();
+
+        DBProductData dbProductData = new DBProductData();
+        dbProductData.deleteProductData(product.getId());
+        for(ProductData data : product.getProductData())
+            rowsAffected += dbProductData.insertProductData(product.getId(), data);
+
+        return rowsAffected;
     }
 
     /**

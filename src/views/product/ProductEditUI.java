@@ -3,7 +3,6 @@ package views.product;
 import controllers.ProductCategoryCtrl;
 import controllers.ProductCtrl;
 import controllers.SupplierCtrl;
-import db.DataAccess;
 import models.Product;
 import models.ProductCategory;
 import models.ProductData;
@@ -21,23 +20,24 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
- * Created: 27-10-2012
+ * Created: 28-10-2012
  * @version: 0.1
- * Filename: ProductCreateUI.java
+ * Filename: ProductEditUI.java
  * Description:
  * @changes
  */
 
-public class ProductCreateUI
+public class ProductEditUI
 {
     private static JFrame _frame;
-    private static ProductCreateUI _instance;
+    private static ProductEditUI _instance;
     private JPanel contentPane;
 
     //Controllers
     private ProductCtrl _prodCtrl;
     private ProductCategoryCtrl _categoryCtrl;
     private SupplierCtrl _supplierCtrl;
+    private long _productId;
 
     private JTextField txtProdName;
     private JTextField txtMinInStock;
@@ -54,16 +54,17 @@ public class ProductCreateUI
     private JTable tblData;
     private ArrayList<ProductData> _productDataCollection;
 
-    public static JFrame createWindow()
+    public static JFrame createWindow(long productId)
     {
         if(_instance == null)
-            _instance = new ProductCreateUI();
+            _instance = new ProductEditUI(productId);
 
         return _frame;
     }
 
-    private ProductCreateUI()
+    private ProductEditUI(long productId)
     {
+        _productId = productId;
         createElements();
     }
 
@@ -76,7 +77,7 @@ public class ProductCreateUI
 
         _frame = new JFrame();
         _frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        _frame.setTitle("Opret produkt");
+        _frame.setTitle("Rediger produkt");
         _frame.setBounds(0, 0, 509, 528);
         _frame.setResizable(false);
         _frame.setLocationRelativeTo(null);
@@ -276,19 +277,21 @@ public class ProductCreateUI
         btnCancel.setBounds(375, 470, 117, 25);
         contentPane.add(btnCancel);
 
-        JButton btnCreate = new JButton("Opret");
-        btnCreate.addActionListener(new ActionListener()
+        JButton btnUpdate = new JButton("Opdater");
+        btnUpdate.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                createProduct();
+                updateProduct();
             }
         });
-        btnCreate.setBounds(246, 470, 117, 25);
-        contentPane.add(btnCreate);
+        btnUpdate.setBounds(246, 470, 117, 25);
+        contentPane.add(btnUpdate);
 
         addCategories();
         addSuppliers();
+
+        addData(_productId);
 
         _frame.addWindowListener(new WindowAdapter()
         {
@@ -300,12 +303,11 @@ public class ProductCreateUI
         });
     }
 
-    private void createProduct()
+    private void updateProduct()
     {
         try
         {
-            DataAccess da = DataAccess.getInstance();
-            long itemNumber = da.getNextId("Products");
+            long itemNumber = _productId;
             String itemName = txtProdName.getText();
             long minInStock = Long.parseLong(txtMinInStock.getText());
             String countryOfOrigin = txtCountryOfOrigin.getText();
@@ -320,15 +322,44 @@ public class ProductCreateUI
 
             product.setProductData(_productDataCollection);
 
-            _prodCtrl.insertProduct(product);
+            _prodCtrl.updateProduct(product);
 
-            JOptionPane.showMessageDialog(null, "Produktet er nu oprettet", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Produktet er nu opdateret", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
             _instance = null;
             _frame.dispose();
         }
         catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, Logging.handleException(e, 1), "Fejl", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void addData(long productId)
+    {
+        try
+        {
+            Product product = _prodCtrl.getProductById(productId, true);
+            if(product != null)
+            {
+                txtProdName.setText(product.getName());
+                txtCountryOfOrigin.setText(product.getCountryOfOrigin());
+                int catIndex = Helper.selectDropdownIndex(drpCategories, product.getCategory().getCategoryName());
+                drpCategories.setSelectedIndex(catIndex);
+                int supIndex = Helper.selectDropdownIndex(drpSuppliers, product.getSupplier().getName());
+                drpSuppliers.setSelectedIndex(supIndex);
+                txtMinInStock.setText(product.getMinimumStock()  + "");
+                txtProdPrice.setText(product.getSalesPrice().doubleValue() + "");
+                txtPurchPrice.setText(product.getPurchasePrice().doubleValue() + "");
+                txtRentPrice.setText(product.getRentPrice().doubleValue() + "");
+                _productDataCollection = product.getProductData();
+                addProductData();
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Der skete en fejl i hentning af produkt information", "Fejl", JOptionPane.WARNING_MESSAGE);
+        }
+        catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, Logging.handleException(ex, 1), "Fejl", JOptionPane.WARNING_MESSAGE);
         }
     }
 

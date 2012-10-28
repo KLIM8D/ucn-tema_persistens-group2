@@ -108,9 +108,9 @@ public class DBProductTest
     @Test
     public void updateProduct() throws Exception
     {
-        ProductCategory category = new ProductCategory(1, "Kategori1");
+        ProductCategory category = new ProductCategory(5, "Kategori1");
         Supplier supplier = new Supplier("Morten", "VejNavn 1222", 9000, "Aalborg", 92120312, "email@ok.dk", "Denmark", "Chris", "102358:123");
-        Product product = new Product(1L, "Test produkt updated", "4000.12", "6000.24", "2000.10", "UK", 5, category, supplier);
+        Product product = new Product(1L, "Test produkt iji", "4000.12", "6000.24", "2000.10", "UK", 5, category, supplier);
 
         int rowsAffected = _dbProduct.updateProduct(product);
         assertEquals(1, rowsAffected);

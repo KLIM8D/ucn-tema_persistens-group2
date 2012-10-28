@@ -136,7 +136,10 @@ public class ContactShowAllUI {
 		});
 		btnAddSupplier.setBounds(647,8,170,25);
 		pnlSuppliers.add(btnAddSupplier);
-		
+
+        // Column names is global
+        columnNames = new String[]{"Telefon", "Navn", "Addresse", "By", "E-Mail", "Land"};
+
 		//Customer retrieval table
 		JPanel custGP = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		pnlCustomers.add(custGP);
@@ -153,14 +156,14 @@ public class ContactShowAllUI {
 		
 		custTable.setModel(custModel);
 		custTable.setFillsViewportHeight(true);
-		addCustomerData();
-		
+
 		JScrollPane custSP = new JScrollPane(custTable);
 		custGP.setBounds(new Rectangle(0,40,825,632));
 		custTable.setPreferredScrollableViewportSize(new Dimension(815,732));
 		custSP.setPreferredSize(new Dimension(815,732));
 		custGP.add(custSP);
-		
+        addCustomerData();
+
 		//Supplier retrieval table
 		JPanel suppGP = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		pnlSuppliers.add(suppGP);
@@ -177,16 +180,15 @@ public class ContactShowAllUI {
 		
 		suppTable.setModel(suppModel);
 		suppTable.setFillsViewportHeight(true);
-		addSupplierData();
 		
 		JScrollPane suppSP = new JScrollPane(suppTable);
 		suppGP.setBounds(new Rectangle(0,40,825,632));
 		suppTable.setPreferredScrollableViewportSize(new Dimension(815,732));
 		suppSP.setPreferredSize(new Dimension(815,732));
 		suppGP.add(suppSP);
+        addSupplierData();
 		
-		// Column names is global
-		columnNames = new String[]{"Telefon", "Navn", "Addresse", "By", "E-Mail", "Land"};
+
 	}
 	
 	private void addCustomerData()
