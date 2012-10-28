@@ -240,7 +240,7 @@ public class ContactShowAllUI {
 				long itemNumber = Long.parseLong(custTable.getValueAt(row, 0).toString());
 				if(columnIndex == 6)
 				{
-					//CostumerEditUI.createWindow(itemNumber);
+					CustomerEditUI.createWindow(itemNumber);
 				}
 				else
 				{

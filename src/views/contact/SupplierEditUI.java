@@ -239,7 +239,7 @@ public class SupplierEditUI
     		}
     		else
     		{
-    			JOptionPane.showMessageDialog(null, "Der skete en fejl i hentning af produkt information", "Fejl", JOptionPane.WARNING_MESSAGE);
+    			JOptionPane.showMessageDialog(null, "Der skete en fejl i hentning af leverandør information", "Fejl", JOptionPane.WARNING_MESSAGE);
     		}
     	}
     	catch (Exception ex)
