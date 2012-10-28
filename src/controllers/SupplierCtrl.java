@@ -2,7 +2,9 @@ package controllers;
 
 import java.util.ArrayList;
 import models.Supplier;
+import models.Contact;
 import db.DBSupplier;
+import db.DBContact;
 
 public class SupplierCtrl
 {
@@ -41,5 +43,11 @@ public class SupplierCtrl
 	{
 		DBSupplier DBS = new DBSupplier();
 		return DBS.updateSupplier(supplier);
+	}
+	
+	public Contact getContact(long PhoneNo) throws Exception
+	{
+		DBContact DBC = new DBContact();
+		return DBC.getContactById(PhoneNo);
 	}
 }
