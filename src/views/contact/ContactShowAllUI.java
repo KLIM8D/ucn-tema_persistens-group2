@@ -6,8 +6,11 @@ import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,6 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import utils.ButtonColumn;
+import utils.Helper;
 import utils.Logging;
 
 import models.Customer;
@@ -132,13 +137,14 @@ public class ContactShowAllUI {
 		JButton btnAddSupplier = new JButton("Tilføj ny leverandør");
 		btnAddSupplier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				SupplierCreateUI.createWindow();
 			}
 		});
 		btnAddSupplier.setBounds(647,8,170,25);
 		pnlSuppliers.add(btnAddSupplier);
 
         // Column names is global
-        columnNames = new String[]{"Telefon", "Navn", "Addresse", "By", "E-Mail", "Land"};
+        columnNames = new String[]{"Telefon", "Navn", "Addresse", "By", "E-Mail", "Land", " ", " "};
 
 		//Customer retrieval table
 		JPanel custGP = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -191,6 +197,42 @@ public class ContactShowAllUI {
 
 	}
 	
+	private void addButtonsToCustomer(final int columnIndex)
+	{
+		@SuppressWarnings("serial")
+		Action show = new AbstractAction()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				JTable custTable = (JTable) e.getSource();
+				int row = Integer.valueOf(e.getActionCommand());
+				long itemNumber = Long.parseLong(custTable.getValueAt(row, 0).toString());
+				if(columnIndex == 6)
+				{
+					//CreateCustomerUI.createWindow(itemNumber);
+				}
+				else
+				{
+					try
+					{
+						if(Helper.showConfirmDialog("kunde") == 1)
+						{
+							Customer customer = _custCtrl.getCustomerById(itemNumber);
+							_custCtrl.deleteCustomer(customer);
+							addCustomerData();
+						}
+					}
+					catch(Exception err)
+					{
+						JOptionPane.showMessageDialog(null, Logging.handleException(err, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			}
+		};
+		ButtonColumn buttonColumn = new ButtonColumn(custTable, show, columnIndex);
+		buttonColumn.setMnemonic(KeyEvent.VK_D);
+	}
+	
 	private void addCustomerData()
 	{
 		try
@@ -200,9 +242,11 @@ public class ContactShowAllUI {
 			custModel.setDataVector(data, columnNames);
 			for(Customer cust : customers)
 			{
-				Object[] row = new Object[]{cust.getPhoneNo(), cust.getName(), cust.getAddress(), cust.getCity(), cust.getEmail(), cust.getCountry()};
+				Object[] row = new Object[]{cust.getPhoneNo(), cust.getName(), cust.getAddress(), cust.getCity(), cust.getEmail(), cust.getCountry(), "Rediger", "Slet"};
 				custModel.addRow(row);
 			}
+			addButtonsToCustomer(6);
+			addButtonsToCustomer(7);
 		}
 		catch(Exception e)
 		{
