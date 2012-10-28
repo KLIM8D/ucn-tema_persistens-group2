@@ -50,4 +50,10 @@ public class SupplierCtrl
 		DBContact DBC = new DBContact();
 		return DBC.getContactById(PhoneNo);
 	}
+	
+	public int deleteSupplier(Supplier supplier) throws Exception
+	{
+		DBSupplier DBS = new DBSupplier();
+		return DBS.deleteSupplier(supplier);
+	}
 }
