@@ -100,16 +100,15 @@ public class DBContact implements IFDBContact
 		if(getContactById(contact.getPhoneNo()) == null)
 			return 0;
 		
-		PreparedStatement query = _da.getCon().prepareStatement("UPDATE Contacts SET phoneNo = ?, name = ?, address = ?, zipCode = ?, city = ?, country = ? " +
-																"WHERE phoneNo = ?");
-		
-		query.setLong(1, contact.getPhoneNo());
-		query.setString(2, contact.getName());
-		query.setString(3, contact.getAddress());
-		query.setLong(4, contact.getZipCode());
-		query.setString(5, contact.getCity());
-		query.setString(6, contact.getEmail());
-		query.setString(7, contact.getCountry());
+		PreparedStatement query = _da.getCon().prepareStatement("UPDATE Contacts SET name = ?, address = ?, zipCode = ?, city = ?, email = ?, country = ? WHERE phoneNo = ?");
+
+		query.setString(1, contact.getName());
+		query.setString(2, contact.getAddress());
+		query.setLong(3, contact.getZipCode());
+		query.setString(4, contact.getCity());
+		query.setString(5, contact.getEmail());
+		query.setString(6, contact.getCountry());
+        query.setLong(7, contact.getPhoneNo());
 		_da.setSqlCommandText(query);
 
 		return _da.callCommand();

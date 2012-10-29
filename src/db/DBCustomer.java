@@ -67,7 +67,7 @@ public class DBCustomer implements IFDBCustomer
     @Override
 	public Customer getCustomerByName(String name) throws Exception
 	{
-        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Customer, Contacts WHERE name = ?");
+        PreparedStatement query = _da.getCon().prepareStatement("SELECT * FROM Customer, Contacts WHERE name = ? AND phoneNo = contactsKey");
         query.setString(1, name);
         _da.setSqlCommandText(query);
         ResultSet customerResult = _da.callCommandGetRow();
