@@ -167,7 +167,9 @@ public class DeliveryStatusUI
     		deliveryStatusses = _deliveryStatusCtrl.getAllDeliveryStatus();
     		String[] deliveryIds = new String[deliveryStatusses.size()];
     		for(int i = 0; i < deliveryStatusses.size(); i++)
-    			deliveryIds[i] = deliveryStatusses.get(i).getDeliveryState();   		
+    			deliveryIds[i] = deliveryStatusses.get(i).getDeliveryState();  
+    		
+    		return deliveryIds;
     	}
     	catch (Exception e)
     	{
