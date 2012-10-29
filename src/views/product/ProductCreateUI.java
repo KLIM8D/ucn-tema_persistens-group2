@@ -78,7 +78,7 @@ public class ProductCreateUI
         _frame = new JFrame();
         _frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         _frame.setTitle("Opret produkt");
-        _frame.setBounds(0, 0, 509, 528);
+        _frame.setBounds(0, 0, 509, 542);
         _frame.setResizable(false);
         _frame.setLocationRelativeTo(null);
         _frame.setVisible(true);
