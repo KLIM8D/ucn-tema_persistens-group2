@@ -51,7 +51,8 @@ public class OrderShowAllUI
 
     }
 
-    private void createElements()
+    @SuppressWarnings("serial")
+	private void createElements()
     {
         _saCtrl = new SalesOrderCtrl();
         _panel = new JPanel();

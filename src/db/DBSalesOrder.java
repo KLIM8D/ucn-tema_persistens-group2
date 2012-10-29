@@ -205,6 +205,7 @@ public class DBSalesOrder implements IFDBSalesOrder
 		return salesOrder;	
 	}
 	
+	@SuppressWarnings("unused")
 	private DeliveryStatus buildDeliveryStatus(ResultSet row) throws Exception
 	{
 		if(row == null)
