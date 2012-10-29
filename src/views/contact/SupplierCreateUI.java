@@ -209,7 +209,7 @@ public class SupplierCreateUI
             String address = txtAddress.getText();
             long zipCode = Long.parseLong(txtZipCode.getText());
             String city = txtCity.getText();
-            long phoneNo = Long.parseLong(txtZipCode.getText());
+            long phoneNo = Long.parseLong(txtPhoneNo.getText());
             String email = txtEmail.getText();
             String country = txtCountry.getText();
             String contactPerson = txtContactPerson.getText();
