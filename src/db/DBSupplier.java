@@ -124,6 +124,7 @@ public class DBSupplier implements IFDBSupplier
         query.setLong(1, supplier.getPhoneNo());
         query.setString(2, supplier.getContactPerson());
         query.setString(3, supplier.getBankAccount());
+        query.setLong(4, supplier.getPhoneNo());
         _da.setSqlCommandText(query);
 
         return _da.callCommand();
