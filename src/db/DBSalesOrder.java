@@ -153,6 +153,7 @@ public class DBSalesOrder implements IFDBSalesOrder
 		query.setLong(2, salesOrder.getDeliveryStatus().getDeliveryId());
 		query.setString(3, salesOrder.getOrderDate());
 		query.setString(4, salesOrder.getDeliveryDate());
+		query.setLong(5, salesOrder.getOrderId());
 		_da.setSqlCommandText(query);
 
 		return _da.callCommand();

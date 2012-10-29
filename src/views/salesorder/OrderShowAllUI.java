@@ -129,7 +129,7 @@ public class OrderShowAllUI
         txtCustomerId.setColumns(10);
         searchPanel.add(txtCustomerId);
 
-        JButton btnSearch = new JButton("Søg");
+        JButton btnSearch = new JButton("S\u00F8g");
         btnSearch.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)

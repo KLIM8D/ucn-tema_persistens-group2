@@ -148,4 +148,9 @@ public class SalesOrderCtrl
     {
         return _dbOrderItems.updateOrderItem(orderItem, orderKey, productKey);
     }
+    
+    public int deleteOrderItems(long orderId) throws Exception
+    {
+    	return _dbOrderItems.deleteOrderItems(orderId);
+    }
 }

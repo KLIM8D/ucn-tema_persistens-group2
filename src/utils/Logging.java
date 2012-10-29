@@ -26,17 +26,17 @@ public class Logging
         switch (messageIndex)
         {
             case 0:
-                return "Kunne ikke hente den nødvendige data. Prøv igen senere eller kontakt support";
+                return "Kunne ikke hente den n\u00F8dvendige data. Pr\u00F8v igen senere eller kontakt support";
             case 1:
-                return "Det var pt. ikke muligt at oprette et produkt. Prøv igen senere eller kontakt support";
+                return "Det var pt. ikke muligt at oprette et produkt. Pr\u00F8v igen senere eller kontakt support";
             case 2:
-                return "Det var pt. ikke muligt at opdatere produktet. Prøv igen senere eller kontakt support";
+                return "Det var pt. ikke muligt at opdatere produktet. Pr\u00F8v igen senere eller kontakt support";
             case 3:
-                return "Det var pt. ikke muligt at oprette en produkt kategori. Prøv igen senere eller kontakt support";
+                return "Det var pt. ikke muligt at oprette en produkt kategori. Pr\u00F8v igen senere eller kontakt support";
             case 4:
-                return "Det var pt. ikke muligt at opdatere produkt kategorien. Prøv igen senere eller kontakt support";
+                return "Det var pt. ikke muligt at opdatere produkt kategorien. Pr\u00F8v igen senere eller kontakt support";
             default:
-                return "Der skete en fejl i udførselen af denne handling. Kontakt support";
+                return "Der skete en fejl i udf\u00F8rselen af denne handling. Kontakt support";
         }
     }
 }

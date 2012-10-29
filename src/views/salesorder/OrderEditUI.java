@@ -10,6 +10,7 @@ import models.DeliveryStatus;
 import models.OrderItems;
 import models.Product;
 import models.SalesOrder;
+import utils.ButtonColumn;
 import utils.Helper;
 import utils.Logging;
 
@@ -69,6 +70,8 @@ public class OrderEditUI
 	//orderLines
 	private ArrayList<OrderItems> _orderLines;
 	private double _totalPrice;
+	private double _discount;
+	
 	public static JFrame createWindow(long orderId)
 	{
 		if(_instance == null)
@@ -78,9 +81,8 @@ public class OrderEditUI
 	}
 	
 	@SuppressWarnings("serial")
-	private OrderEditUI(long orderId)
+	private OrderEditUI(final long _orderId)
 	{
-		long _orderId = orderId;
 		_customerCtrl = new CustomerCtrl();
         _saCtrl = new SalesOrderCtrl();
         _productCtrl = new ProductCtrl();
@@ -243,12 +245,12 @@ public class OrderEditUI
 		btnCancel.setBounds(661, 531, 117, 25);
 		contentPane.add(btnCancel);
 		
-		btnPerform = new JButton("Udfør");
+		btnPerform = new JButton("Udf\u00F8r");
 		btnPerform.addActionListener(new ActionListener()
         {
 			public void actionPerformed(ActionEvent e)
             {
-				createOrder();
+				updateOrder(_orderId);
 			}
 		});
 		btnPerform.setBounds(532, 531, 117, 25);
@@ -334,7 +336,7 @@ public class OrderEditUI
 		lblQuantity.setBounds(12, 466, 70, 15);
 		contentPane.add(lblQuantity);
 		
-		btnAddorderline = new JButton("Tilføj");
+		btnAddorderline = new JButton("Tilf\u00F8j");
 		btnAddorderline.addActionListener(new ActionListener()
         {
 			public void actionPerformed(ActionEvent e)
@@ -356,13 +358,13 @@ public class OrderEditUI
 		
 		tblOrder = new JTable();
 		
-		columnNames = new String[]{"Produkt nummer", "Produkt navn", "Antal", "Enheds pris", "Moms", "Samlet pris"};
+		columnNames = new String[]{"#", "Produkt nummer", "Produkt navn", "Antal", "Enheds pris", "Moms", "Samlet pris", " "};
 		
 		tblOrder = new JTable()
 		{
 			public boolean isCellEditable(int data, int columns)
 			{
-				return false;
+				return columns == 7;
 			}
 		};
 		tblOrder.setBounds(12, 182, 766, 237);
@@ -406,7 +408,9 @@ public class OrderEditUI
         {
         	SalesOrder order = _saCtrl.getSalesOrderById(orderId, true);
             Customer cust = order.getCustomer();
-            //info with orderlines needed
+            _orderLines = order.getAllOrderItems();
+            addOrderLineData();
+            
             if(cust != null)
             {
             	txtPhoneNo.setText(String.valueOf(cust.getPhoneNo()));
@@ -420,6 +424,7 @@ public class OrderEditUI
                     txtIsBusiness.setText("Nej");
 
                 txtDiscount.setText(cust.getDiscount().doubleValue() + "%");
+                _discount = (100 - cust.getDiscount().doubleValue())/100;
 
                 DataAccess da = DataAccess.getInstance();
                 Date orderDate = new Date();
@@ -464,12 +469,43 @@ public class OrderEditUI
 	{
 		Object[][] data = {};
 		model.setDataVector(data, columnNames);
+        int index = 1;
 		for(OrderItems line : _orderLines)
 		{
-			Object[] row = new Object[]{ line.getProduct().getId(), line.getProduct().getName(), line.getQuantity(), calcMoms(line.getProduct().getSalesPrice().toString()), getMoms(line.getProduct().getSalesPrice().toString()), line.getUnitPrice().doubleValue() * line.getQuantity() };
+			Object[] row = new Object[]{index, line.getProduct().getId(), line.getProduct().getName(), line.getQuantity(), calcMoms(line.getProduct().getSalesPrice().toString()), getMoms(line.getProduct().getSalesPrice().toString()), (line.getUnitPrice().doubleValue() * line.getQuantity())*_discount, "Slet" };
 			model.addRow(row);
+            index++;
 		}
+        addButton(7);
 	}
+	
+	private void addButton(final int columnIndex)
+    {
+        @SuppressWarnings("serial")
+        Action show = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JTable table = (JTable) e.getSource();
+                int row = Integer.valueOf(e.getActionCommand());
+                int index = Integer.parseInt(table.getValueAt(row, 0).toString()) - 1;
+                try
+                {
+                    if(Helper.showConfirmDialog("ordre linje") == 1)
+                    {
+                        _orderLines.remove(index);
+                        addOrderLineData();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, Logging.handleException(ex, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        };
+        ButtonColumn buttonColumn = new ButtonColumn(tblOrder, show, columnIndex);
+        buttonColumn.setMnemonic(KeyEvent.VK_D);
+    }
 	
 	private double calcMoms(String price)
 	{
@@ -491,27 +527,27 @@ public class OrderEditUI
 		txtCalcPrice.setText(calcMoms(_totalPrice + "") + "");
 	}
 	
-	private void createOrder()
+	private void updateOrder(long _orderId)
 	{
 		try
 		{
-            DataAccess da = DataAccess.getInstance();
-			long orderId = da.getNextId("SalesOrder");
             long customerId = Long.parseLong(txtPhoneNo.getText());
             Customer customer = _customerCtrl.getCustomerById(customerId);
             DeliveryStatus status = _statusCtrl.getDeliveryStatusById(drpOrderStatus.getSelectedIndex() + 1);
+            String orderDate = txtOrderDate.getText();
+            String deliveryDate = txtDeliveryDate.getText();
 
-			if(orderId != 0)
-			{
-				for(OrderItems line : _orderLines)
-					//insert orderline
-				
-				JOptionPane.showMessageDialog(null, "Ordren er nu oprettet!", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
-				_instance = null;
-				_frame.dispose();
-			}
-			else
-				JOptionPane.showMessageDialog(null, "Der skete en fejl under oprettelsen af ordren", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
+            SalesOrder salesOrder = new SalesOrder(_orderId, orderDate, deliveryDate, status, customer);
+            _saCtrl.updateSalesOrder(salesOrder);
+
+            _saCtrl.deleteOrderItems(_orderId);
+            
+            for(OrderItems item : _orderLines)
+                _saCtrl.insertOrderItem(item, _orderId, item.getProduct().getId());
+
+            JOptionPane.showMessageDialog(null, "Ordren er nu "  + "\u00E6" + "ndret", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
+            _instance = null;
+            _frame.dispose();
 		}
 		catch (Exception e) 
 		{

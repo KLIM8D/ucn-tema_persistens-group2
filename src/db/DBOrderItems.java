@@ -162,4 +162,13 @@ public class DBOrderItems implements IFDBOrderItems
 		
 		return orderItem;	
 	}
+	
+	public int deleteOrderItems(long orderId) throws Exception
+    {
+        PreparedStatement query = _da.getCon().prepareStatement("DELETE FROM OrderItems WHERE orderKey = ?");
+        query.setLong(1, orderId);
+        _da.setSqlCommandText(query);
+
+        return _da.callCommand();
+    }
 }
