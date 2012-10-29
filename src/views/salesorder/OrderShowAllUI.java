@@ -220,7 +220,7 @@ public class OrderShowAllUI
             model.setDataVector(data, columnNames);
             for(SalesOrder order : salesOrders)
             {
-                Object[] row = new Object[]{order.getOrderId(), order.getContact().getName(), order.getOrderDate(), order.getDeliveryStatus().getDeliveryState(), order.getDeliveryDate(), "Rediger", "Slet" };
+                Object[] row = new Object[]{order.getOrderId(), order.getCustomer().getName(), order.getOrderDate(), order.getDeliveryStatus().getDeliveryState(), order.getDeliveryDate(), "Rediger", "Slet" };
                 model.addRow(row);
             }
             addButton(5);
@@ -243,7 +243,7 @@ public class OrderShowAllUI
             {
                 Object[][] row = new Object[][]
                 {
-                        {order.getOrderId(), order.getContact().getName(), order.getOrderDate(), order.getDeliveryStatus().getDeliveryState(), order.getDeliveryDate(), "Rediger", "Slet" }
+                        {order.getOrderId(), order.getCustomer().getName(), order.getOrderDate(), order.getDeliveryStatus().getDeliveryState(), order.getDeliveryDate(), "Rediger", "Slet" }
                 };
                 model.setDataVector(row, columnNames);
             }
@@ -271,7 +271,7 @@ public class OrderShowAllUI
                 model.setDataVector(data, columnNames);
                 for(SalesOrder order : salesOrders)
                 {
-                    Object[] row = new Object[]{order.getOrderId(), order.getContact().getName(), order.getOrderDate(), order.getDeliveryStatus().getDeliveryState(), order.getDeliveryDate(), "Rediger", "Slet" };
+                    Object[] row = new Object[]{order.getOrderId(), order.getCustomer().getName(), order.getOrderDate(), order.getDeliveryStatus().getDeliveryState(), order.getDeliveryDate(), "Rediger", "Slet" };
                     model.addRow(row);
                 }
             }

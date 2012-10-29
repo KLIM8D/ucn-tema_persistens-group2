@@ -5,10 +5,7 @@ import controllers.DeliveryStatusCtrl;
 import controllers.ProductCtrl;
 import controllers.SalesOrderCtrl;
 import db.DataAccess;
-import models.Customer;
-import models.DeliveryStatus;
-import models.OrderItems;
-import models.Product;
+import models.*;
 import utils.Helper;
 import utils.Logging;
 
@@ -68,6 +65,8 @@ public class OrderCreateUI
 	//orderLines
 	private ArrayList<OrderItems> _orderLines;
 	private double _totalPrice;
+    private double _discount;
+
 	public static JFrame createWindow()
 	{
 		if(_instance == null)
@@ -404,6 +403,7 @@ public class OrderCreateUI
                     txtIsBusiness.setText("Nej");
 
                 txtDiscount.setText(cust.getDiscount().doubleValue() + "%");
+                _discount = (100 - cust.getDiscount().doubleValue())/100;
 
                 DataAccess da = DataAccess.getInstance();
                 Date orderDate = new Date();
@@ -420,7 +420,6 @@ public class OrderCreateUI
         {
             JOptionPane.showMessageDialog(null, Logging.handleException(e, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
         }
-
 	}
 	
 	private void createOrderLine(long itemNumber, int quantity)
@@ -450,7 +449,7 @@ public class OrderCreateUI
 		model.setDataVector(data, columnNames);
 		for(OrderItems line : _orderLines)
 		{
-			Object[] row = new Object[]{ line.getProduct().getId(), line.getProduct().getName(), line.getQuantity(), calcMoms(line.getProduct().getSalesPrice().toString()), getMoms(line.getProduct().getSalesPrice().toString()), line.getUnitPrice().doubleValue() * line.getQuantity() };
+			Object[] row = new Object[]{ line.getProduct().getId(), line.getProduct().getName(), line.getQuantity(), calcMoms(line.getProduct().getSalesPrice().toString()), getMoms(line.getProduct().getSalesPrice().toString()), (line.getUnitPrice().doubleValue() * line.getQuantity())*_discount };
 			model.addRow(row);
 		}
 	}
@@ -484,18 +483,19 @@ public class OrderCreateUI
             long customerId = Long.parseLong(txtPhoneNo.getText());
             Customer customer = _customerCtrl.getCustomerById(customerId);
             DeliveryStatus status = _statusCtrl.getDeliveryStatusById(drpOrderStatus.getSelectedIndex() + 1);
+            String orderDate = txtOrderDate.getText();
+            String deliveryDate = txtDeliveryDate.getText();
 
-			if(orderId != 0)
-			{
-				for(OrderItems line : _orderLines)
-					//insert orderline
-				
-				JOptionPane.showMessageDialog(null, "Ordren er nu oprettet!", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
-				_instance = null;
-				_frame.dispose();
-			}
-			else
-				JOptionPane.showMessageDialog(null, "Der skete en fejl under oprettelsen af ordren", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
+            SalesOrder salesOrder = new SalesOrder(orderId, orderDate, deliveryDate, status, customer);
+            _saCtrl.insertSalesOrder(salesOrder);
+
+            for(OrderItems item : _orderLines)
+                _saCtrl.insertOrderItem(item, orderId, item.getProduct().getId());
+
+            JOptionPane.showMessageDialog(null, "Ordren er nu oprettet!", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
+            _instance = null;
+            _frame.dispose();
+
 		}
 		catch (Exception e) 
 		{

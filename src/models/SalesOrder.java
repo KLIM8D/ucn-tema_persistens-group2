@@ -6,7 +6,7 @@ public class SalesOrder
 	private String _orderDate;
 	private String _deliveryDate;
 	private DeliveryStatus _deliveryStatus;
-	private Contact _contact;
+	private Customer _customer;
 	
 	
 	public SalesOrder(long orderId, String orderDate, String deliveryDate)
@@ -16,13 +16,13 @@ public class SalesOrder
 		_deliveryDate = deliveryDate;
 	}
 	
-	public SalesOrder(long orderId, String orderDate, String deliveryDate, DeliveryStatus deliveryStatus, Contact contact)
+	public SalesOrder(long orderId, String orderDate, String deliveryDate, DeliveryStatus deliveryStatus, Customer customer)
 	{
 		_orderId = orderId;
 		_orderDate = orderDate;
 		_deliveryDate = deliveryDate;
 		_deliveryStatus = deliveryStatus;
-		_contact = contact;
+		_customer = customer;
 	}
 
 	public long getOrderId()
@@ -45,8 +45,8 @@ public class SalesOrder
 	public void setDeliveryStatus(DeliveryStatus deliveryStatus) 
 	{ _deliveryStatus = deliveryStatus; }
 	
-	public Contact getContact()
-	{ return _contact; }
-	public void setContact(Contact contact)
-	{ _contact = contact; }
+	public Customer getCustomer()
+	{ return _customer; }
+	public void setCustomer(Customer customer)
+	{ _customer = customer; }
 }

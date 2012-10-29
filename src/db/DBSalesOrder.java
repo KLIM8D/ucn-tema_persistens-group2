@@ -1,5 +1,6 @@
 package db;
 
+import models.Customer;
 import models.SalesOrder;
 import models.DeliveryStatus;
 import models.Contact;
@@ -124,7 +125,7 @@ public class DBSalesOrder implements IFDBSalesOrder
 			return 0;
 		
 		PreparedStatement query = _da.getCon().prepareStatement("INSERT INTO SalesOrder (contactsKey, deliveryKey, orderDate, deliveryDate) VALUES (?, ?, ?, ?)");
-		query.setLong(1, salesOrder.getContact().getPhoneNo());
+		query.setLong(1, salesOrder.getCustomer().getPhoneNo());
 		query.setLong(2, salesOrder.getDeliveryStatus().getDeliveryId());
 		query.setString(3, salesOrder.getOrderDate());
 		query.setString(4, salesOrder.getDeliveryDate());
@@ -149,7 +150,7 @@ public class DBSalesOrder implements IFDBSalesOrder
 			return 0;
 			
 		PreparedStatement query = _da.getCon().prepareStatement("UPDATE SalesOrder SET contactsKey = ?, deliveryKey = ?, orderDate = ?, deliveryDate = ? WHERE orderId = ?");
-		query.setLong(1, salesOrder.getContact().getPhoneNo());
+		query.setLong(1, salesOrder.getCustomer().getPhoneNo());
 		query.setLong(2, salesOrder.getDeliveryStatus().getDeliveryId());
 		query.setString(3, salesOrder.getOrderDate());
 		query.setString(4, salesOrder.getDeliveryDate());
@@ -195,11 +196,11 @@ public class DBSalesOrder implements IFDBSalesOrder
             DeliveryStatus status = dbDeliveryStatus.getDeliveryStatusById(deliveryId);
             salesOrder.setDeliveryStatus(status);
 			
-			// Contact
+			// Customer
 			long contactsKey = row.getLong("contactsKey");
-			DBContact dbContact = new DBContact(); 				
-			Contact contact = dbContact.getContactById(contactsKey);
-			salesOrder.setContact(contact);
+			DBCustomer dbCustomer = new DBCustomer();
+			Customer customer = dbCustomer.getCustomerById(contactsKey);
+			salesOrder.setCustomer(customer);
 		}
 
 		return salesOrder;	
