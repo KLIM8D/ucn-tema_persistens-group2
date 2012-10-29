@@ -60,7 +60,7 @@ public class ProductShowAllUI
         //Top navigation
         JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         navPanel.setBounds(5, 0, 825, 35);
-        JButton btnCreateProduct = new JButton("Tilføj produkt");
+        JButton btnCreateProduct = new JButton("Tilf" + "\u00F8" + "j produkt");
         btnCreateProduct.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
@@ -115,7 +115,7 @@ public class ProductShowAllUI
         txtProductName.setColumns(10);
         searchPanel.add(txtProductName);
 
-        JButton btnSearch = new JButton("Søg");
+        JButton btnSearch = new JButton("S" + "\u00F8" + "g");
         btnSearch.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)

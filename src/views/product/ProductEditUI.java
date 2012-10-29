@@ -112,7 +112,7 @@ public class ProductEditUI
         lblCategory.setBounds(12, 64, 99, 15);
         contentPane.add(lblCategory);
 
-        JLabel lblSupplier = new JLabel("Leverandør");
+        JLabel lblSupplier = new JLabel("Leverand" + "\u00F8" + "r");
         lblSupplier.setBounds(12, 91, 99, 15);
         contentPane.add(lblSupplier);
 
@@ -154,7 +154,7 @@ public class ProductEditUI
         lblCurrency.setBounds(262, 145, 70, 15);
         contentPane.add(lblCurrency);
 
-        JLabel lblPurchPrice = new JLabel("Købs pris");
+        JLabel lblPurchPrice = new JLabel("K" + "\u00F8" + "bs pris");
         lblPurchPrice.setBounds(12, 172, 70, 15);
         contentPane.add(lblPurchPrice);
 
@@ -215,7 +215,7 @@ public class ProductEditUI
         contentPane.add(txtDataAttribute);
         txtDataAttribute.setColumns(10);
 
-        JLabel lblDataValue = new JLabel("Værdi");
+        JLabel lblDataValue = new JLabel("V" + "\u00E6" + "rdi");
         lblDataValue.setBounds(12, 295, 110, 15);
         contentPane.add(lblDataValue);
 
@@ -224,7 +224,7 @@ public class ProductEditUI
         contentPane.add(txtDataValue);
         txtDataValue.setColumns(10);
 
-        JButton btnProductData = new JButton("Tilføj data");
+        JButton btnProductData = new JButton("Tilf" + "\u00F8" + "j data");
         btnProductData.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -243,7 +243,7 @@ public class ProductEditUI
         btnProductData.setBounds(375, 322, 117, 25);
         contentPane.add(btnProductData);
 
-        columnNames = new String[]{"#", "Attribut", "Værdi", " "};
+        columnNames = new String[]{"#", "Attribut", "V" + "\u00E6" + "rdi", " "};
 
         tblData = new JTable()
         {

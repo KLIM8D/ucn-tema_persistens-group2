@@ -124,7 +124,7 @@ public class ProductCategoryUI
                 if(txtEditCategory.getText().length() > 0)
                     updateCategory();
                 else
-                    JOptionPane.showMessageDialog(null, "Feltet kan ikke være tomt", "Information", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Feltet kan ikke v" + "\u00E6" + "re tomt", "Information", JOptionPane.WARNING_MESSAGE);
             }
         });
         btnUpdate.setBounds(400, 121, 100, 25);
@@ -156,7 +156,7 @@ public class ProductCategoryUI
                 if(txtCreateCategory.getText().length() > 0)
                     createCategory();
                 else
-                    JOptionPane.showMessageDialog(null, "Feltet kan ikke være tomt", "Information", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Feltet kan ikke v" + "\u00E6" + "re tomt", "Information", JOptionPane.WARNING_MESSAGE);
             }
         });
         btnCreate.setBounds(400, 225, 100, 25);
