@@ -36,6 +36,8 @@ public class CustomerCtrl
 	public int insertCustomer(Customer supplier) throws Exception
 	{
 		DBCustomer DBC = new DBCustomer();
+		DBContact DBCon = new DBContact();
+		DBCon.updateContact(new Contact(supplier.getName(), supplier.getAddress(), supplier.getZipCode(), supplier.getCity(), supplier.getPhoneNo(), supplier.getEmail(), supplier.getCountry()));
 		return DBC.insertCustomer(supplier);
 	}
 	
