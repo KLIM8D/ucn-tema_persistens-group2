@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OrderCreateUI
 {
@@ -30,6 +31,9 @@ public class OrderCreateUI
 	private JTextField txtAddress;
 	private JTextField txtZipCode;
 	private JTextField txtCity;
+    private JTextField txtDiscount;
+    private JTextField txtOrderDate;
+    private JTextField txtDeliveryDate;
 	private JSeparator separator_1;
 	private JLabel lblOrderStatus;
 	private JComboBox<String> drpOrderStatus;
@@ -137,12 +141,40 @@ public class OrderCreateUI
 		txtPhoneNo.setBounds(78, 10, 198, 17);
 		contentPane.add(txtPhoneNo);
 		txtPhoneNo.setColumns(10);
+
+        JLabel lblDiscount = new JLabel("Rabat sats");
+        lblDiscount.setBounds(305, 12, 100, 15);
+        contentPane.add(lblDiscount);
+
+        txtDiscount = new JTextField();
+        txtDiscount.setEnabled(false);
+        txtDiscount.setColumns(10);
+        txtDiscount.setBounds(420, 10, 198, 17);
+        contentPane.add(txtDiscount);
+
+        JLabel lblOrderDate = new JLabel("Order dato");
+        lblOrderDate.setBounds(305, 35, 100, 15);
+        contentPane.add(lblOrderDate);
+
+        txtOrderDate = new JTextField();
+        txtOrderDate.setColumns(10);
+        txtOrderDate.setBounds(420, 35, 198, 17);
+        contentPane.add(txtOrderDate);
 		
 		txtName = new JTextField();
 		txtName.setEnabled(false);
 		txtName.setColumns(10);
 		txtName.setBounds(78, 35, 198, 17);
 		contentPane.add(txtName);
+
+        JLabel lblDeliveryDate = new JLabel("Leveringsdato");
+        lblDeliveryDate.setBounds(305, 60, 120, 15);
+        contentPane.add(lblDeliveryDate);
+
+        txtDeliveryDate = new JTextField();
+        txtDeliveryDate.setColumns(10);
+        txtDeliveryDate.setBounds(420, 60, 198, 17);
+        contentPane.add(txtDeliveryDate);
 		
 		txtAddress = new JTextField();
 		txtAddress.setEnabled(false);
@@ -370,6 +402,16 @@ public class OrderCreateUI
                     txtIsBusiness.setText("Ja");
                 else
                     txtIsBusiness.setText("Nej");
+
+                txtDiscount.setText(cust.getDiscount().doubleValue() + "%");
+
+                DataAccess da = DataAccess.getInstance();
+                Date orderDate = new Date();
+                String fOrderDate = da.dateToSqlDate(orderDate);
+                txtOrderDate.setText(fOrderDate);
+                Date deliveryDate = Helper.addDays(orderDate, 1);
+                String fDeliveryDate = da.dateToSqlDate(deliveryDate);
+                txtDeliveryDate.setText(fDeliveryDate);
             }
             else
                 JOptionPane.showMessageDialog(null, "Der blev ikke fundet nogen kunde med det telefon nummer", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
