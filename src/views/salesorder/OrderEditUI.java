@@ -9,6 +9,7 @@ import models.Customer;
 import models.DeliveryStatus;
 import models.OrderItems;
 import models.Product;
+import models.SalesOrder;
 import utils.Helper;
 import utils.Logging;
 
@@ -68,18 +69,18 @@ public class OrderEditUI
 	//orderLines
 	private ArrayList<OrderItems> _orderLines;
 	private double _totalPrice;
-	public static JFrame createWindow(long phoneNo)
+	public static JFrame createWindow(long orderId)
 	{
 		if(_instance == null)
-			_instance = new OrderEditUI(phoneNo);
+			_instance = new OrderEditUI(orderId);
 		
 		return _frame;
 	}
 	
 	@SuppressWarnings("serial")
-	private OrderEditUI(long phoneNo)
+	private OrderEditUI(long orderId)
 	{
-		long _phoneNo = phoneNo;
+		long _orderId = orderId;
 		_customerCtrl = new CustomerCtrl();
         _saCtrl = new SalesOrderCtrl();
         _productCtrl = new ProductCtrl();
@@ -140,6 +141,7 @@ public class OrderEditUI
 			}
 		});
 		txtPhoneNo.setBounds(78, 10, 198, 17);
+		txtPhoneNo.setEnabled(false);
 		txtPhoneNo.setEditable(false);
 		contentPane.add(txtPhoneNo);
 		txtPhoneNo.setColumns(10);
@@ -375,8 +377,16 @@ public class OrderEditUI
     	scrollPane.setPreferredSize(new Dimension(766, 237));
     	scrollPane.setLocation(12, 182);
 		contentPane.add(scrollPane);
-		
-		getCustomerInfo(_phoneNo);
+        try
+        {
+        	SalesOrder order = _saCtrl.getSalesOrderById(orderId, true);
+        	long _customerId = order.getCustomer().getPhoneNo();
+        	getCustomerInfo(_customerId);
+    	}
+    	catch (Exception e)
+    	{
+    		JOptionPane.showMessageDialog(null, Logging.handleException(e, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+    	}
 	}
 
     private void addOrderStatuses()
@@ -405,6 +415,7 @@ public class OrderEditUI
             Customer cust = _customerCtrl.getCustomerById(customerId);
             if(cust != null)
             {
+            	txtPhoneNo.setText(String.valueOf(cust.getPhoneNo()));
                 txtName.setText(cust.getName());
                 txtAddress.setText(cust.getAddress());
                 txtZipCode.setText(cust.getZipCode() + "");
