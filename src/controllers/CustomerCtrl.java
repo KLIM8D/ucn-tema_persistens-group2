@@ -2,7 +2,9 @@ package controllers;
 
 import java.util.ArrayList;
 
+import models.Contact;
 import models.Customer;
+import db.DBContact;
 import db.DBCustomer;
 
 public class CustomerCtrl
@@ -40,6 +42,8 @@ public class CustomerCtrl
 	public int updateCustomer(Customer supplier) throws Exception
 	{
 		DBCustomer DBC = new DBCustomer();
+		DBContact DBCon = new DBContact();
+		DBCon.updateContact(new Contact(supplier.getName(), supplier.getAddress(), supplier.getZipCode(), supplier.getCity(), supplier.getPhoneNo(), supplier.getEmail(), supplier.getCountry()));
 		return DBC.updateCustomer(supplier);
 	}
 	
