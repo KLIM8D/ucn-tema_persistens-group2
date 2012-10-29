@@ -284,7 +284,7 @@ public class ContactShowAllUI {
 					{
 						if(Helper.showConfirmDialog("leverandør") == 1)
 						{
-							Supplier supplier = _suppCtrl.getSupplierById(itemNumber, true);
+							Supplier supplier = _suppCtrl.getSupplierById(itemNumber);
 							_suppCtrl.deleteSupplier(supplier);
 							addSupplierData();
 						}
@@ -379,7 +379,7 @@ public class ContactShowAllUI {
 	{
 		try
 		{
-			ArrayList<Supplier> suppliers = _suppCtrl.getAllSuppliers(true);
+			ArrayList<Supplier> suppliers = _suppCtrl.getAllSuppliers();
 			Object[][] data = {};
 			suppModel.setDataVector(data, columnNames);
 			for(Supplier supp : suppliers)
@@ -400,7 +400,7 @@ public class ContactShowAllUI {
 	{
 		try
 		{
-			Supplier supp = _suppCtrl.getSupplierById(itemNumber, true);
+			Supplier supp = _suppCtrl.getSupplierById(itemNumber);
 			
 			if(supp != null)
 			{
@@ -427,7 +427,7 @@ public class ContactShowAllUI {
 	{
 		try
 		{
-			Supplier supp = _suppCtrl.getSupplierByName(itemName, true);
+			Supplier supp = _suppCtrl.getSupplierByName(itemName);
 			
 			if(supp != null)
 			{

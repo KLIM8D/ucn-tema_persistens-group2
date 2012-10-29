@@ -14,20 +14,20 @@ public class SupplierCtrl
 		
 	}
 	
-	public ArrayList<Supplier> getAllSuppliers(boolean retrieveAssociation) throws Exception
+	public ArrayList<Supplier> getAllSuppliers() throws Exception
 	{
 		DBSupplier DBS = new DBSupplier();
 		ArrayList<Supplier> returnList = DBS.getAllSuppliers();
 		return returnList;
 	}
 	
-	public Supplier getSupplierById(long id, boolean retrieveAssociation) throws Exception
+	public Supplier getSupplierById(long id) throws Exception
 	{
 		DBSupplier DBS = new DBSupplier();
 		return DBS.getSupplierById(id);
 	}
 	
-	public Supplier getSupplierByName(String name, boolean retrieveAssociation) throws Exception
+	public Supplier getSupplierByName(String name) throws Exception
 	{
 		DBSupplier DBS = new DBSupplier();
 		return DBS.getSupplierByName(name);
@@ -44,6 +44,8 @@ public class SupplierCtrl
 	public int updateSupplier(Supplier supplier) throws Exception
 	{
 		DBSupplier DBS = new DBSupplier();
+		DBContact DBC = new DBContact();
+		DBC.updateContact(new Contact(supplier.getName(), supplier.getAddress(), supplier.getZipCode(), supplier.getCity(), supplier.getPhoneNo(), supplier.getEmail(), supplier.getCountry()));
 		return DBS.updateSupplier(supplier);
 	}
 	

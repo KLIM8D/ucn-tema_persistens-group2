@@ -224,7 +224,7 @@ public class SupplierEditUI
     private void addData(long data)
     {
     	try {
-    		Supplier supplier = _suppCtrl.getSupplierById(data, true);
+    		Supplier supplier = _suppCtrl.getSupplierById(data);
     		if(supplier != null)
     		{
     			txtName.setText(supplier.getName());

@@ -68,7 +68,8 @@ public class ProductEditUI
         createElements();
     }
 
-    private void createElements()
+    @SuppressWarnings("serial")
+	private void createElements()
     {
         _prodCtrl = new ProductCtrl();
         _categoryCtrl = new ProductCategoryCtrl();
@@ -317,7 +318,7 @@ public class ProductEditUI
             String categoryName = drpCategories.getSelectedItem().toString();
             String supplierName= drpSuppliers.getSelectedItem().toString();
             ProductCategory category = _categoryCtrl.getProductCategoryByName(categoryName);
-            Supplier supplier = _supplierCtrl.getSupplierByName(supplierName, true);
+            Supplier supplier = _supplierCtrl.getSupplierByName(supplierName);
             Product product = new Product(itemNumber, itemName, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minInStock, category, supplier);
 
             product.setProductData(_productDataCollection);
@@ -388,7 +389,7 @@ public class ProductEditUI
         ArrayList<Supplier> suppliers;
         try
         {
-            suppliers = _supplierCtrl.getAllSuppliers(true);
+            suppliers = _supplierCtrl.getAllSuppliers();
             String[] categoryNames = new String[suppliers.size()];
             for(int i = 0; i < suppliers.size(); i++)
                 categoryNames[i] = suppliers.get(i).getName();

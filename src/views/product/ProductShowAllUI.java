@@ -47,7 +47,8 @@ public class ProductShowAllUI
 
     }
 
-    private void createElements()
+    @SuppressWarnings("serial")
+	private void createElements()
     {
         _prodCtrl = new ProductCtrl();
         _panel = new JPanel();
