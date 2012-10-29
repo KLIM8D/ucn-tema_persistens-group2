@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="11.5.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>440</x>
+      <y>60</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>OrderUI
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>440</x>
+      <y>220</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>OrderCTRL
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>440</x>
+      <y>430</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>DBOOrderItems
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>710</x>
+      <y>390</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>DBOSalesOrder
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>250</x>
+      <y>390</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>DBOCustomer
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>250</x>
+      <y>220</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>CustomerCTRL
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>630</x>
+      <y>220</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ProductCTRL
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1020</x>
+      <y>220</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>DBOProduct
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>190</x>
+      <y>50</y>
+      <w>270</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+1. cu = getCustomer(customerId)</panel_attributes>
+    <additional_attributes>250;50;140;50;140;170</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>190</x>
+      <y>260</y>
+      <w>270</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+1a. cu = getCustomer(customerId)</panel_attributes>
+    <additional_attributes>140;30;140;130</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>570</x>
+      <y>50</y>
+      <w>258</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+2. pr = getProduct(productId)</panel_attributes>
+    <additional_attributes>30;50;140;50;140;170</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>380</x>
+      <y>100</y>
+      <w>274</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+3. or = createSalesOrder(cu)
+4. createOrderItem(or, pr, quantity)</panel_attributes>
+    <additional_attributes>140;30;140;120</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>510</x>
+      <y>260</y>
+      <w>300</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+3a. createSalesOrder(cu)
+5. addOrderItem(ol)</panel_attributes>
+    <additional_attributes>30;30;30;50;280;50;280;130</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>370</x>
+      <y>260</y>
+      <w>270</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+4a. ol = new OrderItem(pr, quantity)</panel_attributes>
+    <additional_attributes>140;30;140;170</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>60</x>
+      <y>490</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Customer
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>0</x>
+      <y>380</y>
+      <w>270</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+1b. cu = createCustomer(**param)</panel_attributes>
+    <additional_attributes>250;50;140;50;140;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>440</x>
+      <y>570</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>OrderItems
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>360</x>
+      <y>470</y>
+      <w>290</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+4b. ol = createOrderItem(pr, quantity)
+</panel_attributes>
+    <additional_attributes>150;30;150;100</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>710</x>
+      <y>530</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>SalesOrder
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>650</x>
+      <y>430</y>
+      <w>268</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+3b. ol = new SalesOrder(**param)</panel_attributes>
+    <additional_attributes>140;30;140;100</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>760</x>
+      <y>200</y>
+      <w>280</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+2a. pr = getProduct(productId)</panel_attributes>
+    <additional_attributes>30;50;260;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1020</x>
+      <y>350</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Product
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>960</x>
+      <y>260</y>
+      <w>248</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+2b. pr = new Product(**param)</panel_attributes>
+    <additional_attributes>130;30;130;90</additional_attributes>
+  </element>
+</diagram>
