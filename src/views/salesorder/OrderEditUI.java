@@ -377,16 +377,8 @@ public class OrderEditUI
     	scrollPane.setPreferredSize(new Dimension(766, 237));
     	scrollPane.setLocation(12, 182);
 		contentPane.add(scrollPane);
-        try
-        {
-        	SalesOrder order = _saCtrl.getSalesOrderById(orderId, true);
-        	long _customerId = order.getCustomer().getPhoneNo();
-        	getCustomerInfo(_customerId);
-    	}
-    	catch (Exception e)
-    	{
-    		JOptionPane.showMessageDialog(null, Logging.handleException(e, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
-    	}
+
+        	getCustomerInfo(_orderId);
 	}
 
     private void addOrderStatuses()
@@ -408,11 +400,13 @@ public class OrderEditUI
         }
     }
 	
-	private void getCustomerInfo(long customerId)
+	private void getCustomerInfo(long orderId)
 	{
         try
         {
-            Customer cust = _customerCtrl.getCustomerById(customerId);
+        	SalesOrder order = _saCtrl.getSalesOrderById(orderId, true);
+            Customer cust = order.getCustomer();
+            //info with orderlines needed
             if(cust != null)
             {
             	txtPhoneNo.setText(String.valueOf(cust.getPhoneNo()));
