@@ -50,7 +50,7 @@ public class SupplierCreateUI
 
         _frame = new JFrame();
         _frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        _frame.setTitle("Tilføj ny leverandør");
+        _frame.setTitle("Tilf" + "\u00F8" + "j ny leverand" + "\u00F8" + "r");
         _frame.setBounds(0,0,509,295);
         _frame.setResizable(false);
         _frame.setVisible(true);
@@ -218,7 +218,7 @@ public class SupplierCreateUI
 
             _supCtrl.insertSupplier(supplier);
 
-            JOptionPane.showMessageDialog(null, "Leverandøren er nu oprettet", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Leverand" + "\u00F8" + "ren er nu oprettet", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
             _instance = null;
             _frame.dispose();
         }

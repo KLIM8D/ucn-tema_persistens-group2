@@ -51,7 +51,7 @@ public class SupplierEditUI
 
         _frame = new JFrame();
         _frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        _frame.setTitle("Rediger leverandør");
+        _frame.setTitle("Rediger leverand" + "\u00F8" + "r");
         _frame.setBounds(0,0,509,295);
         _frame.setResizable(false);
         _frame.setVisible(true);
@@ -211,7 +211,7 @@ public class SupplierEditUI
     		Supplier supplier = new Supplier(name, address, zipCode, city, phoneNo, eMail, country, contactPerson, bankAccount);
     		
     		_suppCtrl.updateSupplier(supplier);
-    		JOptionPane.showMessageDialog(null, "Leverandøren er nu opdateret", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Leverand" + "\u00F8" + "ren er nu opdateret", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
     		_instance = null;
     		_frame.dispose();
     	}
@@ -239,7 +239,7 @@ public class SupplierEditUI
     		}
     		else
     		{
-    			JOptionPane.showMessageDialog(null, "Der skete en fejl i hentning af leverandør information", "Fejl", JOptionPane.WARNING_MESSAGE);
+    			JOptionPane.showMessageDialog(null, "Der skete en fejl i hentning af leverand" + "\u00F8" + "r information", "Fejl", JOptionPane.WARNING_MESSAGE);
     		}
     	}
     	catch (Exception ex)

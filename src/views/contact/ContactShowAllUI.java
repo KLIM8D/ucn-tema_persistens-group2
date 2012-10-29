@@ -73,7 +73,7 @@ public class ContactShowAllUI {
 		pnlCustomers.setLayout(null);
 		
 		JPanel pnlSuppliers = new JPanel();
-		tabContacts.addTab("Leverandører", null, pnlSuppliers, null);
+		tabContacts.addTab("Leverand" + "\u00F8" + "rer", null, pnlSuppliers, null);
 		pnlSuppliers.setLayout(null);
 		
 		//Customer top field
@@ -93,7 +93,7 @@ public class ContactShowAllUI {
 		txtCustName.setBounds(313,12,115,19);
 		pnlCustomers.add(txtCustName);
 		
-		JButton btnSearchCustomer = new JButton("Søg");
+		JButton btnSearchCustomer = new JButton("S" + "\u00F8" + "g");
 		btnSearchCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(txtCustPhoneNo.getText().length() > 0)
@@ -114,7 +114,7 @@ public class ContactShowAllUI {
 		btnSearchCustomer.setBounds(439,8,117,25);
 		pnlCustomers.add(btnSearchCustomer);
 		
-		JButton btnAddCustomer = new JButton("Tilføj ny kunde");
+		JButton btnAddCustomer = new JButton("Tilf" + "\u00F8" + "j ny kunde");
 		btnAddCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CustomerCreateUI.createWindow();
@@ -140,7 +140,7 @@ public class ContactShowAllUI {
 		txtSuppName.setBounds(313,12,115,19);
 		pnlSuppliers.add(txtSuppName);
 				
-		JButton btnSearchSupplier = new JButton("Søg");
+		JButton btnSearchSupplier = new JButton("S" + "\u00F8" + "g");
 		btnSearchSupplier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(txtSuppPhoneNo.getText().length() > 0)
@@ -161,7 +161,7 @@ public class ContactShowAllUI {
 		btnSearchSupplier.setBounds(439,8,117,25);
 		pnlSuppliers.add(btnSearchSupplier);
 				
-		JButton btnAddSupplier = new JButton("Tilføj ny leverandør");
+		JButton btnAddSupplier = new JButton("Tilf" + "\u00F8" + "j ny leverand" + "\u00F8" + "r");
 		btnAddSupplier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SupplierCreateUI.createWindow();
@@ -283,7 +283,7 @@ public class ContactShowAllUI {
 				{
 					try
 					{
-						if(Helper.showConfirmDialog("leverandør") == 1)
+						if(Helper.showConfirmDialog("leverand" + "\u00F8" + "r") == 1)
 						{
 							Supplier supplier = _suppCtrl.getSupplierById(itemNumber);
 							_suppCtrl.deleteSupplier(supplier);
@@ -414,7 +414,7 @@ public class ContactShowAllUI {
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(null, "Der blev ikke fundet noget leverandør, med telefon nummeret: " + itemNumber, "Information", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Der blev ikke fundet noget leverand" + "\u00F8" + "r, med telefon nummeret: " + itemNumber, "Information", JOptionPane.WARNING_MESSAGE);
 			}
 			addButtonsToSupplier(6);
 			addButtonsToSupplier(7);
@@ -441,7 +441,7 @@ public class ContactShowAllUI {
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(null, "Der blev ikke fundet noget leverandør, med navnet: " + itemName, "Information", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Der blev ikke fundet noget leverand" + "\u00F8" + "r, med navnet: " + itemName, "Information", JOptionPane.WARNING_MESSAGE);
 			}
 			addButtonsToSupplier(6);
 			addButtonsToSupplier(7);
