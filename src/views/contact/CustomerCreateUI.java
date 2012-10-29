@@ -121,7 +121,7 @@ public class CustomerCreateUI
                     Helper.checkIfInt(txtZipCode);
             }
         });
-        txtZipCode.setDocument(new JTextFieldLimit(4));
+        txtZipCode.setDocument(new JTextFieldLimit(5));
         txtZipCode.setBounds(142,60,50,19);
         contentPane.add(txtZipCode);
         txtZipCode.setColumns(10);
@@ -141,7 +141,7 @@ public class CustomerCreateUI
             }
         });
         txtPhoneNo.setBounds(142,85,75,19);
-        txtPhoneNo.setDocument(new JTextFieldLimit(8));
+        txtPhoneNo.setDocument(new JTextFieldLimit(9));
         contentPane.add(txtPhoneNo);
         txtPhoneNo.setColumns(10);
         
