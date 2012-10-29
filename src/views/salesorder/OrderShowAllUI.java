@@ -75,6 +75,17 @@ public class OrderShowAllUI
         btnCreateOrder.setBounds(10, 5, 61, 25);
         navPanel.add(btnCreateOrder);
 
+        JButton btnDeliveryStatus = new JButton("Adm. leveringsstatus");
+        btnDeliveryStatus.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                DeliveryStatusUI.createWindow();
+            }
+        });
+        btnDeliveryStatus.setBounds(86, 5, 61, 25);
+        navPanel.add(btnDeliveryStatus);
+
         _panel.add(navPanel);
 
         //Search

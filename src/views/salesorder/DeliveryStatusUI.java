@@ -36,12 +36,19 @@ public class DeliveryStatusUI
 	private JTextField txtEditState;
 	private JComboBox<String> drpDeliveryStatus;
 	private DefaultComboBoxModel<String> model;
-	
-	public DeliveryStatusUI()
-	{
-		createElements();
-	}
-	
+
+    public static JFrame createWindow()
+    {
+        if(_instance == null)
+            _instance = new DeliveryStatusUI();
+
+        return _frame;
+    }
+
+    private DeliveryStatusUI()
+    {
+        createElements();
+    }
 	
 	public void createElements()
 	{
@@ -145,7 +152,7 @@ public class DeliveryStatusUI
             	if(txtAddStatus.getText().length() > 0)
             		createDeliveryStatus();
             	else
-            		JOptionPane.showMessageDialog(null, "Feltet kan ikke være tomt", "IInformation", JOptionPane.WARNING_MESSAGE);
+            		JOptionPane.showMessageDialog(null, "Feltet kan ikke vï¿½re tomt", "IInformation", JOptionPane.WARNING_MESSAGE);
             }
         });
         btnCreate.setBounds(400, 225, 100, 25);

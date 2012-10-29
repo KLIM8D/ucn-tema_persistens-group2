@@ -2,6 +2,8 @@ package views;
 
 import utils.Logging;
 import views.contact.ContactShowAllUI;
+import views.contact.CustomerCreateUI;
+import views.contact.SupplierCreateUI;
 import views.product.ProductCreateUI;
 import views.product.ProductShowAllUI;
 import views.salesorder.OrderCreateUI;
@@ -47,13 +49,21 @@ public class SystemUI
 		});
 		mnNew.add(mntmNewOrder);
 		
-		JMenuItem mntmNewContact = new JMenuItem("Kontakt");
-		mntmNewContact.addActionListener(new ActionListener() {
+		JMenuItem mntmNewCustomer = new JMenuItem("Kunde");
+        mntmNewCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newContact();
+				newCustomer();
 			}
 		});
-		mnNew.add(mntmNewContact);
+		mnNew.add(mntmNewCustomer);
+
+        JMenuItem mntmNewSupplier = new JMenuItem("Leverand\u00F8r");
+        mntmNewSupplier.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                newSupplier();
+            }
+        });
+        mnNew.add(mntmNewSupplier);
 		
 		JMenuItem mntmNewProduct = new JMenuItem("Produkt");
 		mntmNewProduct.addActionListener(new ActionListener() {
@@ -183,10 +193,15 @@ public class SystemUI
         OrderCreateUI.createWindow();
 	}
 	
-	private void newContact()
+	private void newCustomer()
 	{
-		
+        CustomerCreateUI.createWindow();
 	}
+
+    private void newSupplier()
+    {
+        SupplierCreateUI.createWindow();
+    }
 	
 	private void newProduct()
 	{

@@ -6,8 +6,10 @@ import controllers.ProductCtrl;
 import controllers.SalesOrderCtrl;
 import db.DataAccess;
 import models.*;
+import utils.ButtonColumn;
 import utils.Helper;
 import utils.Logging;
+import views.product.ProductEditUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -344,13 +346,13 @@ public class OrderCreateUI
 		
 		tblOrder = new JTable();
 		
-		columnNames = new String[]{"Produkt nummer", "Produkt navn", "Antal", "Enheds pris", "Moms", "Samlet pris"};
+		columnNames = new String[]{"#", "Produkt nummer", "Produkt navn", "Antal", "Enheds pris", "Moms", "Samlet pris", " "};
 		
 		tblOrder = new JTable()
 		{
 			public boolean isCellEditable(int data, int columns)
 			{
-				return false;
+				return columns == 7;
 			}
 		};
 		tblOrder.setBounds(12, 182, 766, 237);
@@ -385,8 +387,37 @@ public class OrderCreateUI
             JOptionPane.showMessageDialog(null, Logging.handleException(e, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
         }
     }
-	
-	private void getCustomerInfo(long customerId)
+
+    private void addButton(final int columnIndex)
+    {
+        @SuppressWarnings("serial")
+        Action show = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JTable table = (JTable) e.getSource();
+                int row = Integer.valueOf(e.getActionCommand());
+                int index = Integer.parseInt(table.getValueAt(row, 0).toString()) - 1;
+                try
+                {
+                    if(Helper.showConfirmDialog("ordre linje") == 1)
+                    {
+                        _orderLines.remove(index);
+                        addOrderLineData();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, Logging.handleException(ex, 0), "Fejl", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        };
+        ButtonColumn buttonColumn = new ButtonColumn(tblOrder, show, columnIndex);
+        buttonColumn.setMnemonic(KeyEvent.VK_D);
+    }
+
+
+    private void getCustomerInfo(long customerId)
 	{
         try
         {
@@ -447,11 +478,14 @@ public class OrderCreateUI
 	{
 		Object[][] data = {};
 		model.setDataVector(data, columnNames);
+        int index = 1;
 		for(OrderItems line : _orderLines)
 		{
-			Object[] row = new Object[]{ line.getProduct().getId(), line.getProduct().getName(), line.getQuantity(), calcMoms(line.getProduct().getSalesPrice().toString()), getMoms(line.getProduct().getSalesPrice().toString()), (line.getUnitPrice().doubleValue() * line.getQuantity())*_discount };
+			Object[] row = new Object[]{index, line.getProduct().getId(), line.getProduct().getName(), line.getQuantity(), calcMoms(line.getProduct().getSalesPrice().toString()), getMoms(line.getProduct().getSalesPrice().toString()), (line.getUnitPrice().doubleValue() * line.getQuantity())*_discount, "Slet" };
 			model.addRow(row);
+            index++;
 		}
+        addButton(7);
 	}
 	
 	private double calcMoms(String price)

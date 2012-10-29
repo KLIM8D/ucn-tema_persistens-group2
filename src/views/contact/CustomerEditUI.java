@@ -97,7 +97,7 @@ public class CustomerEditUI
         lblCustomerDiscount.setBounds(12,145,120,15);
         contentPane.add(lblCustomerDiscount);
         
-        JLabel lblCustomerDiscountSet = new JLabel("DKK");
+        JLabel lblCustomerDiscountSet = new JLabel("%");
         lblCustomerDiscountSet.setBounds(222,145,120,15);
         contentPane.add(lblCustomerDiscountSet);
         
