@@ -6,7 +6,6 @@ import db.DataAccess;
 import models.Product;
 import models.ProductCategory;
 import models.Supplier;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
