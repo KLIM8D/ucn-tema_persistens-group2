@@ -187,7 +187,7 @@ public class OrderShowAllUI
                 long orderId = Long.parseLong(table.getValueAt(row, 0).toString());
                 if(columnIndex == 5)
                 {
-                    //edit
+                    OrderEditUI.createWindow(orderId);
                 }
                 else
                 {
