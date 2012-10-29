@@ -37,7 +37,7 @@ public class CustomerCtrl
 	{
 		DBCustomer DBC = new DBCustomer();
 		DBContact DBCon = new DBContact();
-		DBCon.updateContact(new Contact(supplier.getName(), supplier.getAddress(), supplier.getZipCode(), supplier.getCity(), supplier.getPhoneNo(), supplier.getEmail(), supplier.getCountry()));
+		DBCon.insertContact(new Contact(supplier.getName(), supplier.getAddress(), supplier.getZipCode(), supplier.getCity(), supplier.getPhoneNo(), supplier.getEmail(), supplier.getCountry()));
 		return DBC.insertCustomer(supplier);
 	}
 	
