@@ -63,7 +63,7 @@ public class SystemUI
 		});
 		mnNew.add(mntmNewProduct);
 		
-		JMenu mnOpen = new JMenu("Åben");
+		JMenu mnOpen = new JMenu("\u00C5" + "ben");
 		mnFiles.add(mnOpen);
 		
 		JMenuItem mntmOpenOrder = new JMenuItem("Ordre");

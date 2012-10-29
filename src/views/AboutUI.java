@@ -73,12 +73,12 @@ public class AboutUI {
 		lblDev01.setBounds(22, 110, 399, 15);
 		pnlSystem.add(lblDev01);
 		
-		JLabel lblDev02 = new JLabel("Chris Tindbæk (1016273@ucn.dk)");
+		JLabel lblDev02 = new JLabel("Chris Tindb" + "\u00E6" + "k (1016273@ucn.dk)");
 		lblDev02.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblDev02.setBounds(22, 125, 384, 15);
 		pnlSystem.add(lblDev02);
 		
-		JLabel lblDev03 = new JLabel("Morten Klim Sørensen (1016053@ucn.dk)");
+		JLabel lblDev03 = new JLabel("Morten Klim S" + "\u00F8" + "rensen (1016053@ucn.dk)");
 		lblDev03.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblDev03.setBounds(22, 140, 384, 15);
 		pnlSystem.add(lblDev03);
@@ -106,7 +106,7 @@ public class AboutUI {
 		txtLicense.setWrapStyleWord(true);
 		txtLicense.setLineWrap(true);
 		txtLicense.setEditable(false);
-		txtLicense.setText("Copyright (c) 2012 Rasmus Meyer Lillienskjold Pedersen, Chris Tindbæk, Morten Klim Sørensen, Mads Nielsen\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
+		txtLicense.setText("Copyright (c) 2012 Rasmus Meyer Lillienskjold Pedersen, Chris Tindb" + "\u00E6" + "k, Morten Klim S" + "\u00F8" + "rensen, Mads Nielsen\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
 		txtLicense.setBounds(5, 5, 435, 337);
 		pnlLicense.add(txtLicense);
 		
