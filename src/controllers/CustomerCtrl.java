@@ -54,4 +54,10 @@ public class CustomerCtrl
 		DBCustomer DBC = new DBCustomer();
 		return DBC.deleteCustomer(customer);
 	}
+	
+	public int deleteContact(long data) throws Exception
+	{
+		DBContact DBCon = new DBContact();
+		return DBCon.deleteContact(data);
+	}
 }

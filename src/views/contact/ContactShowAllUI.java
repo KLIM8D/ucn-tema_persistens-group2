@@ -250,6 +250,7 @@ public class ContactShowAllUI {
 						{
 							Customer customer = _custCtrl.getCustomerById(itemNumber);
 							_custCtrl.deleteCustomer(customer);
+							_custCtrl.deleteContact(itemNumber);
 							addCustomerData();
 						}
 					}
@@ -286,6 +287,7 @@ public class ContactShowAllUI {
 						{
 							Supplier supplier = _suppCtrl.getSupplierById(itemNumber);
 							_suppCtrl.deleteSupplier(supplier);
+							_suppCtrl.deleteContact(itemNumber);
 							addSupplierData();
 						}
 					}

@@ -54,4 +54,10 @@ public class SupplierCtrl
 		DBSupplier DBS = new DBSupplier();
 		return DBS.deleteSupplier(supplier);
 	}
+	
+	public int deleteContact(long data) throws Exception
+	{
+		DBContact DBCon = new DBContact();
+		return DBCon.deleteContact(data);
+	}
 }
