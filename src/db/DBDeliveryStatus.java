@@ -86,7 +86,7 @@ public class DBDeliveryStatus implements IFDBDeliveryStatus
         if(getDeliveryStatusById(deliveryStatus.getDeliveryId()) == null)
             return 0;
 
-        PreparedStatement query = _da.getCon().prepareStatement("UPDATE DeliveryStatus SET deliverState = ? WHERE deliveryId = ?");
+        PreparedStatement query = _da.getCon().prepareStatement("UPDATE DeliveryStatus SET deliveryState = ? WHERE deliveryId = ?");
         query.setString(1, deliveryStatus.getDeliveryState());
         query.setLong(2,  deliveryStatus.getDeliveryId());
         _da.setSqlCommandText(query);

@@ -31,7 +31,6 @@ public class DeliveryStatusUI
 	private DeliveryStatus _deliveryStatus;
 
 	// Elements
-	private JTextField txtEditStatus;
 	private JTextField txtAddStatus;
 	private JTextField txtEditState;
 	private JComboBox<String> drpDeliveryStatus;
@@ -82,9 +81,9 @@ public class DeliveryStatusUI
 		lblEditStatusHeader.setFont(new Font("Dialog", Font.BOLD, 16));
 		contentPane.add(lblEditStatusHeader);
 		
-		JLabel lblDeliveryId = new JLabel("Leverings Id");
-		lblDeliveryId.setBounds(12, 47, 180, 15);
-		contentPane.add(lblDeliveryId);
+		JLabel lblDeliveryStatus = new JLabel("Leverings Status");
+		lblDeliveryStatus.setBounds(12, 47, 180, 15);
+		contentPane.add(lblDeliveryStatus);
 		
 		drpDeliveryStatus = new JComboBox<String>();
 		drpDeliveryStatus.setBounds(200, 45, 300, 20);
@@ -92,12 +91,12 @@ public class DeliveryStatusUI
         model = new DefaultComboBoxModel<String>(addDeliveryStatus());
         drpDeliveryStatus.setModel(model);
 		
-		JLabel lblStateId = new JLabel("Leverings state");
-		lblStateId.setBounds(12, 87, 140, 15);
+		JLabel lblStateId = new JLabel("Status Navn");
+		lblStateId.setBounds(12, 133, 140, 15);
 		contentPane.add(lblStateId);
 		
 		txtEditState = new JTextField();
-		txtEditState.setBounds(200, 87, 180, 20);
+		txtEditState.setBounds(200, 133, 180, 20);
 		contentPane.add(txtEditState);
 		txtEditState.setColumns(10);
 		
@@ -106,13 +105,13 @@ public class DeliveryStatusUI
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                if(txtEditStatus.getText().length() > 0)
+                if(txtEditState.getText().length() > 0)
                 	UpdateDeliveryStatus();
                 else
                    JOptionPane.showMessageDialog(null, "Feltet kan ikke være tomt", "Information", JOptionPane.WARNING_MESSAGE);
             }
         });
-        btnUpdate.setBounds(400, 84, 100, 25);
+        btnUpdate.setBounds(400, 130, 100, 25);
         contentPane.add(btnUpdate);
 		
         JButton btnEdit = new JButton("Rediger");
@@ -120,13 +119,10 @@ public class DeliveryStatusUI
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                if(txtEditStatus.getText().length() > 0)
-                	editDeliveryStatus();
-                else
-                   JOptionPane.showMessageDialog(null, "Feltet kan ikke være tomt", "Information", JOptionPane.WARNING_MESSAGE);
+            	editDeliveryStatus();
             }
         });
-        btnEdit.setBounds(400, 130, 100, 25);
+        btnEdit.setBounds(400, 84, 100, 25);
         contentPane.add(btnEdit);
         
 		JSeparator separator = new JSeparator();
@@ -204,7 +200,7 @@ public class DeliveryStatusUI
 		{
 			// statements
 			DBDeliveryStatus dbDeliveryStatus = new DBDeliveryStatus();
-			_deliveryStatus.setDeliveryState(txtAddStatus.getText());
+			_deliveryStatus.setDeliveryState(txtEditState.getText());
 			dbDeliveryStatus.updateDeliveryStatus(_deliveryStatus);
 			JOptionPane.showMessageDialog(null, "Leverings status er nu Opdateret", "INFORMATION!", JOptionPane.INFORMATION_MESSAGE);
 			txtEditState.setText("");
@@ -224,7 +220,7 @@ public class DeliveryStatusUI
 		{
 			int deliveryId = drpDeliveryStatus.getSelectedIndex() + 1;
 			_deliveryStatus = _deliveryStatusCtrl.getDeliveryStatusById(deliveryId);
-			txtEditStatus.setText(_deliveryStatus.getDeliveryState());
+			txtEditState.setText(_deliveryStatus.getDeliveryState());
 		}
 		catch (Exception e)
 		{
