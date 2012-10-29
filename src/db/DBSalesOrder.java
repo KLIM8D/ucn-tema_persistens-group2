@@ -3,7 +3,6 @@ package db;
 import models.Customer;
 import models.SalesOrder;
 import models.DeliveryStatus;
-import models.Contact;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
