@@ -1,12 +1,15 @@
 package models;
 
-public class SalesOrder 
+import java.util.ArrayList;
+
+public class SalesOrder
 {
 	private long _orderId;
 	private String _orderDate;
 	private String _deliveryDate;
 	private DeliveryStatus _deliveryStatus;
 	private Customer _customer;
+    private ArrayList<OrderItems> _orderItems;
 	
 	
 	public SalesOrder(long orderId, String orderDate, String deliveryDate)
@@ -49,4 +52,11 @@ public class SalesOrder
 	{ return _customer; }
 	public void setCustomer(Customer customer)
 	{ _customer = customer; }
+
+    public ArrayList<OrderItems> getAllOrderItems()
+    { return _orderItems; }
+    public void setOrderItems(ArrayList<OrderItems> value)
+    { _orderItems = value; }
+    public void addOrderItem(OrderItems item)
+    { _orderItems.add(item); }
 }

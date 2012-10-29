@@ -200,6 +200,10 @@ public class DBSalesOrder implements IFDBSalesOrder
 			DBCustomer dbCustomer = new DBCustomer();
 			Customer customer = dbCustomer.getCustomerById(contactsKey);
 			salesOrder.setCustomer(customer);
+
+            //OrderItems
+            DBOrderItems dbOrderItems = new DBOrderItems();
+            salesOrder.setOrderItems(dbOrderItems.getAllOrderItemsForSalesOrder(orderId, true));
 		}
 
 		return salesOrder;	
